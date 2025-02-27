@@ -1,42 +1,88 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class SequenceChecker : MonoBehaviour
 {
-    public GameObject[] shape1, shape2, shape3, shape4, shape5; // Arrays for the shapes
+    public TextMeshProUGUI Result;
+    public TextMeshProUGUI Timer;
+    private float mainTimer = 30f;
+    private float hideTime = 10f;
+    public GameObject[] shape1, shape2, shape3, shape4, shape5;
     private GameObject[][] shapes;
-    private GameObject[] OriginalSequence; // From the previous script
+    private GameObject[] OriginalSequence;
     private GameObject[] userSequence;
     private int userIndex = 0;
-
+    private int userPoints = 0;
     private SequenceManager sequenceManager;
-    private bool hasStarted = false; // To track if user input has started
+    private bool isSequenceReady = false;
+    private bool canTakeInput = false;
+    private bool hasHiddenOriginalSequence = false;
+    private bool isTimerRunning = true;  // Track if timer is still running
+    private bool hasCheckedSequence = false;
 
     void Start()
     {
         sequenceManager = FindObjectOfType<SequenceManager>();
-
-        // Initialize the shapes array (same as the previous script)
         shapes = new GameObject[][] { shape1, shape2, shape3, shape4, shape5 };
-        OriginalSequence = new GameObject[shapes.Length]; // This will be filled by sequenceManager
-
-        // Initialize the user sequence array
+        OriginalSequence = new GameObject[shapes.Length];
         userSequence = new GameObject[shapes.Length];
     }
 
     void Update()
     {
-        // Ensure OriginalSequence is populated by sequenceManager before accepting user input
-        if (sequenceManager != null && sequenceManager.OriginalSequence != null)
+        if (!isSequenceReady)
         {
-            // Wait until sequenceManager has finished populating the OriginalSequence
-            if (OriginalSequence.Length == 0 || OriginalSequence[0] == null)
+            if (sequenceManager != null && sequenceManager.OriginalSequence != null)
             {
-                // Get the populated OriginalSequence from sequenceManager
-                OriginalSequence = sequenceManager.OriginalSequence;
+                bool sequencePopulated = true;
+
+                for (int i = 0; i < sequenceManager.OriginalSequence.Length; i++)
+                {
+                    if (sequenceManager.OriginalSequence[i] == null)
+                    {
+                        sequencePopulated = false;
+                        break;
+                    }
+                }
+
+                if (sequencePopulated)
+                {
+                    OriginalSequence = sequenceManager.OriginalSequence;
+                    isSequenceReady = true;
+                    canTakeInput = true;
+                }
             }
         }
 
-        // Listen for the key presses (1-4)
+        // Hide the original sequence after 10 seconds
+        if (isSequenceReady && !hasHiddenOriginalSequence && (30f - mainTimer) >= hideTime)
+        {
+            HideOriginalSequence();
+            hasHiddenOriginalSequence = true;
+        }
+
+        // Timer countdown and stopping at 0
+        if (isTimerRunning)
+        {
+            mainTimer -= Time.deltaTime;
+            if (mainTimer <= 0)
+            {
+                mainTimer = 0;
+                isTimerRunning = false;
+                canTakeInput = false;  // Stop user input
+                CheckSequence();  // Immediately check sequence
+            }
+            Timer.text = Mathf.RoundToInt(mainTimer).ToString();
+        }
+
+        // Block input if sequence isn't ready or if userSequence is full
+        if (!canTakeInput || userIndex >= shapes.Length)
+        {
+            return;
+        }
+
+        // Listen for input
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             AddToUserSequence("Circle");
@@ -54,40 +100,45 @@ public class SequenceChecker : MonoBehaviour
             AddToUserSequence("Star");
         }
 
-        // Check if user has completed their sequence
+        // Stop taking input immediately once user finishes their sequence
         if (userIndex >= shapes.Length)
         {
+            canTakeInput = false;
+            isTimerRunning = false; // Stop timer if user finishes early
             CheckSequence();
         }
     }
 
     void AddToUserSequence(string shapeName)
     {
-        if (userIndex >= shapes.Length)
+        if (userIndex >= shapes.Length || !canTakeInput)
         {
-            return; // Stop adding if sequence is full
+            return;
         }
 
-        // Only deactivate all shapes once, on the first input
-        if (!hasStarted)
+        if (userIndex == 0)
         {
             DeactivateAllShapes();
-            hasStarted = true;
         }
 
-        // Add the selected shape to the user sequence array
         GameObject selectedShape = GetShapeByName(shapeName, userIndex);
         if (selectedShape != null)
         {
             userSequence[userIndex] = selectedShape;
-            selectedShape.SetActive(true); // Activate the selected shape
+            selectedShape.SetActive(true);
             userIndex++;
+
+            if (userIndex >= shapes.Length)
+            {
+                canTakeInput = false;
+                isTimerRunning = false; // Stop timer early if user finishes
+                CheckSequence();
+            }
         }
     }
 
     GameObject GetShapeByName(string shapeName, int index)
     {
-        // Return the corresponding shape from the correct shape array based on user input
         if (index >= 0 && index < shapes.Length)
         {
             foreach (GameObject shape in shapes[index])
@@ -98,12 +149,23 @@ public class SequenceChecker : MonoBehaviour
                 }
             }
         }
-        return null; // If the shape is not found
+        return null;
+    }
+
+    void HideOriginalSequence()
+    {
+        Debug.Log("Hiding Original Sequence!");
+        foreach (GameObject shape in OriginalSequence)
+        {
+            if (shape != null)
+            {
+                shape.SetActive(false);
+            }
+        }
     }
 
     void DeactivateAllShapes()
     {
-        // Deactivate all objects in all shape arrays once at the start
         foreach (GameObject[] shapeArray in shapes)
         {
             foreach (GameObject shape in shapeArray)
@@ -115,32 +177,42 @@ public class SequenceChecker : MonoBehaviour
 
     void CheckSequence()
     {
+        if (hasCheckedSequence) return;  // Prevent multiple calls
+
+        hasCheckedSequence = true;  // Mark as checked
         bool isCorrect = true;
 
-        // Compare the user sequence with the original sequence
         for (int i = 0; i < shapes.Length; i++)
         {
-            // Check if the user sequence shape matches the original sequence shape
-            if (userSequence[i].name != OriginalSequence[i].name)
+            if (userSequence[i] == null || OriginalSequence[i] == null || userSequence[i].name != OriginalSequence[i].name)
             {
                 isCorrect = false;
                 break;
             }
         }
 
-        // Output the result
         if (isCorrect)
         {
             Debug.Log("Correct Sequence!");
+            Result.text = "Correct!";
+            userPoints += 1000; // Base points for correctness
+
+            // Calculate bonus points based on remaining time
+            if (mainTimer > 0)
+            {
+                float bonusMultiplier = Mathf.Clamp(mainTimer / 27f, 0f, 1f);
+                int bonusPoints = Mathf.RoundToInt(1000 * bonusMultiplier / 10) * 10; // Round to nearest 10
+                userPoints += bonusPoints;
+                 // Debug log for testing
+            }
+            Debug.Log(userPoints);
         }
         else
         {
+            Result.text = "Incorrect!";
             Debug.Log("Incorrect Sequence. Try Again!");
         }
-
-        // Reset for next round
-        userIndex = 0;
-        System.Array.Clear(userSequence, 0, userSequence.Length); // Clear the user sequence
-        hasStarted = false; // Reset the start flag
     }
+
+
 }

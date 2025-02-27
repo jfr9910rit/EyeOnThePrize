@@ -2,6 +2,8 @@ using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using TMPro;
 
 public class SequenceManager : MonoBehaviour
 {
@@ -10,8 +12,11 @@ public class SequenceManager : MonoBehaviour
 
     public GameObject[] shape1, shape2, shape3, shape4, shape5;
 
+    
+
     private GameObject[][] shapes;
     private float timer = 0f;
+    
     private int index = 0;
     private bool activationStarted = false;
 
@@ -38,28 +43,34 @@ public class SequenceManager : MonoBehaviour
     void Update()
     {
         if (!activationStarted || index >= shapes.Length)
-            return;
+        {
+            activationStarted = false;
+        }
 
         // Timer-based delay
         timer += Time.deltaTime;
-        if (timer >= 1f)
+        
+
+        if (timer >= 1f && activationStarted == true)
         {
             timer = 0f;
             ActivateNextShape();
         }
 
-        if (index >= shapes.Length)
-        {
-            if (index == shapes.Length)
-            {
-                // Print the sequence when all activations are complete
-                PrintOriginalSequence();
-            }
-            return;
-        }
+        //if (index >= shapes.Length)
+        //{
+        //    if (index == shapes.Length)
+        //    {
+        //        // Print the sequence when all activations are complete
+        //        PrintOriginalSequence();
+        //    }
+        //    return;
+        //}
+
 
     }
 
+    //actually creates the sequence
     void ActivateNextShape()
     {
         if (index >= shapes.Length) return;
@@ -81,6 +92,7 @@ public class SequenceManager : MonoBehaviour
         index++; // Move to the next shape array after processing the current one
     }
 
+    //debugging function
     void PrintOriginalSequence()
     {
         Debug.Log("Original Sequence of Activated Objects:");
