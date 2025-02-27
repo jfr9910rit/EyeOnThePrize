@@ -12,7 +12,8 @@ public class SequenceManager : MonoBehaviour
 
     public GameObject[] shape1, shape2, shape3, shape4, shape5;
 
-    
+    private float[] probabilities;
+    private int lastSelected = -1;
 
     private GameObject[][] shapes;
     private float timer = 0f;
@@ -22,6 +23,7 @@ public class SequenceManager : MonoBehaviour
 
     void Start()
     {
+        probabilities = new float[] { 25f, 25f, 25f, 25f };
         for (int s = 1; s < 6; s++)
         {
             List<GameObject[]> shapes = new List<GameObject[]> { shape1, shape2, shape3, shape4, shape5 };
@@ -51,7 +53,7 @@ public class SequenceManager : MonoBehaviour
         timer += Time.deltaTime;
         
 
-        if (timer >= 1f && activationStarted == true)
+        if (timer >= 0.1f && activationStarted == true) //experiment with order/speed
         {
             timer = 0f;
             ActivateNextShape();
@@ -75,21 +77,75 @@ public class SequenceManager : MonoBehaviour
     {
         if (index >= shapes.Length) return;
 
-        GameObject[] shape = shapes[index];
+        GameObject[] shapeGroup = shapes[index];
 
-        if (shape.Length > 0)
+        if (shapeGroup.Length == 0) return;
+
+        // Select a random index based on weighted probability
+        int randomIndex = GetWeightedRandomIndex(shapeGroup.Length);
+
+        // Activate the selected object
+        shapeGroup[randomIndex].SetActive(true);
+
+        // Store in OriginalSequence
+        OriginalSequence[index] = shapeGroup[randomIndex];
+
+        // Update probabilities based on selection
+        UpdateProbabilities(randomIndex, shapeGroup.Length);
+
+        index++; // Move to the next shape group
+    }
+
+    int GetWeightedRandomIndex(int shapeCount)
+    {
+        float total = 0;
+        foreach (float p in probabilities)
+            total += p;
+
+        float randomPoint = UnityEngine.Random.Range(0, total);
+        float cumulative = 0f;
+
+        for (int i = 0; i < shapeCount; i++)
         {
-            
-
-            // Select and activate a random object
-            int randomIndex = UnityEngine.Random.Range(0, shape.Length);
-            shape[randomIndex].SetActive(true);
-
-            // Store the selected object in OriginalSequence
-            OriginalSequence[index] = shape[randomIndex];
+            cumulative += probabilities[i];
+            if (randomPoint <= cumulative)
+            {
+                return i;
+            }
         }
 
-        index++; // Move to the next shape array after processing the current one
+        return 0; // Failsafe
+    }
+
+    void UpdateProbabilities(int selected, int shapeCount)
+    {
+        if (lastSelected == selected) // If the same shape is selected again
+        {
+            probabilities[selected] /= 2f;
+        }
+        else
+        {
+            if (lastSelected != -1)
+            {
+                probabilities[lastSelected] = 12.5f; // Restore the previous selection to half of its original 25%
+            }
+
+            probabilities[selected] /= 2f; // Halve the new selection
+        }
+
+        // Recalculate the remaining probability pool
+        float remaining = 100f - probabilities[selected] - (lastSelected != -1 ? probabilities[lastSelected] : 0);
+        int countOther = shapeCount - (lastSelected == -1 ? 1 : 2); // Remaining non-selected options
+
+        for (int i = 0; i < shapeCount; i++)
+        {
+            if (i != selected && i != lastSelected)
+            {
+                probabilities[i] = remaining / countOther;
+            }
+        }
+
+        lastSelected = selected; // Store last choice
     }
 
     //debugging function

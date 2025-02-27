@@ -1,14 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Globalization;
+
 
 public class SequenceChecker : MonoBehaviour
 {
+    public string Button1 = "";
+    public string Button2 = "";
+    public string Button3 = "";
+    public string Button4 = "";
     public TextMeshProUGUI Result;
     public TextMeshProUGUI Timer;
     private float mainTimer = 30f;
     private float hideTime = 10f;
-    public GameObject[] shape1, shape2, shape3, shape4, shape5;
+    private GameObject[] shape1, shape2, shape3, shape4, shape5;
     private GameObject[][] shapes;
     private GameObject[] OriginalSequence;
     private GameObject[] userSequence;
@@ -18,12 +24,18 @@ public class SequenceChecker : MonoBehaviour
     private bool isSequenceReady = false;
     private bool canTakeInput = false;
     private bool hasHiddenOriginalSequence = false;
-    private bool isTimerRunning = true;  // Track if timer is still running
+    private bool isTimerRunning = false;  // Track if timer is still running
     private bool hasCheckedSequence = false;
 
     void Start()
     {
         sequenceManager = FindObjectOfType<SequenceManager>();
+        
+        shape1 = sequenceManager.shape1;
+        shape2 = sequenceManager.shape2;
+        shape3 = sequenceManager.shape3;
+        shape4 = sequenceManager.shape4;
+        shape5 = sequenceManager.shape5;
         shapes = new GameObject[][] { shape1, shape2, shape3, shape4, shape5 };
         OriginalSequence = new GameObject[shapes.Length];
         userSequence = new GameObject[shapes.Length];
@@ -51,6 +63,7 @@ public class SequenceChecker : MonoBehaviour
                     OriginalSequence = sequenceManager.OriginalSequence;
                     isSequenceReady = true;
                     canTakeInput = true;
+                    isTimerRunning = true;
                 }
             }
         }
