@@ -12,8 +12,6 @@ public class SequenceManager : MonoBehaviour
 
     public GameObject[] shape1, shape2, shape3, shape4, shape5;
 
-    
-
     private GameObject[][] shapes;
     private float timer = 0f;
     
@@ -22,6 +20,7 @@ public class SequenceManager : MonoBehaviour
 
     void Start()
     {
+
         for (int s = 1; s < 6; s++)
         {
             List<GameObject[]> shapes = new List<GameObject[]> { shape1, shape2, shape3, shape4, shape5 };
@@ -42,6 +41,7 @@ public class SequenceManager : MonoBehaviour
 
     void Update()
     {
+
         if (!activationStarted || index >= shapes.Length)
         {
             activationStarted = false;
