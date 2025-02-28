@@ -12,7 +12,7 @@ public class SequenceChecker : MonoBehaviour
     public string Button4 = "";
     public TextMeshProUGUI Result;
     public TextMeshProUGUI Timer;
-    private float mainTimer = 30f;
+    private float mainTimer = 25f;
     private float hideTime = 10f;
     private GameObject[] shape1, shape2, shape3, shape4, shape5;
     private GameObject[][] shapes;

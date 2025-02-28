@@ -53,7 +53,7 @@ public class SequenceManager : MonoBehaviour
         timer += Time.deltaTime;
         
 
-        if (timer >= 0.1f && activationStarted == true) //experiment with order/speed
+        if (timer >= 0.5f && activationStarted == true) //experiment with order/speed
         {
             timer = 0f;
             ActivateNextShape();
