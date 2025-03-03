@@ -17,7 +17,7 @@ public class Controller : MonoBehaviour
         while(true)
         {
             incomingMsg = sp.ReadExisting();
-            Thread.Sleep(150);
+            Thread.Sleep(50);
         }
     }
 
@@ -38,7 +38,17 @@ public class Controller : MonoBehaviour
     {
         if (incomingMsg != "")
         {
-            Debug.Log(incomingMsg);
+            switch (incomingMsg)
+            {
+                case "RED":
+                    break;
+                case "YEL":
+                    break;
+                case "GRE":
+                    break;
+                case "BLU":
+                    break;
+            }
         }
     }
 }
