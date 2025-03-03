@@ -1,3 +1,4 @@
+#include <Keyboard.h>
 
 int redButtonPin = 2;
 int yellowButtonPin = 3;
@@ -30,18 +31,22 @@ void loop() {
   greenButtonState = digitalRead(greenButtonPin);
 
   if (redButtonState == HIGH && redDown == false) {
+    Keyboard.write('1');
     redDown = true;
     Serial.println("RED");
   }
   if (yellowButtonState == HIGH  && yellowDown == false) {
+    Keyboard.write('2');
     yellowDown = true;
     Serial.println("YEL");
   }
   if (blueButtonState == HIGH && blueDown == false) {
+    Keyboard.write('3');
     blueDown = true;
     Serial.println("BLU");
   }
   if (greenButtonState == HIGH && greenDown == false) {
+    Keyboard.write('4');
     greenDown = true;
     Serial.println("GRE");
   }
