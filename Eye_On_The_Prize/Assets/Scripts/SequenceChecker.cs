@@ -11,7 +11,7 @@ public class SequenceChecker : MonoBehaviour
     public string Button3 = "";
     public string Button4 = "";
     public TextMeshProUGUI Result;
-    public TextMeshProUGUI Timer;
+    //public TextMeshProUGUI Timer;
     private float mainTimer = 25f;
     private float hideTime = 10f;
     private GameObject[] shape1, shape2, shape3, shape4, shape5;
@@ -26,7 +26,7 @@ public class SequenceChecker : MonoBehaviour
     private bool hasHiddenOriginalSequence = false;
     private bool isTimerRunning = false;  // Track if timer is still running
     private bool hasCheckedSequence = false;
-
+    //make references and add in tries
     void Start()
     {
         sequenceManager = FindObjectOfType<SequenceManager>();
@@ -63,13 +63,13 @@ public class SequenceChecker : MonoBehaviour
                     OriginalSequence = sequenceManager.OriginalSequence;
                     isSequenceReady = true;
                     canTakeInput = true;
-                    isTimerRunning = true;
+                    GameManager.Instance.isTimerRunning = true;
                 }
             }
         }
 
         // Hide the original sequence after 10 seconds
-        if (isSequenceReady && !hasHiddenOriginalSequence && (25f - mainTimer) >= hideTime)
+        if (isSequenceReady && !hasHiddenOriginalSequence && (25f - GameManager.Instance.gameTimer) >= hideTime)
         {
             HideOriginalSequence();
             hasHiddenOriginalSequence = true;
@@ -78,15 +78,15 @@ public class SequenceChecker : MonoBehaviour
         // Timer countdown and stopping at 0
         if (isTimerRunning)
         {
-            mainTimer -= Time.deltaTime;
-            if (mainTimer <= 0)
+            GameManager.Instance.gameTimer -= Time.deltaTime;
+            if (GameManager.Instance.gameTimer <= 0)
             {
-                mainTimer = 0;
+                
                 isTimerRunning = false;
                 canTakeInput = false;  // Stop user input
                 CheckSequence();  // Immediately check sequence
             }
-            Timer.text = Mathf.RoundToInt(mainTimer).ToString();
+            //Timer.text = Mathf.RoundToInt(GameManager.Instance.gameTimer).ToString();
         }
 
         // Block input if sequence isn't ready or if userSequence is full
@@ -96,19 +96,19 @@ public class SequenceChecker : MonoBehaviour
         }
 
         // Listen for input
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetButtonDown(Button1))
         {
             AddToUserSequence("Circle");
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetButtonDown(Button2))
         {
             AddToUserSequence("Square");
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetButtonDown(Button3))
         {
             AddToUserSequence("Triangle");
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        else if (Input.GetButtonDown(Button4))
         {
             AddToUserSequence("Star");
         }

@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 
+
+
+//go nuclear, make into instantiate
 public class SequenceManager : MonoBehaviour
 {
     
@@ -59,16 +62,6 @@ public class SequenceManager : MonoBehaviour
             timer = 0f;
             ActivateNextShape();
         }
-
-        //if (index >= shapes.Length)
-        //{
-        //    if (index == shapes.Length)
-        //    {
-        //        // Print the sequence when all activations are complete
-        //        PrintOriginalSequence();
-        //    }
-        //    return;
-        //}
 
 
     }
@@ -147,22 +140,5 @@ public class SequenceManager : MonoBehaviour
         }
 
         lastSelected = selected; // Store last choice
-    }
-
-    //debugging function
-    void PrintOriginalSequence()
-    {
-        Debug.Log("Original Sequence of Activated Objects:");
-        for (int i = 0; i < OriginalSequence.Length; i++)
-        {
-            if (OriginalSequence[i] != null)
-            {
-                Debug.Log($"Shape {i + 1}: {OriginalSequence[i].name}");
-            }
-            else
-            {
-                Debug.Log($"Shape {i + 1}: No object was activated.");
-            }
-        }
     }
 }

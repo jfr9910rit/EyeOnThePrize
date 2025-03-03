@@ -1586,7 +1586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &233864104
 Transform:
   m_ObjectHideFlags: 0
@@ -3791,7 +3791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &526618076
 Transform:
   m_ObjectHideFlags: 0
@@ -4070,7 +4070,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &555483842
 Transform:
   m_ObjectHideFlags: 0
@@ -6561,7 +6561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1149656613
 Transform:
   m_ObjectHideFlags: 0
@@ -7635,7 +7635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1368874822
 Transform:
   m_ObjectHideFlags: 0
@@ -7668,10 +7668,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae1170d75ff9ce489f0fa4ca655d1e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button1: 1
-  Button2: 2
-  Button3: 3
-  Button4: 4
+  Button1: leftarrow
+  Button2: rightarrow
+  Button3: uparrow
+  Button4: downarrow
   Result: {fileID: 2144283682}
   Timer: {fileID: 698214043}
 --- !u!114 &1368874824
