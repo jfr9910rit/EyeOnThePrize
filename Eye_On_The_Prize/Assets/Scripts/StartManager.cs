@@ -55,7 +55,7 @@ public class StartManager : MonoBehaviour
             if (percentage > 1)
             {
                 // SceneManager.SetActiveScene(SceneManager.GetSceneByName("Julian_Testing"));
-                SceneManager.LoadSceneAsync("Sawyer_Testing");
+                SceneManager.LoadSceneAsync("MainScene");
             }
             else if (Input.GetKey(KeyCode.Alpha2))
             {

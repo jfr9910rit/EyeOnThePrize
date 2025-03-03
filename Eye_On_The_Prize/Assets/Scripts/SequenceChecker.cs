@@ -69,7 +69,7 @@ public class SequenceChecker : MonoBehaviour
         }
 
         // Hide the original sequence after 10 seconds
-        if (isSequenceReady && !hasHiddenOriginalSequence && (30f - mainTimer) >= hideTime)
+        if (isSequenceReady && !hasHiddenOriginalSequence && (25f - mainTimer) >= hideTime)
         {
             HideOriginalSequence();
             hasHiddenOriginalSequence = true;
