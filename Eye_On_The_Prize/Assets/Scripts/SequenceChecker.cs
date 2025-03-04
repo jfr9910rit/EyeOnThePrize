@@ -24,7 +24,7 @@ public class SequenceChecker : MonoBehaviour
     private bool[] canTakeInput2;
     private bool hasHiddenOriginalSequence = false;
     private bool isTimerRunning = false;  // Track if timer is still running
-    private bool hasCheckedSequence = false;
+    bool[] hasCheckedSequence;
     private int[,] shapeX;
     private int[,] playerTries;
     //make references and add in tries
@@ -45,6 +45,7 @@ public class SequenceChecker : MonoBehaviour
         playerTries = new int[GameManager.Instance.playerCount, 2];
         shapeX = new int[GameManager.Instance.playerCount, 2];
         canTakeInput2 = new bool[GameManager.Instance.playerCount];
+        hasCheckedSequence = new bool[GameManager.Instance.playerCount];
     }
 
     void Update()
@@ -70,8 +71,8 @@ public class SequenceChecker : MonoBehaviour
                     
                     isSequenceReady = true;
                     
-                    //broken
-                    for (int i = 0; i >= GameManager.Instance.playerCount; i++)
+                    
+                    for (int i = 0; i < GameManager.Instance.playerCount; i++)
                     {
                         canTakeInput2[i] = true;
                         Debug.Log(canTakeInput2[i]);
@@ -129,62 +130,62 @@ public class SequenceChecker : MonoBehaviour
 
         //prob can turn into a function later
         // Listen for input
-        if (Input.GetButtonDown("1") && canTakeInput2[0])
+        if (Input.GetButtonDown("1") && canTakeInput2[0] && playerTries[0,1] < 3)
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 0);
         }
-        else if (Input.GetButtonDown("2") && canTakeInput2[0])
+        else if (Input.GetButtonDown("2") && canTakeInput2[0] && playerTries[0, 1] < 3)
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 1);
         }
-        else if (Input.GetButtonDown("3") && canTakeInput2[0])
+        else if (Input.GetButtonDown("3") && canTakeInput2[0] && playerTries[0, 1] < 3)
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 2);
         }
-        else if (Input.GetButtonDown("4") && canTakeInput2[0])
+        else if (Input.GetButtonDown("4") && canTakeInput2[0] && playerTries[0, 1] < 3)
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 3);
         }
-        else if (Input.GetButtonDown("con1") && canTakeInput2[1])
+        else if (Input.GetButtonDown("con1") && canTakeInput2[1] && playerTries[1, 1] < 3)
         {
             if (userIndex[1, 1] == 0) HideOriginalSequence(1);
             AddTouserSequences(1, 0);
         }
-        else if (Input.GetButtonDown("con2") && canTakeInput2[1])
+        else if (Input.GetButtonDown("con2") && canTakeInput2[1] && playerTries[1, 1] < 3)
         {
             if (userIndex[1, 1] == 0) HideOriginalSequence(1);
             AddTouserSequences(1, 1);
         }
-        else if (Input.GetButtonDown("con3") && canTakeInput2[1])
+        else if (Input.GetButtonDown("con3") && canTakeInput2[1] && playerTries[1, 1] < 3)
         {
             if (userIndex[1, 1] == 0) HideOriginalSequence(1);
             AddTouserSequences(1, 2);
         }
-        else if (Input.GetButtonDown("con4") && canTakeInput2[1])
+        else if (Input.GetButtonDown("con4") && canTakeInput2[1] && playerTries[1, 1] < 3)
         {
             if (userIndex[1, 1] == 0) HideOriginalSequence(1);
             AddTouserSequences(1, 3);
         }
-        else if (Input.GetButtonDown("leftarrow") && canTakeInput2[2])
+        else if (Input.GetButtonDown("leftarrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
         {
             if (userIndex[2, 1] == 0) HideOriginalSequence(2);
             AddTouserSequences(2, 0);
         }
-        else if (Input.GetButtonDown("uparrow") && canTakeInput2[2])
+        else if (Input.GetButtonDown("uparrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
         {
             if (userIndex[2, 1] == 0) HideOriginalSequence(2);
             AddTouserSequences(2, 1);
         }
-        else if (Input.GetButtonDown("rightarrow") && canTakeInput2[2])
+        else if (Input.GetButtonDown("rightarrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
         {
             if (userIndex[2, 1] == 0) HideOriginalSequence(2);
             AddTouserSequences(2, 2);
         }
-        else if (Input.GetButtonDown("downarrow") && canTakeInput2[2])
+        else if (Input.GetButtonDown("downarrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
         {
             if (userIndex[2, 1] == 0) HideOriginalSequence(2);
             AddTouserSequences(2, 3);
@@ -280,27 +281,23 @@ public class SequenceChecker : MonoBehaviour
             hasHiddenOriginalSequence = true;
         }
 
-        //turn into destroy function
-        //void DeactivateAllShapes()
-        //{
-        //    foreach (GameObject[] shapeArray in shapes)
-        //    {
-        //        foreach (GameObject shape in shapeArray)
-        //        {
-        //            shape.SetActive(false);
-        //        }
-        //    }
-        //}
+    //turn into destroy function
+    //void DestroyArray(GameObject shape)
+    //{
+       
+    //       Destroy(shape);
+       
+        
+    //}
 
 
 
-        //make per player and also assign points to player
-        void CheckSequence(int playerInt)
-        {
-            if (hasCheckedSequence) return;  // Prevent multiple calls
-
-            hasCheckedSequence = true;  // Mark as checked
-            bool isCorrect = true;
+    //make per player and also assign points to player
+    void CheckSequence(int playerInt)
+    {
+        if (hasCheckedSequence[playerInt]) return;
+        hasCheckedSequence[playerInt] = true;  // Mark as checked
+        bool isCorrect = true;
             
             for (int i = 0; i < sequenceManager.shapeCount; i++)
             {
@@ -323,9 +320,13 @@ public class SequenceChecker : MonoBehaviour
                     float bonusMultiplier = Mathf.Clamp(GameManager.Instance.gameTimer / 22f, 0f, 1f);
                     int bonusPoints = Mathf.RoundToInt(1000 * bonusMultiplier / 10) * 10; // Round to nearest 10
                     userPoints[playerInt, 1] += bonusPoints;
-                    // Destroy originial sequence
+                    GameManager.Instance.PlayerFinished(playerInt, userPoints[playerInt, 1]);
+                for (int i = 0; i >= sequenceManager.shapeCount; i++)
+                {
+                    Destroy(sequenceManager.OriginalSequences[playerInt, i]);
                 }
-                Debug.Log(userPoints);
+            }
+                Debug.Log(userPoints[playerInt,1]);
             }
             else
             {
@@ -333,10 +334,24 @@ public class SequenceChecker : MonoBehaviour
                 Debug.Log("Incorrect Sequence. Try Again!");
                 //add retry steps here
                 playerTries[playerInt, 1]++;
+                userIndex[playerInt, 1] = 0;
                 // say whats wrong would be here
-                //Destroy wrong user sequence
+                for(int i = 0; i < sequenceManager.shapeCount; i++)
+                {
+                    
+                    Destroy(userSequences[playerInt, i]);
+                    
+                }
+                
+            //userSequences[playerInt,]
+                canTakeInput2[playerInt] = true;
+                hasCheckedSequence[playerInt] = false;
+            if (playerTries[playerInt, 1] == 2)
+            {
+                GameManager.Instance.PlayerFinished(playerInt, userPoints[playerInt, 1]);
             }
-        }
+            }
+    }
     
 }
 

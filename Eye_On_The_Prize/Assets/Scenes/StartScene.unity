@@ -785,7 +785,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   TimerText: {fileID: 0}
-  playerPoints: 
+  gameTimer: 25
+  isTimerRunning: 0
+  difficultyLevel: 1
 --- !u!4 &940357375
 Transform:
   m_ObjectHideFlags: 0

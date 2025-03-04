@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
         if (playersFinished >= playerCount)
         {
             isTimerRunning = false;
-            SceneManager.LoadScene("StartScene"); // change to end scene
+            SceneManager.LoadScene("StartScene"); // change to end scene here
             difficultyLevel++;
             //add other difficulty stuff here
         }
