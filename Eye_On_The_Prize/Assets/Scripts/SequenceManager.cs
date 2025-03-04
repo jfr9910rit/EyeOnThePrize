@@ -82,36 +82,36 @@ public class SequenceManager : MonoBehaviour
         if (index >= shapeCount) return;
         if (playerCnt == 1)
         { 
-           int randomIndex = GetWeightedRandomIndex(index);
+           int randomIndex = GetWeightedRandomIndex(shapes.Length);
            OriginalSequences[0,index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
            OriginalSequences[0,index].transform.SetParent(seqs[0], false);
            shapeX += 300;
-           UpdateProbabilities(randomIndex, shapeCount);
+           UpdateProbabilities(randomIndex, shapes.Length);
         }
         else if(playerCnt == 2)
         {
-            int randomIndex = GetWeightedRandomIndex(index);
+            int randomIndex = GetWeightedRandomIndex(shapes.Length);
             OriginalSequences[0,index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
             OriginalSequences[0,index].transform.SetParent(seqs[1], false);
-            randomIndex = GetWeightedRandomIndex(index);
+            randomIndex = GetWeightedRandomIndex(shapes.Length);
             OriginalSequences[1, index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
             OriginalSequences[1, index].transform.SetParent(seqs[2], false);
             shapeX += 300;
-            UpdateProbabilities(randomIndex, shapeCount);
+            UpdateProbabilities(randomIndex, shapes.Length);
         }
         else if(playerCnt == 3)
         {
-            int randomIndex = GetWeightedRandomIndex(index);
+            int randomIndex = GetWeightedRandomIndex(shapes.Length);
             OriginalSequences[0, index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
             OriginalSequences[0, index].transform.SetParent(seqs[3], false);
-            randomIndex = GetWeightedRandomIndex(index);
+            randomIndex = GetWeightedRandomIndex(shapes.Length);
             OriginalSequences[1, index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
             OriginalSequences[1, index].transform.SetParent(seqs[4], false);
-            randomIndex = GetWeightedRandomIndex(index);
+            randomIndex = GetWeightedRandomIndex(shapes.Length);
             OriginalSequences[2, index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
             OriginalSequences[2, index].transform.SetParent(seqs[5], false);
             shapeX += 300;
-            UpdateProbabilities(randomIndex, shapeCount);
+            UpdateProbabilities(randomIndex, shapes.Length);
         }
 
         index++;
