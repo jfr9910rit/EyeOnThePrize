@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Globalization;
+using System.Runtime.InteropServices;
 
 
 public class SequenceChecker : MonoBehaviour
@@ -91,19 +92,24 @@ public class SequenceChecker : MonoBehaviour
             {
 
                 GameManager.Instance.isTimerRunning = false;
-                canTakeInput = false;  // Stop user input
-                //call 3x
-                CheckSequence();  // Immediately check sequence
+                canTakeInput = false;  // make for each user
+                //check all 3
+                for(int i = 0; i >= GameManager.Instance.playerCount; i++)
+                {
+                    CheckSequence(i);
+                }
+                
             }
 
         }
+
         //need to make player dependant
         // Block input if sequence isn't ready or if userSequences is full
         if (!canTakeInput || userIndex[0, 1] >= sequenceManager.shapeCount)
         {
             return;
         }
-        //may need to change dependant on players
+        
 
         //prob can turn into a function later
         // Listen for input
@@ -168,16 +174,22 @@ public class SequenceChecker : MonoBehaviour
             AddTouserSequences(2, 3);
         }
 
-        // Stop taking input immediately once user finishes their sequence
-        if (userIndex[0, 1] >= sequenceManager.shapeCount)
+        for(int i = 0; i >= GameManager.Instance.playerCount; i++)
         {
-            canTakeInput = false;
-            //isTimerRunning = false; // change to make so that its dependant on player
-            CheckSequence();
+            // Stop taking input immediately once user finishes their sequence
+            if (userIndex[i, 1] >= sequenceManager.shapeCount)
+            {
+                canTakeInput = false;
+                //isTimerRunning = false; // change to make it so that player time is tracked unless all players finish
+                CheckSequence(i);
+            }
         }
+
+        
+        
     }
 
-    //add arguement for which player so it adds to individual arrays
+    
     void AddTouserSequences(int playerInt, int shapeInt)
     {
         if (userIndex[playerInt, 1] >= sequenceManager.shapeCount || !canTakeInput)
@@ -228,14 +240,15 @@ public class SequenceChecker : MonoBehaviour
             userIndex[playerInt, 1]++;
             //Debug.Log(userIndex[playerInt, 1]);
 
-            shapeX[playerInt, 1] += 300;
+            shapeX[playerInt, 1] += 300; //turn 300 to variable
 
             if (userIndex[playerInt, 1] >= sequenceManager.shapeCount)
             {
                 canTakeInput = false;
                 //isTimerRunning = false; // change to make it so that player time is tracked unless all players finish
-                CheckSequence();
+                CheckSequence(playerInt);
             }
+            
         }
 
     }
@@ -265,27 +278,16 @@ public class SequenceChecker : MonoBehaviour
 
 
         //make per player and also assign points to player
-        void CheckSequence()
+        void CheckSequence(int playerInt)
         {
             if (hasCheckedSequence) return;  // Prevent multiple calls
 
             hasCheckedSequence = true;  // Mark as checked
             bool isCorrect = true;
-            //if(GameManager.Instance.playerCount == 1)
-            //{
-            //    
-            //}
-            //else if (GameManager.Instance.playerCount == 2)
-            //{
-            //    
-            //}
-            //else if (GameManager.Instance.playerCount == 3)
-            //{
-            //    
-            //}
+            
             for (int i = 0; i < sequenceManager.shapeCount; i++)
             {
-                if (userSequences[0, i] == null || sequenceManager.OriginalSequences[0, i] == null || userSequences[0, i].name != sequenceManager.OriginalSequences[0, i].name)
+                if (userSequences[playerInt, i] == null || sequenceManager.OriginalSequences[playerInt, i] == null || userSequences[playerInt, i].name != sequenceManager.OriginalSequences[playerInt, i].name)
                 {
                     isCorrect = false;
                     break;
@@ -296,14 +298,14 @@ public class SequenceChecker : MonoBehaviour
             {
                 Debug.Log("Correct Sequence!");
                 Result.text = "Correct!";
-                userPoints[0, 1] += 1000; // Base points for correctness
+                userPoints[playerInt, 1] += 1000; // Base points for correctness turn into variable later
 
                 // Calculate bonus points based on remaining time
                 if (GameManager.Instance.gameTimer > 0)
                 {
                     float bonusMultiplier = Mathf.Clamp(GameManager.Instance.gameTimer / 22f, 0f, 1f);
                     int bonusPoints = Mathf.RoundToInt(1000 * bonusMultiplier / 10) * 10; // Round to nearest 10
-                    userPoints[0, 1] += bonusPoints;
+                    userPoints[playerInt, 1] += bonusPoints;
                     // Debug log for testing
                 }
                 Debug.Log(userPoints);
@@ -313,6 +315,9 @@ public class SequenceChecker : MonoBehaviour
                 Result.text = "Incorrect!";
                 Debug.Log("Incorrect Sequence. Try Again!");
                 //add retry steps here
+                playerTries[playerInt, 1]++;
+                // say whats wrong would be here
+                //destroy wrong sequence
             }
         }
     

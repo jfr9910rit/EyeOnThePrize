@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public float gameTimer = 25f;
     public bool isTimerRunning = false;
     private int playersFinished = 0;
-    public int[] playerPoints; //fix this
+    public int[,] playerPoints; //fix this
     public int difficultyLevel = 1;
 
     void Awake()
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerPoints = new int[3]; //initialize players
+        playerPoints = new int[playerCount, 2]; //initialize players
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -89,14 +89,15 @@ public class GameManager : MonoBehaviour
     {
         if (playerIndex >= 0 && playerIndex < playerPoints.Length)
         {
-            playerPoints[playerIndex] += score;
+            playerPoints[playerIndex,1] += score;
         }
         playersFinished++;
         if (playersFinished >= playerCount)
         {
             isTimerRunning = false;
-            SceneManager.LoadScene("StartScene"); // Return to StartScene after round completion
+            SceneManager.LoadScene("StartScene"); // change to end scene
             difficultyLevel++;
+            //add other difficulty stuff here
         }
     }
 
