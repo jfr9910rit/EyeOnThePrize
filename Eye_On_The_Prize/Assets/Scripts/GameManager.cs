@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public bool isTimerRunning = false;
     private int playersFinished = 0;
     public int[] playerPoints; //fix this
+    public int difficultyLevel = 1;
 
     void Awake()
     {
@@ -95,6 +96,7 @@ public class GameManager : MonoBehaviour
         {
             isTimerRunning = false;
             SceneManager.LoadScene("StartScene"); // Return to StartScene after round completion
+            difficultyLevel++;
         }
     }
 

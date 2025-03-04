@@ -24,6 +24,7 @@ public class StartManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //change logic so it can be 2 players with slots 2 and 3 being full being p1 and p2 and single player being any poistion
         if (Input.GetKeyDown(KeyCode.Alpha1))//make all buttons
         {
             p1JoinDialogue.text = "Player 1 Ready";
@@ -42,7 +43,7 @@ public class StartManager : MonoBehaviour
         //add timer
         if(GameManager.Instance.playerCount > 0)
         {
-            pressHold.text = "Player 1 hold '2' to start " + GameManager.Instance.playerCount.ToString() + " Player game";
+            pressHold.text = "Player 1 hold 'Square' to start " + GameManager.Instance.playerCount.ToString() + " Player game";
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {

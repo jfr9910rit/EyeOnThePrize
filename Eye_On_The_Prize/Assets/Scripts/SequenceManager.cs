@@ -11,44 +11,54 @@ using TMPro;
 public class SequenceManager : MonoBehaviour
 {
     
-    public GameObject[] OriginalSequence;
+    public GameObject[,] OriginalSequences;
 
-    public GameObject[] shape1, shape2, shape3, shape4, shape5;
+    //public GameObject[] shape1, shape2, shape3, shape4, shape5;
 
     private float[] probabilities;
     private int lastSelected = -1;
-
-    private GameObject[][] shapes;
+    public GameObject[] shapes;
+    //private GameObject[][] shapes;
     private float timer = 0f;
-    
+    private float delayTime = 0.5f;
     private int index = 0;
     private bool activationStarted = false;
+    private int playerCnt;
+    private int diffLevel;
+    public int shapeCount = 5;
+    private int shapeX = -600;
+    public Transform[] seqs;
 
     void Start()
     {
+        playerCnt = GameManager.Instance.playerCount;
+        diffLevel = GameManager.Instance.difficultyLevel;
         probabilities = new float[] { 25f, 25f, 25f, 25f };
-        for (int s = 1; s < 6; s++)
-        {
-            List<GameObject[]> shapes = new List<GameObject[]> { shape1, shape2, shape3, shape4, shape5 };
+        //oldCode
+        //for (int s = 1; s < 6; s++)
+        //{
+        //    List<GameObject[]> shapes = new List<GameObject[]> { shape1, shape2, shape3, shape4, shape5 };
 
-            foreach (GameObject[] shape in shapes)
-            {
-                foreach (GameObject obj in shape)
-                {
-                    obj.SetActive(false);
-                }
-            }
-        }
-        shapes = new GameObject[][] { shape1, shape2, shape3, shape4, shape5 };
-        OriginalSequence = new GameObject[shapes.Length];
-        activationStarted = true;
+        //    foreach (GameObject[] shape in shapes)
+        //    {
+        //        foreach (GameObject obj in shape)
+        //        {
+        //            obj.SetActive(false);
+        //        }
+        //    }
+        //}
+        //shapes = new GameObject[][] { shape1, shape2, shape3, shape4, shape5 };
+
+        OriginalSequences = new GameObject[playerCnt,shapeCount];
+
+            activationStarted = true;
         ActivateNextShape();
     }
 
     void Update()
     {
 
-        if (!activationStarted || index >= shapes.Length)
+        if (!activationStarted || index >= shapeCount)
         {
             activationStarted = false;
         }
@@ -57,7 +67,7 @@ public class SequenceManager : MonoBehaviour
         timer += Time.deltaTime;
         
 
-        if (timer >= 0.5f && activationStarted == true) //experiment with order/speed
+        if (timer >= delayTime && activationStarted == true) //experiment with order/speed
         {
             timer = 0f;
             ActivateNextShape();
@@ -69,25 +79,43 @@ public class SequenceManager : MonoBehaviour
     //actually creates the sequence
     void ActivateNextShape()
     {
-        if (index >= shapes.Length) return;
+        if (index >= shapeCount) return;
+        if (playerCnt == 1)
+        { 
+           int randomIndex = GetWeightedRandomIndex(index);
+           OriginalSequences[0,index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
+           OriginalSequences[0,index].transform.SetParent(seqs[0], false);
+           shapeX += 300;
+           UpdateProbabilities(randomIndex, shapeCount);
+        }
+        else if(playerCnt == 2)
+        {
+            int randomIndex = GetWeightedRandomIndex(index);
+            OriginalSequences[0,index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
+            OriginalSequences[0,index].transform.SetParent(seqs[1], false);
+            randomIndex = GetWeightedRandomIndex(index);
+            OriginalSequences[1, index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
+            OriginalSequences[1, index].transform.SetParent(seqs[2], false);
+            shapeX += 300;
+            UpdateProbabilities(randomIndex, shapeCount);
+        }
+        else if(playerCnt == 3)
+        {
+            int randomIndex = GetWeightedRandomIndex(index);
+            OriginalSequences[0, index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
+            OriginalSequences[0, index].transform.SetParent(seqs[3], false);
+            randomIndex = GetWeightedRandomIndex(index);
+            OriginalSequences[1, index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
+            OriginalSequences[1, index].transform.SetParent(seqs[4], false);
+            randomIndex = GetWeightedRandomIndex(index);
+            OriginalSequences[2, index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
+            OriginalSequences[2, index].transform.SetParent(seqs[5], false);
+            shapeX += 300;
+            UpdateProbabilities(randomIndex, shapeCount);
+        }
 
-        GameObject[] shapeGroup = shapes[index];
-
-        if (shapeGroup.Length == 0) return;
-
-        // Select a random index based on weighted probability
-        int randomIndex = GetWeightedRandomIndex(shapeGroup.Length);
-
-        // Activate the selected object
-        shapeGroup[randomIndex].SetActive(true);
-
-        // Store in OriginalSequence
-        OriginalSequence[index] = shapeGroup[randomIndex];
-
-        // Update probabilities based on selection
-        UpdateProbabilities(randomIndex, shapeGroup.Length);
-
-        index++; // Move to the next shape group
+        index++;
+        
     }
 
     int GetWeightedRandomIndex(int shapeCount)
@@ -131,7 +159,13 @@ public class SequenceManager : MonoBehaviour
         float remaining = 100f - probabilities[selected] - (lastSelected != -1 ? probabilities[lastSelected] : 0);
         int countOther = shapeCount - (lastSelected == -1 ? 1 : 2); // Remaining non-selected options
 
-        for (int i = 0; i < shapeCount; i++)
+        if (countOther <= 0)
+        {
+            countOther = 1;  // Prevent division by zero
+        }
+
+        // Only loop within bounds of probabilities
+        for (int i = 0; i < Mathf.Min(shapeCount, probabilities.Length); i++)
         {
             if (i != selected && i != lastSelected)
             {
@@ -141,4 +175,5 @@ public class SequenceManager : MonoBehaviour
 
         lastSelected = selected; // Store last choice
     }
+
 }
