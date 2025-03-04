@@ -20,7 +20,8 @@ public class SequenceChecker : MonoBehaviour
     private int[,] userPoints;
     private SequenceManager sequenceManager;
     private bool isSequenceReady = false;
-    private bool canTakeInput = false;
+    //private bool canTakeInput = false;
+    private bool[] canTakeInput2;
     private bool hasHiddenOriginalSequence = false;
     private bool isTimerRunning = false;  // Track if timer is still running
     private bool hasCheckedSequence = false;
@@ -43,6 +44,7 @@ public class SequenceChecker : MonoBehaviour
         userPoints = new int[GameManager.Instance.playerCount, 2];
         playerTries = new int[GameManager.Instance.playerCount, 2];
         shapeX = new int[GameManager.Instance.playerCount, 2];
+        canTakeInput2 = new bool[GameManager.Instance.playerCount];
     }
 
     void Update()
@@ -65,9 +67,17 @@ public class SequenceChecker : MonoBehaviour
                 if (sequencePopulated)
                 {
 
-
+                    
                     isSequenceReady = true;
-                    canTakeInput = true;
+                    
+                    //broken
+                    for (int i = 0; i >= GameManager.Instance.playerCount; i++)
+                    {
+                        canTakeInput2[i] = true;
+                        Debug.Log(canTakeInput2[i]);
+                    }
+                    //canTakeInput = true;
+                    
                     GameManager.Instance.isTimerRunning = true;
                 }
             }
@@ -92,83 +102,89 @@ public class SequenceChecker : MonoBehaviour
             {
 
                 GameManager.Instance.isTimerRunning = false;
-                canTakeInput = false;  // make for each user
+
                 //check all 3
-                for(int i = 0; i >= GameManager.Instance.playerCount; i++)
+                for (int i = 0; i >= GameManager.Instance.playerCount; i++)
                 {
+                    canTakeInput2[i] = false;
                     CheckSequence(i);
                 }
-                
+
             }
 
         }
 
         //need to make player dependant
-        // Block input if sequence isn't ready or if userSequences is full
-        if (!canTakeInput || userIndex[0, 1] >= sequenceManager.shapeCount)
-        {
-            return;
-        }
+        // Block input if sequence isn't ready or if userSequences is full 
+        //seperate
+        //for (int i = 0; i >= GameManager.Instance.playerCount; i++)
+        //{
+        //    if (!canTakeInput2[i] || userIndex[i, 1] >= sequenceManager.shapeCount) return;
+        //}
+        
+            
+    
+        
         
 
         //prob can turn into a function later
         // Listen for input
-        if (Input.GetButtonDown("1"))
+        if (Input.GetButtonDown("1") && canTakeInput2[0])
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 0);
         }
-        else if (Input.GetButtonDown("2"))
+        else if (Input.GetButtonDown("2") && canTakeInput2[0])
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 1);
         }
-        else if (Input.GetButtonDown("3"))
+        else if (Input.GetButtonDown("3") && canTakeInput2[0])
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 2);
         }
-        else if (Input.GetButtonDown("4"))
+        else if (Input.GetButtonDown("4") && canTakeInput2[0])
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 3);
         }
-        else if (Input.GetButtonDown("con1"))
+        else if (Input.GetButtonDown("con1") && canTakeInput2[1])
         {
             if (userIndex[1, 1] == 0) HideOriginalSequence(1);
             AddTouserSequences(1, 0);
         }
-        else if (Input.GetButtonDown("con2"))
+        else if (Input.GetButtonDown("con2") && canTakeInput2[1])
         {
             if (userIndex[1, 1] == 0) HideOriginalSequence(1);
             AddTouserSequences(1, 1);
         }
-        else if (Input.GetButtonDown("con3"))
+        else if (Input.GetButtonDown("con3") && canTakeInput2[1])
         {
             if (userIndex[1, 1] == 0) HideOriginalSequence(1);
             AddTouserSequences(1, 2);
         }
-        else if (Input.GetButtonDown("con4"))
+        else if (Input.GetButtonDown("con4") && canTakeInput2[1])
         {
             if (userIndex[1, 1] == 0) HideOriginalSequence(1);
             AddTouserSequences(1, 3);
         }
-        else if (Input.GetButtonDown("leftarrow"))
+        else if (Input.GetButtonDown("leftarrow") && canTakeInput2[2])
         {
             if (userIndex[2, 1] == 0) HideOriginalSequence(2);
             AddTouserSequences(2, 0);
         }
-        else if (Input.GetButtonDown("uparrow"))
+        else if (Input.GetButtonDown("uparrow") && canTakeInput2[2])
         {
             if (userIndex[2, 1] == 0) HideOriginalSequence(2);
             AddTouserSequences(2, 1);
         }
-        else if (Input.GetButtonDown("rightarrow"))
+        else if (Input.GetButtonDown("rightarrow") && canTakeInput2[2])
         {
             if (userIndex[2, 1] == 0) HideOriginalSequence(2);
             AddTouserSequences(2, 2);
         }
-        else if (Input.GetButtonDown("downarrow"))
+        else if (Input.GetButtonDown("downarrow") && canTakeInput2[2])
         {
             if (userIndex[2, 1] == 0) HideOriginalSequence(2);
             AddTouserSequences(2, 3);
@@ -179,7 +195,7 @@ public class SequenceChecker : MonoBehaviour
             // Stop taking input immediately once user finishes their sequence
             if (userIndex[i, 1] >= sequenceManager.shapeCount)
             {
-                canTakeInput = false;
+                canTakeInput2[i] = false;
                 //isTimerRunning = false; // change to make it so that player time is tracked unless all players finish
                 CheckSequence(i);
             }
@@ -192,7 +208,7 @@ public class SequenceChecker : MonoBehaviour
     
     void AddTouserSequences(int playerInt, int shapeInt)
     {
-        if (userIndex[playerInt, 1] >= sequenceManager.shapeCount || !canTakeInput)
+        if (userIndex[playerInt, 1] >= sequenceManager.shapeCount || !canTakeInput2[playerInt])
         {
             return;
         }
@@ -244,7 +260,7 @@ public class SequenceChecker : MonoBehaviour
 
             if (userIndex[playerInt, 1] >= sequenceManager.shapeCount)
             {
-                canTakeInput = false;
+                canTakeInput2[playerInt] = false;
                 //isTimerRunning = false; // change to make it so that player time is tracked unless all players finish
                 CheckSequence(playerInt);
             }
@@ -253,7 +269,7 @@ public class SequenceChecker : MonoBehaviour
 
     }
 
-        //make independant for player
+        
         void HideOriginalSequence(int playerInt)
         {
             Debug.Log("Hiding Original Sequence!");
@@ -264,6 +280,7 @@ public class SequenceChecker : MonoBehaviour
             hasHiddenOriginalSequence = true;
         }
 
+        //turn into destroy function
         //void DeactivateAllShapes()
         //{
         //    foreach (GameObject[] shapeArray in shapes)
@@ -306,7 +323,7 @@ public class SequenceChecker : MonoBehaviour
                     float bonusMultiplier = Mathf.Clamp(GameManager.Instance.gameTimer / 22f, 0f, 1f);
                     int bonusPoints = Mathf.RoundToInt(1000 * bonusMultiplier / 10) * 10; // Round to nearest 10
                     userPoints[playerInt, 1] += bonusPoints;
-                    // Debug log for testing
+                    // Destroy originial sequence
                 }
                 Debug.Log(userPoints);
             }
@@ -317,7 +334,7 @@ public class SequenceChecker : MonoBehaviour
                 //add retry steps here
                 playerTries[playerInt, 1]++;
                 // say whats wrong would be here
-                //destroy wrong sequence
+                //Destroy wrong user sequence
             }
         }
     
