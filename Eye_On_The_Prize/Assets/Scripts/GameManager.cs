@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log(playerCount);
         if (Instance == null)
         {
             Instance = this;
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isTimerRunning)
+        if (isTimerRunning && SceneManager.GetActiveScene().name == "Julian_Testing")
         {
             gameTimer -= Time.deltaTime;
             if (gameTimer <= 0)
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
                 isTimerRunning = false;
                 //canTakeInput = false;  // Stop user input
                 //CheckSequence();  // Immediately check sequence
+                SceneManager.LoadScene("EndScene");
             }
             TimerText.text = Mathf.RoundToInt(gameTimer).ToString();
         }
@@ -95,7 +97,7 @@ public class GameManager : MonoBehaviour
         if (playersFinished >= playerCount)
         {
             isTimerRunning = false;
-            SceneManager.LoadScene("StartScene"); // change to end scene here
+            SceneManager.LoadScene("EndScene"); // change to end scene here
             difficultyLevel++;
             //add other difficulty stuff here
         }

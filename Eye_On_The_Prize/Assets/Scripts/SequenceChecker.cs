@@ -3,10 +3,13 @@ using UnityEngine.UI;
 using TMPro;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using UnityEngine.SceneManagement;
+
 
 
 public class SequenceChecker : MonoBehaviour
 {
+    public static SequenceChecker Instance;
 
     public TextMeshProUGUI Result;
     //public TextMeshProUGUI Timer;
@@ -16,7 +19,7 @@ public class SequenceChecker : MonoBehaviour
     //private GameObject[][] shapes;
     //private GameObject[] OriginalSequence;
     private GameObject[,] userSequences;
-    private int[,] userIndex;
+    public int[,] userIndex;
     private int[,] userPoints;
     private SequenceManager sequenceManager;
     private bool isSequenceReady = false;
@@ -31,6 +34,8 @@ public class SequenceChecker : MonoBehaviour
     void Start()
     {
         sequenceManager = FindObjectOfType<SequenceManager>();
+
+
 
         //shape1 = sequenceManager.shape1;
         //shape2 = sequenceManager.shape2;
@@ -68,17 +73,17 @@ public class SequenceChecker : MonoBehaviour
                 if (sequencePopulated)
                 {
 
-                    
+
                     isSequenceReady = true;
-                    
-                    
+
+
                     for (int i = 0; i < GameManager.Instance.playerCount; i++)
                     {
                         canTakeInput2[i] = true;
                         Debug.Log(canTakeInput2[i]);
                     }
                     //canTakeInput = true;
-                    
+
                     GameManager.Instance.isTimerRunning = true;
                 }
             }
@@ -111,6 +116,8 @@ public class SequenceChecker : MonoBehaviour
                     CheckSequence(i);
                 }
 
+                SceneManager.LoadScene("EndScene");
+
             }
 
         }
@@ -122,15 +129,15 @@ public class SequenceChecker : MonoBehaviour
         //{
         //    if (!canTakeInput2[i] || userIndex[i, 1] >= sequenceManager.shapeCount) return;
         //}
-        
-            
-    
-        
-        
+
+
+
+
+
 
         //prob can turn into a function later
         // Listen for input
-        if (Input.GetButtonDown("1") && canTakeInput2[0] && playerTries[0,1] < 3)
+        if (Input.GetButtonDown("1") && canTakeInput2[0] && playerTries[0, 1] < 3)
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 0);
@@ -191,7 +198,7 @@ public class SequenceChecker : MonoBehaviour
             AddTouserSequences(2, 3);
         }
 
-        for(int i = 0; i >= GameManager.Instance.playerCount; i++)
+        for (int i = 0; i >= GameManager.Instance.playerCount; i++)
         {
             // Stop taking input immediately once user finishes their sequence
             if (userIndex[i, 1] >= sequenceManager.shapeCount)
@@ -202,11 +209,11 @@ public class SequenceChecker : MonoBehaviour
             }
         }
 
-        
-        
+
+
     }
 
-    
+
     void AddTouserSequences(int playerInt, int shapeInt)
     {
         if (userIndex[playerInt, 1] >= sequenceManager.shapeCount || !canTakeInput2[playerInt])
@@ -216,18 +223,18 @@ public class SequenceChecker : MonoBehaviour
 
         if (userIndex[playerInt, 1] == 0) shapeX[playerInt, 1] = -600;
         GameObject selectedShape = Instantiate(sequenceManager.shapes[shapeInt], new Vector3(shapeX[playerInt, 1], 0, -5), Quaternion.identity);
-        
+
         if (GameManager.Instance.playerCount == 1)
         {
             selectedShape.transform.SetParent(sequenceManager.seqs[0], false);
         }
         else if (GameManager.Instance.playerCount == 2)
         {
-            if(playerInt == 0)
+            if (playerInt == 0)
             {
                 selectedShape.transform.SetParent(sequenceManager.seqs[1], false);
             }
-            else if(playerInt == 1)
+            else if (playerInt == 1)
             {
                 selectedShape.transform.SetParent(sequenceManager.seqs[2], false);
             }
@@ -242,14 +249,14 @@ public class SequenceChecker : MonoBehaviour
             {
                 selectedShape.transform.SetParent(sequenceManager.seqs[4], false);
             }
-            else if(playerInt == 2)
+            else if (playerInt == 2)
             {
                 selectedShape.transform.SetParent(sequenceManager.seqs[5], false);
             }
         }
 
-        
-        
+
+
         if (selectedShape != null)
         {
             userSequences[playerInt, userIndex[playerInt, 1]] = selectedShape;
@@ -265,29 +272,29 @@ public class SequenceChecker : MonoBehaviour
                 //isTimerRunning = false; // change to make it so that player time is tracked unless all players finish
                 CheckSequence(playerInt);
             }
-            
+
         }
 
     }
 
-        
-        void HideOriginalSequence(int playerInt)
+
+    void HideOriginalSequence(int playerInt)
+    {
+        Debug.Log("Hiding Original Sequence!");
+        for (int s = 0; s < sequenceManager.shapeCount; s++)
         {
-            Debug.Log("Hiding Original Sequence!");
-            for (int s = 0; s < sequenceManager.shapeCount; s++)
-            {
-                sequenceManager.OriginalSequences[playerInt, s].SetActive(false);
-            }
-            hasHiddenOriginalSequence = true;
+            sequenceManager.OriginalSequences[playerInt, s].SetActive(false);
         }
+        hasHiddenOriginalSequence = true;
+    }
 
     //turn into destroy function
     //void DestroyArray(GameObject shape)
     //{
-       
+
     //       Destroy(shape);
-       
-        
+
+
     //}
 
 
@@ -298,60 +305,66 @@ public class SequenceChecker : MonoBehaviour
         if (hasCheckedSequence[playerInt]) return;
         hasCheckedSequence[playerInt] = true;  // Mark as checked
         bool isCorrect = true;
-            
-            for (int i = 0; i < sequenceManager.shapeCount; i++)
+
+        for (int i = 0; i < sequenceManager.shapeCount; i++)
+        {
+            if (userSequences[playerInt, i] == null || sequenceManager.OriginalSequences[playerInt, i] == null || userSequences[playerInt, i].name != sequenceManager.OriginalSequences[playerInt, i].name)
             {
-                if (userSequences[playerInt, i] == null || sequenceManager.OriginalSequences[playerInt, i] == null || userSequences[playerInt, i].name != sequenceManager.OriginalSequences[playerInt, i].name)
-                {
-                    isCorrect = false;
-                    break;
-                }
+                isCorrect = false;
+                break;
             }
+        }
 
-            if (isCorrect)
+        if (isCorrect)
+        {
+            Debug.Log("Correct Sequence!");
+            Result.text = "Correct!";
+            userPoints[playerInt, 1] += 1000; // Base points for correctness turn into variable later
+
+            // Calculate bonus points based on remaining time
+            if (GameManager.Instance.gameTimer > 0)
             {
-                Debug.Log("Correct Sequence!");
-                Result.text = "Correct!";
-                userPoints[playerInt, 1] += 1000; // Base points for correctness turn into variable later
-
-                // Calculate bonus points based on remaining time
-                if (GameManager.Instance.gameTimer > 0)
-                {
-                    float bonusMultiplier = Mathf.Clamp(GameManager.Instance.gameTimer / 22f, 0f, 1f);
-                    int bonusPoints = Mathf.RoundToInt(1000 * bonusMultiplier / 10) * 10; // Round to nearest 10
-                    userPoints[playerInt, 1] += bonusPoints;
-                    GameManager.Instance.PlayerFinished(playerInt, userPoints[playerInt, 1]);
+                float bonusMultiplier = Mathf.Clamp(GameManager.Instance.gameTimer / 22f, 0f, 1f);
+                int bonusPoints = Mathf.RoundToInt(1000 * bonusMultiplier / 10) * 10; // Round to nearest 10
+                userPoints[playerInt, 1] += bonusPoints;
+                GameManager.Instance.PlayerFinished(playerInt, userPoints[playerInt, 1]);
                 for (int i = 0; i >= sequenceManager.shapeCount; i++)
                 {
                     Destroy(sequenceManager.OriginalSequences[playerInt, i]);
                 }
             }
-                Debug.Log(userPoints[playerInt,1]);
-            }
-            else
+            Debug.Log(userPoints[playerInt, 1]);
+
+        }
+        else
+        {
+            Result.text = "Incorrect!";
+            Debug.Log("Incorrect Sequence. Try Again!");
+            //add retry steps here
+            playerTries[playerInt, 1]++;
+            userIndex[playerInt, 1] = 0;
+            // say whats wrong would be here
+            for (int i = 0; i < sequenceManager.shapeCount; i++)
             {
-                Result.text = "Incorrect!";
-                Debug.Log("Incorrect Sequence. Try Again!");
-                //add retry steps here
-                playerTries[playerInt, 1]++;
-                userIndex[playerInt, 1] = 0;
-                // say whats wrong would be here
-                for(int i = 0; i < sequenceManager.shapeCount; i++)
-                {
-                    
-                    Destroy(userSequences[playerInt, i]);
-                    
-                }
-                
+
+                Destroy(userSequences[playerInt, i]);
+
+            }
+
             //userSequences[playerInt,]
-                canTakeInput2[playerInt] = true;
-                hasCheckedSequence[playerInt] = false;
+            canTakeInput2[playerInt] = true;
+            hasCheckedSequence[playerInt] = false;
             if (playerTries[playerInt, 1] == 2)
             {
                 GameManager.Instance.PlayerFinished(playerInt, userPoints[playerInt, 1]);
             }
-            }
+        }
+
+        PlayerPrefs.SetInt($"Player{playerInt}Score", userPoints[playerInt, 1]);
+        PlayerPrefs.Save();
+
+
     }
-    
+
 }
 
