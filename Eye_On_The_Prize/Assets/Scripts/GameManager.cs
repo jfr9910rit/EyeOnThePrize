@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI TimerText;
     public float gameTimer = 25f;
     public bool isTimerRunning = false;
-    private int playersFinished = 0;
+    public int playersFinished = 0;
     public int[,] playerPoints; //fix this
     public int difficultyLevel = 1;
 
