@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerPoints = new int[playerCount, 2]; //initialize players
+         //initialize players
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
         playerSequences[3] = GameObject.Find("Sequence_L1_3P_P1");
         playerSequences[4] = GameObject.Find("Sequence_L1_3P_P2");
         playerSequences[5] = GameObject.Find("Sequence_L1_3P_P3");
+        playerPoints = new int[playerCount, 2];
         UpdateActiveSequences();
     }
 
@@ -92,11 +93,13 @@ public class GameManager : MonoBehaviour
         if (playerIndex >= 0 && playerIndex < playerPoints.Length)
         {
             playerPoints[playerIndex,1] += score;
+           
         }
         playersFinished++;
         if (playersFinished >= playerCount)
         {
             isTimerRunning = false;
+            Debug.Log(playerPoints[playerIndex, 1]);
             SceneManager.LoadScene("EndScene"); // change to end scene here
             difficultyLevel++;
             //add other difficulty stuff here

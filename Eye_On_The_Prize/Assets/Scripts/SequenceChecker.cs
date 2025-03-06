@@ -90,11 +90,13 @@ public class SequenceChecker : MonoBehaviour
         }
 
         // Hide the original sequence after 10 seconds
-        if (isSequenceReady && !hasHiddenOriginalSequence && (25f - GameManager.Instance.gameTimer) >= hideTime)
+        if (/*isSequenceReady &&*/ !hasHiddenOriginalSequence && (25f - GameManager.Instance.gameTimer) >= hideTime)
         {
-            for (int i = 0; i >= GameManager.Instance.playerCount; i++)
+            //Debug.Log("hidden orig sequence");
+            for (int i = 0; i < GameManager.Instance.playerCount; i++)
             {
                 HideOriginalSequence(i);
+                //Debug.Log("hidden orig sequence");
             }
 
 
@@ -288,14 +290,6 @@ public class SequenceChecker : MonoBehaviour
         hasHiddenOriginalSequence = true;
     }
 
-    //turn into destroy function
-    //void DestroyArray(GameObject shape)
-    //{
-
-    //       Destroy(shape);
-
-
-    //}
 
 
 
