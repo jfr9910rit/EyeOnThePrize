@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         if (playerIndex >= 0 && playerIndex < playerPoints.Length)
         {
             playerPoints[playerIndex,1] += score;
-           
+            Debug.Log("test1");
         }
         playersFinished++;
         if (playersFinished >= playerCount)

@@ -6,7 +6,7 @@ public class EndScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public TextMeshProUGUI EndBanner;
 
-    void Start()
+    void Awake()
     {
         Debug.Log("end scene");
         GameManager.Instance.isTimerRunning = false;
