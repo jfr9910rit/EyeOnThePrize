@@ -25,21 +25,30 @@ public class StartManager : MonoBehaviour
     void Update()
     {
         //change logic so it can be 2 players with slots 2 and 3 being full being p1 and p2 and single player being any poistion
-        if (Input.GetKeyDown(KeyCode.Alpha1))//make all buttons
+        if(playerCount < 3)
         {
-            p1JoinDialogue.text = "Player 1 Ready";
-            GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
+            if (playerCount < 1 && Input.GetKeyDown(KeyCode.Alpha1))//make all buttons
+            {
+                p1JoinDialogue.text = "Player 1 Ready";
+                GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
+                playerCount += 1;
+            }
+            if (playerCount < 2 && Input.GetKeyDown(KeyCode.Alpha7))//make all buttons
+            {
+                p2JoinDialogue.text = "Player 2 Ready";
+                GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
+                playerCount += 1;
+
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow))//make all buttons
+            {
+                p3JoinDialogue.text = "Player 3 Ready";
+                GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
+                playerCount += 1;
+
+            }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha7))//make all buttons
-        {
-            p2JoinDialogue.text = "Player 2 Ready";
-            GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1); 
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))//make all buttons
-        {
-            p3JoinDialogue.text = "Player 3 Ready";
-            GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
-        }
+
         //add timer
         if(GameManager.Instance.playerCount > 0)
         {
