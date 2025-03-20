@@ -12,10 +12,11 @@ public class GameManager : MonoBehaviour
     public GameObject[] playerSequences = new GameObject[6];
     public TextMeshProUGUI TimerText;
     public float gameTimer = 25f;
+    public float hideTime = 10f;
     public bool isTimerRunning = false;
     public int playersFinished = 0;
     public int[,] playerPoints; //fix this
-    public int difficultyLevel = 1;
+    public int difficultyLevel = 0;
 
     void Awake()
     {
@@ -100,8 +101,11 @@ public class GameManager : MonoBehaviour
         {
             isTimerRunning = false;
             Debug.Log(playerPoints[playerIndex, 1]);
-            SceneManager.LoadScene("EndScene"); // change to end scene here
             difficultyLevel++;
+            gameTimer = 25f - ((float)difficultyLevel * 5f);
+
+            SceneManager.LoadScene("EndScene"); // change to end scene here
+            
             //add other difficulty stuff here
         }
     }

@@ -14,10 +14,11 @@ public class SequenceChecker : MonoBehaviour
     public TextMeshProUGUI Result;
     //public TextMeshProUGUI Timer;
     //private float mainTimer = 25f;
-    private float hideTime = 10f;
+    //private float hideTime = 10f;
     //private GameObject[] shape1, shape2, shape3, shape4, shape5;
     //private GameObject[][] shapes;
     //private GameObject[] OriginalSequence;
+    private float roundTime = 25f;
     private GameObject[,] userSequences;
     public int[,] userIndex;
     private int[,] userPoints;
@@ -51,6 +52,15 @@ public class SequenceChecker : MonoBehaviour
         shapeX = new int[GameManager.Instance.playerCount, 2];
         canTakeInput2 = new bool[GameManager.Instance.playerCount];
         hasCheckedSequence = new bool[GameManager.Instance.playerCount];
+        roundTime = 25f - ((float)GameManager.Instance.difficultyLevel * 5f);
+        //if (GameManger.Instance.difficultyLevel == 1)
+        //{
+        //    roundTime = 25f;
+        //}
+        //else
+        //{
+        //    roundTime = 25f - ((float)GameManger.Instance.difficultyLevel * 5f);
+        //}
     }
 
     void Update()
@@ -90,7 +100,7 @@ public class SequenceChecker : MonoBehaviour
         }
 
         // Hide the original sequence after 10 seconds
-        if (/*isSequenceReady &&*/ !hasHiddenOriginalSequence && (25f - GameManager.Instance.gameTimer) >= hideTime)
+        if (/*isSequenceReady &&*/ !hasHiddenOriginalSequence && GameManager.Instance.gameTimer <= (roundTime - GameManager.Instance.hideTime))
         {
             //Debug.Log("hidden orig sequence");
             for (int i = 0; i < GameManager.Instance.playerCount; i++)
@@ -105,7 +115,7 @@ public class SequenceChecker : MonoBehaviour
         // Timer countdown and stopping at 0
         if (isTimerRunning)
         {
-            GameManager.Instance.gameTimer -= Time.deltaTime;
+            //GameManager.Instance.gameTimer -= Time.deltaTime;
             if (GameManager.Instance.gameTimer <= 0)
             {
 
@@ -266,7 +276,7 @@ public class SequenceChecker : MonoBehaviour
             userIndex[playerInt, 1]++;
             //Debug.Log(userIndex[playerInt, 1]);
 
-            shapeX[playerInt, 1] += 300; //turn 300 to variable
+            shapeX[playerInt, 1] += (300 - GameManager.Instance.difficultyLevel * 50); //turn 300 to variable
 
             if (userIndex[playerInt, 1] >= sequenceManager.shapeCount)
             {
@@ -318,7 +328,7 @@ public class SequenceChecker : MonoBehaviour
             // Calculate bonus points based on remaining time
             if (GameManager.Instance.gameTimer > 0)
             {
-                float bonusMultiplier = Mathf.Clamp(GameManager.Instance.gameTimer / 22f, 0f, 1f);
+                float bonusMultiplier = Mathf.Clamp(GameManager.Instance.gameTimer / (roundTime - 3f), 0f, 1f);
                 int bonusPoints = Mathf.RoundToInt(1000 * bonusMultiplier / 10) * 10; // Round to nearest 10
                 userPoints[playerInt, 1] += bonusPoints;
                 GameManager.Instance.PlayerFinished(playerInt, userPoints[playerInt, 1]);

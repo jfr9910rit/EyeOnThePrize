@@ -27,6 +27,7 @@ public class SequenceManager : MonoBehaviour
     private int diffLevel;
     public int shapeCount = 5;
     private int shapeX = -600;
+    private int shapeGap = 300;
     public Transform[] seqs;
 
     void Start()
@@ -48,7 +49,8 @@ public class SequenceManager : MonoBehaviour
         //    }
         //}
         //shapes = new GameObject[][] { shape1, shape2, shape3, shape4, shape5 };
-
+        shapeCount = 5 + diffLevel;
+        shapeGap = 300 - (diffLevel * 50);
         OriginalSequences = new GameObject[playerCnt,shapeCount];
 
             activationStarted = true;
@@ -85,7 +87,7 @@ public class SequenceManager : MonoBehaviour
            int randomIndex = GetWeightedRandomIndex(shapes.Length);
            OriginalSequences[0,index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
            OriginalSequences[0,index].transform.SetParent(seqs[0], false);
-           shapeX += 300;
+           shapeX += shapeGap;
            UpdateProbabilities(randomIndex, shapes.Length);
         }
         else if(playerCnt == 2)
@@ -96,7 +98,7 @@ public class SequenceManager : MonoBehaviour
             randomIndex = GetWeightedRandomIndex(shapes.Length);
             OriginalSequences[1, index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
             OriginalSequences[1, index].transform.SetParent(seqs[2], false);
-            shapeX += 300;
+            shapeX += shapeGap;
             UpdateProbabilities(randomIndex, shapes.Length);
         }
         else if(playerCnt == 3)
@@ -110,7 +112,7 @@ public class SequenceManager : MonoBehaviour
             randomIndex = GetWeightedRandomIndex(shapes.Length);
             OriginalSequences[2, index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
             OriginalSequences[2, index].transform.SetParent(seqs[5], false);
-            shapeX += 300;
+            shapeX += shapeGap;
             UpdateProbabilities(randomIndex, shapes.Length);
         }
 
