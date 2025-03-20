@@ -22,6 +22,7 @@ public class ResetToRest : MonoBehaviour
                 GameManager.Instance.difficultyLevel = 0;
                 GameManager.Instance.gameTimer = 25f;
                 GameManager.Instance.playersFinished = 0;
+                GameManager.Instance.hideTime = 10f;
                 SceneManager.LoadSceneAsync("RestScene");
             }
             else

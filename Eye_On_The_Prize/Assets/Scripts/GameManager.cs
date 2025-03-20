@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
             Debug.Log(playerPoints[playerIndex, 1]);
             difficultyLevel++;
             gameTimer = 25f - ((float)difficultyLevel * 5f);
-
+            hideTime = 10f - ((float)difficultyLevel * 2.5f);
             SceneManager.LoadScene("EndScene"); // change to end scene here
             
             //add other difficulty stuff here
