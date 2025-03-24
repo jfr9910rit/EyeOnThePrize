@@ -27,6 +27,7 @@ public class ResetToRest : MonoBehaviour
             }
             else
             {
+                GameManager.Instance.playersFinished = 0;
                 SceneManager.LoadSceneAsync("Julian_Testing");
             }
             

@@ -71,14 +71,16 @@ public class GameManager : MonoBehaviour
         playerSequences[3] = GameObject.Find("Sequence_L1_3P_P1");
         playerSequences[4] = GameObject.Find("Sequence_L1_3P_P2");
         playerSequences[5] = GameObject.Find("Sequence_L1_3P_P3");
-        playerPoints = new int[playerCount, 2];
+        
         UpdateActiveSequences();
     }
 
     public void SetPlayerCount(int count)
     {
         playerCount = count;
+        playerPoints = new int[playerCount, 2];
         //playersFinished = 0; // Reset player finish count
+        difficultyLevel = 0;
         UpdateActiveSequences();
     }
 
