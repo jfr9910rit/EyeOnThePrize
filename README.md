@@ -5,8 +5,8 @@ Eye On The Prize is a 1-3 player game where contestants race to complete a "Simo
 
 ## Unity Project
 Unity project for game. Displayed on large screen for all contestants to see. 
-Directory: 
+Directory: main/Eye_On_The_Prize
 
 ## Podiums
 Podiums are physical interfaces that use Arduino button inputs to control gameplay in the Unity program. Podiums communicate with Unity by simulating keyboard inputs.
-Directory: main/Podiums
+Directory: main/Podium
