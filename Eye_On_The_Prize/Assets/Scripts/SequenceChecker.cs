@@ -4,6 +4,7 @@ using TMPro;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 
 
@@ -22,6 +23,7 @@ public class SequenceChecker : MonoBehaviour
     private GameObject[,] userSequences;
     public int[,] userIndex;
     private int[,] userPoints;
+    private Dictionary<string, string[]> userInputs;
     private SequenceManager sequenceManager;
     private bool isSequenceReady = false;
     //private bool canTakeInput = false;
@@ -32,6 +34,7 @@ public class SequenceChecker : MonoBehaviour
     private int[,] shapeX;
     private int[,] playerTries;
     //make references and add in tries
+
     void Start()
     {
         sequenceManager = FindObjectOfType<SequenceManager>();
@@ -48,6 +51,7 @@ public class SequenceChecker : MonoBehaviour
         userSequences = new GameObject[GameManager.Instance.playerCount, sequenceManager.shapeCount];
         userIndex = new int[GameManager.Instance.playerCount, 2];
         userPoints = new int[GameManager.Instance.playerCount, 2];
+        userInputs = GameManager.Instance.playerInputs;
         playerTries = new int[GameManager.Instance.playerCount, 2];
         shapeX = new int[GameManager.Instance.playerCount, 2];
         canTakeInput2 = new bool[GameManager.Instance.playerCount];
@@ -149,62 +153,62 @@ public class SequenceChecker : MonoBehaviour
 
         //prob can turn into a function later
         // Listen for input
-        if (Input.GetButtonDown("1") && canTakeInput2[0] && playerTries[0, 1] < 3)
+        if (Input.GetButtonDown(userInputs["Player_1"][0]) && canTakeInput2[0] && playerTries[0, 1] < 3)
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 0);
         }
-        else if (Input.GetButtonDown("2") && canTakeInput2[0] && playerTries[0, 1] < 3)
+        else if (Input.GetButtonDown(userInputs["Player_1"][1]) && canTakeInput2[0] && playerTries[0, 1] < 3)
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 1);
         }
-        else if (Input.GetButtonDown("3") && canTakeInput2[0] && playerTries[0, 1] < 3)
+        else if (Input.GetButtonDown(userInputs["Player_1"][2]) && canTakeInput2[0] && playerTries[0, 1] < 3)
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 2);
         }
-        else if (Input.GetButtonDown("4") && canTakeInput2[0] && playerTries[0, 1] < 3)
+        else if (Input.GetButtonDown(userInputs["Player_1"][3]) && canTakeInput2[0] && playerTries[0, 1] < 3)
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 3);
         }
-        else if (Input.GetButtonDown("con1") && canTakeInput2[1] && playerTries[1, 1] < 3)
+        else if (Input.GetButtonDown(userInputs["Player_2"][0]) && canTakeInput2[1] && playerTries[1, 1] < 3)
         {
             if (userIndex[1, 1] == 0) HideOriginalSequence(1);
             AddTouserSequences(1, 0);
         }
-        else if (Input.GetButtonDown("con2") && canTakeInput2[1] && playerTries[1, 1] < 3)
+        else if (Input.GetButtonDown(userInputs["Player_2"][1]) && canTakeInput2[1] && playerTries[1, 1] < 3)
         {
             if (userIndex[1, 1] == 0) HideOriginalSequence(1);
             AddTouserSequences(1, 1);
         }
-        else if (Input.GetButtonDown("con3") && canTakeInput2[1] && playerTries[1, 1] < 3)
+        else if (Input.GetButtonDown(userInputs["Player_2"][2]) && canTakeInput2[1] && playerTries[1, 1] < 3)
         {
             if (userIndex[1, 1] == 0) HideOriginalSequence(1);
             AddTouserSequences(1, 2);
         }
-        else if (Input.GetButtonDown("con4") && canTakeInput2[1] && playerTries[1, 1] < 3)
+        else if (Input.GetButtonDown(userInputs["Player_2"][3]) && canTakeInput2[1] && playerTries[1, 1] < 3)
         {
             if (userIndex[1, 1] == 0) HideOriginalSequence(1);
             AddTouserSequences(1, 3);
         }
-        else if (Input.GetButtonDown("leftarrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
+        else if (Input.GetButtonDown(userInputs["Player_3"][0]) && canTakeInput2[2] && playerTries[2, 1] < 3)
         {
             if (userIndex[2, 1] == 0) HideOriginalSequence(2);
             AddTouserSequences(2, 0);
         }
-        else if (Input.GetButtonDown("uparrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
+        else if (Input.GetButtonDown(userInputs["Player_3"][1]) && canTakeInput2[2] && playerTries[2, 1] < 3)
         {
             if (userIndex[2, 1] == 0) HideOriginalSequence(2);
             AddTouserSequences(2, 1);
         }
-        else if (Input.GetButtonDown("rightarrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
+        else if (Input.GetButtonDown(userInputs["Player_3"][2]) && canTakeInput2[2] && playerTries[2, 1] < 3)
         {
             if (userIndex[2, 1] == 0) HideOriginalSequence(2);
             AddTouserSequences(2, 2);
         }
-        else if (Input.GetButtonDown("downarrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
+        else if (Input.GetButtonDown(userInputs["Player_3"][3]) && canTakeInput2[2] && playerTries[2, 1] < 3)
         {
             if (userIndex[2, 1] == 0) HideOriginalSequence(2);
             AddTouserSequences(2, 3);

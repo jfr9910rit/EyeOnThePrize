@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,20 @@ public class GameManager : MonoBehaviour
     public int playersFinished = 0;
     public int[,] playerPoints; //fix this
     public int difficultyLevel = 0;
+
+    // referances for inputs used by podiums
+    private Dictionary<string, string[]> podiumInputs = new Dictionary<string, string[]> {
+        {"Podium_A", new string[] {"1", "2", "3", "4" } },
+        {"Podium_B", new string[] {"con1", "con2", "con3", "con4"} },
+        {"Podium_C", new string[] {"leftarrow", "uparrow", "rightarrow", "downarrow"} },
+    };
+
+    public Dictionary<string, string[]> playerInputs = new Dictionary<string, string[]>
+    {
+        {"Player_1", new string[] {} },
+        {"Player_2", new string[] {} },
+        {"Player_3", new string[] {} },
+    };
 
     void Awake()
     {
@@ -75,8 +90,11 @@ public class GameManager : MonoBehaviour
         UpdateActiveSequences();
     }
 
-    public void SetPlayerCount(int count)
+    public void SetPlayerCount(int count, string p)
     {
+        // set player inputs
+        playerInputs["Player_"+count] = podiumInputs[p];
+
         playerCount = count;
         playerPoints = new int[playerCount, 2];
         //playersFinished = 0; // Reset player finish count

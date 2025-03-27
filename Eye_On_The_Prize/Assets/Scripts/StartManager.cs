@@ -16,11 +16,6 @@ public class StartManager : MonoBehaviour
     private float percentage = 0;
     private float decriment = .01f;
 
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -30,20 +25,20 @@ public class StartManager : MonoBehaviour
             if (playerCount < 1 && Input.GetKeyDown(KeyCode.Alpha1))//make all buttons
             {
                 p1JoinDialogue.text = "Player 1 Ready";
-                GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
+                GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1, "Podium_A");
                 playerCount += 1;
             }
             if (playerCount < 2 && Input.GetKeyDown(KeyCode.Alpha7))//make all buttons
             {
                 p2JoinDialogue.text = "Player 2 Ready";
-                GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
+                GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1, "Podium_B");
                 playerCount += 1;
 
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))//make all buttons
             {
                 p3JoinDialogue.text = "Player 3 Ready";
-                GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
+                GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1, "Podium_C");
                 playerCount += 1;
 
             }
