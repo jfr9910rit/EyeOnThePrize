@@ -180,6 +180,7 @@ public class CaseOpening : MonoBehaviour
         string itemName = winningItem.name;
 
         rewardText.text = $"You won: {itemName}";
+        GameManager.Instance.activeModifier = itemName;
         Debug.Log($"You won: {itemName}");
 
         // Play win sound and effect

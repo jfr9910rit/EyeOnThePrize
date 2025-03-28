@@ -7,10 +7,10 @@ using UnityEngine.SceneManagement;
 public class TextBlink : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textToUse;
-    [SerializeField] private bool fadeIn = false;
-    [SerializeField] private bool fadeOnStart = false;
+    //[SerializeField] private bool fadeIn = false;
+    //[SerializeField] private bool fadeOnStart = false;
     [SerializeField] private float timeMultiplier;
-    private bool FadeIncomplete = false;
+    //private bool FadeIncomplete = false;
 
     private void Start()
     {

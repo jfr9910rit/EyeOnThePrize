@@ -323,7 +323,7 @@ public class SequenceChecker : MonoBehaviour
         {
             Debug.Log("Correct Sequence!");
             Result.text = "Correct!";
-            userPoints[playerInt, 1] += 1000; // Base points for correctness turn into variable later
+            userPoints[playerInt, 1] += (1000 + (GameManager.Instance.difficultyLevel * 500)); // Base points for correctness turn into variable later
 
             // Calculate bonus points based on remaining time
             if (GameManager.Instance.gameTimer > 0)

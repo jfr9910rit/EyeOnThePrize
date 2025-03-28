@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int playersFinished = 0;
     public int[,] playerPoints; //fix this
     public int difficultyLevel = 0;
+    public string activeModifier = "None";
 
     void Awake()
     {
