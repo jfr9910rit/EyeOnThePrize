@@ -323,13 +323,25 @@ public class SequenceChecker : MonoBehaviour
         {
             Debug.Log("Correct Sequence!");
             Result.text = "Correct!";
-            userPoints[playerInt, 1] += (1000 + (GameManager.Instance.difficultyLevel * 500)); // Base points for correctness turn into variable later
-
+            userPoints[playerInt, 1] += (1000 + (GameManager.Instance.difficultyLevel * 500)); // Base points for correctness
+            
             // Calculate bonus points based on remaining time
             if (GameManager.Instance.gameTimer > 0)
             {
                 float bonusMultiplier = Mathf.Clamp(GameManager.Instance.gameTimer / (roundTime - 3f), 0f, 1f);
                 int bonusPoints = Mathf.RoundToInt(1000 * bonusMultiplier / 10) * 10; // Round to nearest 10
+                if (GameManager.Instance.activeModifier == "2x Points")
+                {
+                    bonusPoints *= 2;
+                }
+                else if(GameManager.Instance.activeModifier == "1.5x Points")
+                {
+                    bonusPoints *= (int)1.5;
+                }
+                else if(GameManager.Instance.activeModifier == "Bonus Points")
+                {
+                    bonusPoints += 1000;
+                }
                 userPoints[playerInt, 1] += bonusPoints;
                 GameManager.Instance.PlayerFinished(playerInt, userPoints[playerInt, 1]);
                 for (int i = 0; i >= sequenceManager.shapeCount; i++)
