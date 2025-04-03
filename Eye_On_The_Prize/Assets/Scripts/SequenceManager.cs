@@ -38,9 +38,14 @@ public class SequenceManager : MonoBehaviour
         shapeCount = 5 + diffLevel;
         shapeGap = 300 - (diffLevel * 50);
         OriginalSequences = new GameObject[playerCnt,shapeCount];
-
-            activationStarted = true;
+        activationStarted = true;
         ActivateNextShape();
+    }
+
+    void Awake()
+    {
+        //trying to fix occasional bug where it fails to reset each round
+        GameManager.Instance.playersFinished = 0;
     }
 
     void Update()
