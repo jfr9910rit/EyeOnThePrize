@@ -35,20 +35,6 @@ public class SequenceManager : MonoBehaviour
         playerCnt = GameManager.Instance.playerCount;
         diffLevel = GameManager.Instance.difficultyLevel;
         probabilities = new float[] { 25f, 25f, 25f, 25f };
-        //oldCode
-        //for (int s = 1; s < 6; s++)
-        //{
-        //    List<GameObject[]> shapes = new List<GameObject[]> { shape1, shape2, shape3, shape4, shape5 };
-
-        //    foreach (GameObject[] shape in shapes)
-        //    {
-        //        foreach (GameObject obj in shape)
-        //        {
-        //            obj.SetActive(false);
-        //        }
-        //    }
-        //}
-        //shapes = new GameObject[][] { shape1, shape2, shape3, shape4, shape5 };
         shapeCount = 5 + diffLevel;
         shapeGap = 300 - (diffLevel * 50);
         OriginalSequences = new GameObject[playerCnt,shapeCount];
