@@ -22,13 +22,13 @@ public class StartManager : MonoBehaviour
         //change logic so it can be 2 players with slots 2 and 3 being full being p1 and p2 and single player being any poistion
         if(playerCount < 3)
         {
-            if (playerCount < 1 && Input.GetKeyDown(KeyCode.Alpha1))//make all buttons
+            if (Input.GetKeyDown(KeyCode.Alpha1))//make all buttons
             {
                 p1JoinDialogue.text = "Player 1 Ready";
                 GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1, "Podium_A");
                 playerCount += 1;
             }
-            if (playerCount < 2 && Input.GetKeyDown(KeyCode.Alpha7))//make all buttons
+            if (Input.GetKeyDown(KeyCode.Alpha7))//make all buttons
             {
                 p2JoinDialogue.text = "Player 2 Ready";
                 GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1, "Podium_B");
