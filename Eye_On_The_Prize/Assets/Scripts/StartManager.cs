@@ -10,6 +10,12 @@ public class StartManager : MonoBehaviour
     public TextMeshProUGUI p1JoinDialogue;
     public TextMeshProUGUI p2JoinDialogue;
     public TextMeshProUGUI p3JoinDialogue;
+    public Image p1glow;
+    public Image p2glow;
+    public Image p3glow;
+    public Image p1Ready;
+    public Image p2Ready;
+    public Image p3Ready;
     private float startTime;
     public TextMeshProUGUI pressHold;
     public Image progBar;
@@ -18,7 +24,10 @@ public class StartManager : MonoBehaviour
 
     void Start()
     {
-        
+        p1glow.enabled = false;
+        p2glow.enabled = false;
+        p3glow.enabled = false;
+        p3glow.enabled = false;
     }
 
     // Update is called once per frame
@@ -29,20 +38,26 @@ public class StartManager : MonoBehaviour
         {
             if (playerCount < 1 && Input.GetKeyDown(KeyCode.Alpha1))//make all buttons
             {
-                p1JoinDialogue.text = "Player 1 Ready";
+                //p1JoinDialogue.text = "Player 1 Ready";
+                p1glow.enabled = true;
+                p1Ready.enabled = false;
                 GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
                 playerCount += 1;
             }
             if (playerCount < 2 && Input.GetKeyDown(KeyCode.Alpha7))//make all buttons
             {
-                p2JoinDialogue.text = "Player 2 Ready";
+                //p2JoinDialogue.text = "Player 2 Ready";
+                p2glow.enabled = true;
+                p2Ready.enabled = false;
                 GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
                 playerCount += 1;
 
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))//make all buttons
             {
-                p3JoinDialogue.text = "Player 3 Ready";
+                //p3JoinDialogue.text = "Player 3 Ready";
+                p3glow.enabled = true;
+                p3Ready.enabled = false;
                 GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
                 playerCount += 1;
 
