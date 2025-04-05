@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
 
     public void SetPlayerCount(int count, string p)
     {
-        // set player inputs
+        // set player inputs the podium that was registered.
         playerInputs["Player_"+count] = podiumInputs[p];
 
         playerCount = count;
