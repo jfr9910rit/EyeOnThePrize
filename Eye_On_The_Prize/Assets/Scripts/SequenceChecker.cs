@@ -26,7 +26,7 @@ public class SequenceChecker : MonoBehaviour
     private bool isSequenceReady = false;
     //private bool canTakeInput = false;
     private bool[] canTakeInput2;
-    private bool hasHiddenOriginalSequence = false;
+    private bool[] hasHiddenOriginalSequence;
     private bool isTimerRunning = false;  // Track if timer is still running
     bool[] hasCheckedSequence;
     private int[,] shapeX;
@@ -48,7 +48,7 @@ public class SequenceChecker : MonoBehaviour
         userSequences = new GameObject[GameManager.Instance.playerCount, sequenceManager.shapeCount];
         userIndex = new int[GameManager.Instance.playerCount, 2];
         userPoints = new int[GameManager.Instance.playerCount, 2];
-        playerTries = new int[GameManager.Instance.playerCount, 2];
+        hasHiddenOriginalSequence = new bool[GameManager.Instance.playerCount];
         shapeX = new int[GameManager.Instance.playerCount, 2];
         canTakeInput2 = new bool[GameManager.Instance.playerCount];
         hasCheckedSequence = new bool[GameManager.Instance.playerCount];
@@ -61,6 +61,21 @@ public class SequenceChecker : MonoBehaviour
         //{
         //    roundTime = 25f - ((float)GameManger.Instance.difficultyLevel * 5f);
         //}
+    }
+
+    void Awake()
+    {
+        playerTries = new int[GameManager.Instance.playerCount, 1];
+        
+        //for(int i = 0; i < GameManager.Instance.playerCount; i++)
+        //{
+        //    playerTries[i, 1] = 0;
+        //}
+        //for (int i = 0; i < GameManager.Instance.playerCount; i++)
+        //{
+        //    hasHiddenOriginalSequence[i] = false;
+        //}
+        
     }
 
     void Update()
@@ -100,17 +115,33 @@ public class SequenceChecker : MonoBehaviour
         }
 
         // Hide the original sequence after 10 seconds
-        if (/*isSequenceReady &&*/ !hasHiddenOriginalSequence && GameManager.Instance.gameTimer <= (roundTime - GameManager.Instance.hideTime))
+        for(int i = 0; i < GameManager.Instance.playerCount; i++)
         {
-            //Debug.Log("hidden orig sequence");
-            for (int i = 0; i < GameManager.Instance.playerCount; i++)
+            if (!hasHiddenOriginalSequence[i] && GameManager.Instance.gameTimer <= (roundTime - GameManager.Instance.hideTime))
             {
-                HideOriginalSequence(i);
                 //Debug.Log("hidden orig sequence");
+                for (int j = 0; j < GameManager.Instance.playerCount; j++)
+                {
+                    HideOriginalSequence(j);
+                    //Debug.Log("hidden orig sequence");
+                }
+
+
             }
 
-
         }
+        
+        //if (/*isSequenceReady &&*/ !hasHiddenOriginalSequence && GameManager.Instance.gameTimer <= (roundTime - GameManager.Instance.hideTime))
+        //{
+        //    //Debug.Log("hidden orig sequence");
+        //    for (int i = 0; i < GameManager.Instance.playerCount; i++)
+        //    {
+        //        HideOriginalSequence(i);
+        //        //Debug.Log("hidden orig sequence");
+        //    }
+
+
+        //}
 
         // Timer countdown and stopping at 0
         if (isTimerRunning)
@@ -125,7 +156,12 @@ public class SequenceChecker : MonoBehaviour
                 for (int i = 0; i >= GameManager.Instance.playerCount; i++)
                 {
                     canTakeInput2[i] = false;
-                    CheckSequence(i);
+                    if (playerTries[i, 1] < 3)
+                    {
+                        playerTries[i, 1] = 3;
+                        CheckSequence(i);
+                    }
+                    //CheckSequence(i);
                 }
 
                 SceneManager.LoadScene("EndScene");
@@ -297,7 +333,7 @@ public class SequenceChecker : MonoBehaviour
         {
             sequenceManager.OriginalSequences[playerInt, s].SetActive(false);
         }
-        hasHiddenOriginalSequence = true;
+        hasHiddenOriginalSequence[playerInt] = true;
     }
 
 

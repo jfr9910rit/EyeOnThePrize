@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public int[,] playerPoints; //fix this
     public int difficultyLevel = 0;
     public string activeModifier = "None";
+    public bool timerEnded = false;
 
     void Awake()
     {
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
             {
                 gameTimer = 0;
                 isTimerRunning = false;
+                timerEnded = true;
                 //canTakeInput = false;  // Stop user input
                 //CheckSequence();  // Immediately check sequence
                 SceneManager.LoadScene("EndScene");
