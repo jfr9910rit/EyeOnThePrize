@@ -149,12 +149,12 @@ public class SequenceChecker : MonoBehaviour
 
         //prob can turn into a function later
         // Listen for input
-        if (Input.GetButtonDown("1") && canTakeInput2[0] && playerTries[0, 1] < 3)
+        if (Input.GetButtonDown("2") && canTakeInput2[0] && playerTries[0, 1] < 3)
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 0);
         }
-        else if (Input.GetButtonDown("2") && canTakeInput2[0] && playerTries[0, 1] < 3)
+        else if (Input.GetButtonDown("1") && canTakeInput2[0] && playerTries[0, 1] < 3)
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
             AddTouserSequences(0, 1);
