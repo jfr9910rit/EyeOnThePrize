@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         AssignSceneVariables();
+        
     }
 
     void AssignSceneVariables()
@@ -104,9 +105,7 @@ public class GameManager : MonoBehaviour
         {
             isTimerRunning = false;
             Debug.Log(playerPoints[playerIndex, 1]);
-            difficultyLevel++;
-            gameTimer = 25f - ((float)difficultyLevel * 5f);
-            hideTime = 10f - ((float)difficultyLevel * 2.5f);
+            
             SceneManager.LoadScene("EndScene"); // change to end scene here
             
             //add other difficulty stuff here
