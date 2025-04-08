@@ -26,7 +26,7 @@ public class SequenceChecker : MonoBehaviour
     private bool isSequenceReady = false;
     //private bool canTakeInput = false;
     private bool[] canTakeInput2;
-    private bool hasHiddenOriginalSequence = false;
+    private bool[] hasHiddenOriginalSequence;
     private bool isTimerRunning = false;  // Track if timer is still running
     bool[] hasCheckedSequence;
     private int[,] shapeX;
@@ -53,14 +53,8 @@ public class SequenceChecker : MonoBehaviour
         canTakeInput2 = new bool[GameManager.Instance.playerCount];
         hasCheckedSequence = new bool[GameManager.Instance.playerCount];
         roundTime = 25f - ((float)GameManager.Instance.difficultyLevel * 5f);
-        //if (GameManger.Instance.difficultyLevel == 1)
-        //{
-        //    roundTime = 25f;
-        //}
-        //else
-        //{
-        //    roundTime = 25f - ((float)GameManger.Instance.difficultyLevel * 5f);
-        //}
+        hasHiddenOriginalSequence = new bool[GameManager.Instance.playerCount];
+    
     }
 
     void Update()
@@ -100,12 +94,16 @@ public class SequenceChecker : MonoBehaviour
         }
 
         // Hide the original sequence after 10 seconds
-        if (/*isSequenceReady &&*/ !hasHiddenOriginalSequence && GameManager.Instance.gameTimer <= (roundTime - GameManager.Instance.hideTime))
+        if (/*isSequenceReady && !hasHiddenOriginalSequence &&*/ GameManager.Instance.gameTimer <= (roundTime - GameManager.Instance.hideTime))
         {
             //Debug.Log("hidden orig sequence");
             for (int i = 0; i < GameManager.Instance.playerCount; i++)
             {
-                HideOriginalSequence(i);
+                if (!hasHiddenOriginalSequence[i])
+                {
+                    HideOriginalSequence(i);
+                }
+                
                 //Debug.Log("hidden orig sequence");
             }
 
@@ -297,7 +295,7 @@ public class SequenceChecker : MonoBehaviour
         {
             sequenceManager.OriginalSequences[playerInt, s].SetActive(false);
         }
-        hasHiddenOriginalSequence = true;
+        hasHiddenOriginalSequence[playerInt] = true;
     }
 
 
@@ -370,7 +368,7 @@ public class SequenceChecker : MonoBehaviour
             //userSequences[playerInt,]
             canTakeInput2[playerInt] = true;
             hasCheckedSequence[playerInt] = false;
-            if (playerTries[playerInt, 1] == 2)
+            if (playerTries[playerInt, 1] == 3)
             {
                 GameManager.Instance.PlayerFinished(playerInt, userPoints[playerInt, 1]);
             }

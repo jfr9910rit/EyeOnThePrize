@@ -5,9 +5,11 @@ public class EndScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public TextMeshProUGUI EndBanner;
-    public TextMeshProUGUI p1Score;
-    public TextMeshProUGUI p2Score;
-    public TextMeshProUGUI p3Score;
+    //public TextMeshProUGUI p1Score;
+    //public TextMeshProUGUI p2Score;
+    //public TextMeshProUGUI p3Score;
+
+    public TextMeshProUGUI[] pScores;
 
     void Awake()
     {
@@ -33,9 +35,13 @@ public class EndScript : MonoBehaviour
         else {
             EndBanner.text = "Round " + (GameManager.Instance.difficultyLevel + 1) + "Over";
         }
-        p1Score.text = "Player 1 \nScore: " + GameManager.Instance.playerPoints[0, 1];
-        p2Score.text = "Player 2 \nScore: " + GameManager.Instance.playerPoints[1, 1];
-        p3Score.text = "Player 3 \nScore: " + GameManager.Instance.playerPoints[2, 1];
+        for(int i = 0; i < GameManager.Instance.playerCount; i++)
+        {
+            pScores[i].text = "Player " + i +  "\nScore: " + GameManager.Instance.playerPoints[i, 1];
+        }
+        //p1Score.text = "Player 1 \nScore: " + GameManager.Instance.playerPoints[0, 1];
+        //p2Score.text = "Player 2 \nScore: " + GameManager.Instance.playerPoints[1, 1];
+        //p3Score.text = "Player 3 \nScore: " + GameManager.Instance.playerPoints[2, 1];
     }
 
     // Update is called once per frame
