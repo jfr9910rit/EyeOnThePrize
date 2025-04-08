@@ -31,7 +31,7 @@ public class EndScript : MonoBehaviour
             EndBanner.text = "Game Over \nPress any button to Restart";
         }
         else {
-            EndBanner.text = "Round " + (GameManager.Instance.difficultyLevel) + "Over";
+            EndBanner.text = "Round " + (GameManager.Instance.difficultyLevel + 1) + "Over";
         }
         p1Score.text = "Player 1 \nScore: " + GameManager.Instance.playerPoints[0, 1];
         p2Score.text = "Player 2 \nScore: " + GameManager.Instance.playerPoints[1, 1];
