@@ -7,9 +7,9 @@ public class StartManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public int playerCount = 0;
-    public TextMeshProUGUI p1JoinDialogue;
-    public TextMeshProUGUI p2JoinDialogue;
-    public TextMeshProUGUI p3JoinDialogue;
+    //public TextMeshProUGUI p1JoinDialogue;
+    //public TextMeshProUGUI p2JoinDialogue;
+    //public TextMeshProUGUI p3JoinDialogue;
     public Image p1glow;
     public Image p2glow;
     public Image p3glow;

@@ -354,10 +354,14 @@ public class SequenceChecker : MonoBehaviour
         {
             Result.text = "Incorrect!";
             Debug.Log("Incorrect Sequence. Try Again!");
-            //add retry steps here
+            
             playerTries[playerInt, 1]++;
             userIndex[playerInt, 1] = 0;
             // say whats wrong would be here
+
+
+
+
             for (int i = 0; i < sequenceManager.shapeCount; i++)
             {
 
