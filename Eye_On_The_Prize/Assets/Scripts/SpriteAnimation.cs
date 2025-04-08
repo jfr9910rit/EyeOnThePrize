@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpriteAnimation : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class SpriteAnimation : MonoBehaviour
     private float fps = 60.0f;
 
     [SerializeField]
-    private SpriteRenderer sRenderer;
+    private Image imageUI;
 
     [SerializeField]
     private string folderPath = "SPRITES_FOLDER"; // Relative to the Resources folder
@@ -40,7 +41,7 @@ public class SpriteAnimation : MonoBehaviour
                 timer = 0f;
                 if (spriteIndex < spriteCount)
                 {
-                    sRenderer.sprite = spriteList[spriteIndex];
+                    imageUI.sprite = spriteList[spriteIndex];
                     spriteIndex++;
                 }
                 else
