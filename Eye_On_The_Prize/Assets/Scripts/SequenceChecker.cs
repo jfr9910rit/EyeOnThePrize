@@ -4,6 +4,10 @@ using TMPro;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
 
 
 
@@ -54,7 +58,7 @@ public class SequenceChecker : MonoBehaviour
         hasCheckedSequence = new bool[GameManager.Instance.playerCount];
         roundTime = 25f - ((float)GameManager.Instance.difficultyLevel * 5f);
         hasHiddenOriginalSequence = new bool[GameManager.Instance.playerCount];
-    
+
     }
 
     void Update()
@@ -103,7 +107,7 @@ public class SequenceChecker : MonoBehaviour
                 {
                     HideOriginalSequence(i);
                 }
-                
+
                 //Debug.Log("hidden orig sequence");
             }
 
@@ -322,7 +326,7 @@ public class SequenceChecker : MonoBehaviour
             Debug.Log("Correct Sequence!");
             Result.text = "Correct!";
             userPoints[playerInt, 1] += (1000 + (GameManager.Instance.difficultyLevel * 500)); // Base points for correctness
-            
+
             // Calculate bonus points based on remaining time
             if (GameManager.Instance.gameTimer > 0)
             {
@@ -332,11 +336,11 @@ public class SequenceChecker : MonoBehaviour
                 {
                     bonusPoints *= 2;
                 }
-                else if(GameManager.Instance.activeModifier == "1.5x Points")
+                else if (GameManager.Instance.activeModifier == "1.5x Points")
                 {
                     bonusPoints *= (int)1.5;
                 }
-                else if(GameManager.Instance.activeModifier == "Bonus Points")
+                else if (GameManager.Instance.activeModifier == "Bonus Points")
                 {
                     bonusPoints += 1000;
                 }
@@ -354,35 +358,197 @@ public class SequenceChecker : MonoBehaviour
         {
             Result.text = "Incorrect!";
             Debug.Log("Incorrect Sequence. Try Again!");
-            
+
             playerTries[playerInt, 1]++;
             userIndex[playerInt, 1] = 0;
-            // say whats wrong would be here
 
-
-
-
-            for (int i = 0; i < sequenceManager.shapeCount; i++)
-            {
-
-                Destroy(userSequences[playerInt, i]);
-
-            }
-
-            //userSequences[playerInt,]
-            canTakeInput2[playerInt] = true;
-            hasCheckedSequence[playerInt] = false;
+            GameObject[] feedbackObjects = new GameObject[sequenceManager.shapeCount];
             if (playerTries[playerInt, 1] == 3)
             {
                 GameManager.Instance.PlayerFinished(playerInt, userPoints[playerInt, 1]);
             }
-        }
+            StartCoroutine(ShowFeedbackSequence(playerInt));
 
-        PlayerPrefs.SetInt($"Player{playerInt}Score", userPoints[playerInt, 1]);
-        PlayerPrefs.Save();
+
+            //    for (int i = 0; i < sequenceManager.shapeCount; i++)
+            //    {
+            //        if (userSequences[playerInt, i] != null)
+            //        {
+            //            string userShapeName = userSequences[playerInt, i].name.Replace("(Clone)", "").Trim();
+            //            string correctShapeName = sequenceManager.OriginalSequences[playerInt, i].name.Replace("(Clone)", "").Trim();
+
+            //            Destroy(userSequences[playerInt, i]);
+
+            //            isCorrect = userShapeName == correctShapeName;
+
+            //            GameObject prefabToUse;
+
+            //            if (isCorrect)
+            //            {
+            //                prefabToUse = sequenceManager.shapes.FirstOrDefault(s => s.name == correctShapeName);
+            //            }
+            //            else
+            //            {
+            //                int wrongIndex = -1;
+            //                for (int s = 0; s < sequenceManager.shapes.Length; s++)
+            //                {
+            //                    if (sequenceManager.shapes[s].name == userShapeName)
+            //                    {
+            //                        wrongIndex = s;
+            //                        break;
+            //                    }
+            //                }
+            //                prefabToUse = wrongIndex >= 0 ? sequenceManager.shapesWithX[wrongIndex] : null;
+            //            }
+
+            //            if (prefabToUse != null)
+            //            {
+            //                Vector3 spawnPos = new Vector3(shapeX[playerInt, 1] + (i * (300 - GameManager.Instance.difficultyLevel * 50)), 0, -5);
+            //                GameObject feedbackShape = Instantiate(prefabToUse, spawnPos, Quaternion.identity);
+
+            //                // Parent to the proper sequence UI section
+            //                if (GameManager.Instance.playerCount == 1)
+            //                    feedbackShape.transform.SetParent(sequenceManager.seqs[0], false);
+            //                else if (GameManager.Instance.playerCount == 2)
+            //                    feedbackShape.transform.SetParent(sequenceManager.seqs[playerInt + 1], false);
+            //                else if (GameManager.Instance.playerCount == 3)
+            //                    feedbackShape.transform.SetParent(sequenceManager.seqs[playerInt + 3], false);
+
+            //                feedbackObjects[i] = feedbackShape;
+            //            }
+            //        }
+            //    }
+
+            //    // Wait, shake, and wipe
+            //    StartCoroutine(ShakeAndWipeSequence(feedbackObjects));
+
+            //    canTakeInput2[playerInt] = true;
+            //    hasCheckedSequence[playerInt] = false;
+
+            
+        //}
+
+        //PlayerPrefs.SetInt($"Player{playerInt}Score", userPoints[playerInt, 1]);
+        //PlayerPrefs.Save();
 
 
     }
 
+
+        IEnumerator ShowFeedbackSequence(int playerInt)
+        {
+            for (int i = 0; i < sequenceManager.shapeCount; i++)
+            {
+                // Destroy previous user input shape if it exists
+                if (userSequences[playerInt, i] != null)
+                {
+                    Destroy(userSequences[playerInt, i]);
+                }
+
+                // Get the position of the original shape
+                Vector3 originalPos = sequenceManager.OriginalSequences[playerInt, i].transform.position;
+
+                // Debugging: Log the shape names for both user and original
+                string playerShapeName = userSequences[playerInt, i] != null
+                    ? userSequences[playerInt, i].name.Split('(')[0].Trim()
+                    : "null";
+                string originalShapeName = sequenceManager.OriginalSequences[playerInt, i].name.Split('(')[0].Trim();
+
+                Debug.Log($"Index {i}: Player Shape: {playerShapeName}, Original Shape: {originalShapeName}");
+
+                // Determine which shape to show
+                GameObject feedbackShape = null;
+                bool isCorrectShape = false;
+
+                if (userSequences[playerInt, i] != null)
+                {
+                    // Check if the player's input matches the original shape
+                    isCorrectShape = playerShapeName == originalShapeName;
+                }
+
+                if (isCorrectShape)
+                {
+                    // If the shape is correct, instantiate the original shape
+                    Debug.Log($"Correct shape for index {i}: {originalShapeName}");
+                    feedbackShape = Instantiate(sequenceManager.OriginalSequences[playerInt, i], originalPos, Quaternion.identity);
+                    feedbackShape.SetActive(true);
+                }
+                else if (userSequences[playerInt, i] != null)
+                {
+                    // If the shape is incorrect, instantiate the X version of the user's shape
+                    string baseName = userSequences[playerInt, i].name.Split('(')[0].Trim();
+                    GameObject xVersion = sequenceManager.shapesWithX
+                        .FirstOrDefault(go => go.name.StartsWith(baseName));
+
+                    if (xVersion != null)
+                    {
+                        Debug.Log($"Incorrect shape for index {i}, replacing with X version of: {baseName}");
+                        feedbackShape = Instantiate(xVersion, originalPos, Quaternion.identity);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"No X version found for shape {baseName}, using original");
+                        feedbackShape = sequenceManager.OriginalSequences[playerInt, i]; // Fallback to the original shape
+                    }
+                }
+
+                // Set the parent and store the shape
+                if (feedbackShape != null)
+                {
+                    feedbackShape.transform.SetParent(sequenceManager.seqs[playerInt], true);
+                    userSequences[playerInt, i] = feedbackShape; // Store feedback shape in the sequence
+                }
+                else
+                {
+                    Debug.LogError($"Failed to instantiate feedback shape at index {i}");
+                }
+            }
+
+            // Wait for 1 second before shaking and destroying feedback shapes
+            yield return new WaitForSeconds(1f);
+
+            // Shake and destroy all feedback shapes
+            for (int i = 0; i < sequenceManager.shapeCount; i++)
+            {
+                if (userSequences[playerInt, i] != null)
+                {
+                    StartCoroutine(ShakeAndDestroy(userSequences[playerInt, i]));
+                }
+            }
+
+            // Wait for 0.5 seconds before resetting the sequence check
+            yield return new WaitForSeconds(0.5f);
+            hasCheckedSequence[playerInt] = false;
+            userIndex[playerInt, 1] = 0;
+            canTakeInput2[playerInt] = true;
+        }
+
+
+
+
+
+
+        IEnumerator ShakeAndDestroy(GameObject obj)
+        {
+            Vector3 originalPos = obj.transform.localPosition;
+            float shakeAmount = 10f;
+            float duration = 0.3f;
+
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                float x = Random.Range(-1f, 1f) * shakeAmount;
+                float y = Random.Range(-1f, 1f) * shakeAmount;
+
+                obj.transform.localPosition = originalPos + new Vector3(x, y, 0);
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            Destroy(obj);
+        }
+
+
+    }
 }
 

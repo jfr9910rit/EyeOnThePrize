@@ -363,55 +363,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 359415366}
   m_CullTransparentMesh: 1
---- !u!1 &387385036
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 387385038}
-  - component: {fileID: 387385037}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!320 &387385037
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387385036}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 0}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings: []
-  m_ExposedReferences:
-    m_References: []
---- !u!4 &387385038
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387385036}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1252.6748, y: 653.993, z: -2.4187756}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &526618075
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,6 +446,11 @@ MonoBehaviour:
   - {fileID: 191432663088807599, guid: 6bfdbb38698f56748b8f1aa93c136d4e, type: 3}
   - {fileID: 2929095463195608197, guid: 1ce9134cf9c1bb44d8c9823a47e75df1, type: 3}
   - {fileID: 7981411932293872189, guid: 3bbbff55c52c5774abfbfbb74e2a347f, type: 3}
+  shapesWithX:
+  - {fileID: 5955036515647422142, guid: d69c14138a4391543b7b7bbbfa4e9e4d, type: 3}
+  - {fileID: 7857060272445337307, guid: e1f8005f015d6bd4695f6ebc11661cf8, type: 3}
+  - {fileID: 29019613054095434, guid: 08c661c020f2320499709d6ae0292ccd, type: 3}
+  - {fileID: 6729109949560140647, guid: b3a466d1195cabc49869fb6246ece76f, type: 3}
   shapeCount: 5
   seqs:
   - {fileID: 1155092264}
@@ -1364,7 +1320,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297923470}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 26ed6842c3a087f4eb5715d5c25eb8ab, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 3044f0ac27be11a4ca59bdbef530540f, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 625691581}
@@ -1378,14 +1334,12 @@ VideoPlayer:
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
   m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 0
   m_Looping: 1
@@ -1919,7 +1873,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1773943035
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2139,7 +2093,7 @@ GameObject:
   - component: {fileID: 2113621234}
   - component: {fileID: 2113621233}
   m_Layer: 5
-  m_Name: Image
+  m_Name: DialogueBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2346,4 +2300,3 @@ SceneRoots:
   - {fileID: 1345360305}
   - {fileID: 1019610829}
   - {fileID: 1758240540}
-  - {fileID: 387385038}
