@@ -37,7 +37,7 @@ public class EndScript : MonoBehaviour
         }
         for(int i = 0; i < GameManager.Instance.playerCount; i++)
         {
-            pScores[i].text = "Player " + i +  "\nScore: " + GameManager.Instance.playerPoints[i, 1];
+            pScores[i].text = "Player " + (i +1) +  "\nScore: " + GameManager.Instance.playerPoints[i, 1];
         }
         //p1Score.text = "Player 1 \nScore: " + GameManager.Instance.playerPoints[0, 1];
         //p2Score.text = "Player 2 \nScore: " + GameManager.Instance.playerPoints[1, 1];

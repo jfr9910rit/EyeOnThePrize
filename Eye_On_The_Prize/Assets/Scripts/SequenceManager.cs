@@ -18,7 +18,8 @@ public class SequenceManager : MonoBehaviour
     private float[] probabilities;
     private int lastSelected = -1;
     public GameObject[] shapes;
-    //private GameObject[][] shapes;
+    public GameObject[] shapesWithX; // Same order as shapes[]
+
     private float timer = 0f;
     private float delayTime = 0.5f;
     private int index = 0;

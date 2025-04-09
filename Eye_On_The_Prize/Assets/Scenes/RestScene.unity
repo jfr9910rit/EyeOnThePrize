@@ -755,8 +755,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: PRESS ANY BUTTON TO JOIN
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c27a4499f3e1ed74782c659a21daf4b5, type: 2}
-  m_sharedMaterial: {fileID: -3600790047974214291, guid: c27a4499f3e1ed74782c659a21daf4b5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f07e897ff9fce9a40b292f7f5b9083f6, type: 2}
+  m_sharedMaterial: {fileID: 8262250560645112714, guid: f07e897ff9fce9a40b292f7f5b9083f6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
