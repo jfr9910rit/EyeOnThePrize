@@ -1568,7 +1568,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1899557214
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1602,7 +1602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fps: 60
   imageUI: {fileID: 1899557216}
-  folderPath: simon_bounce
+  folderPath: green_effect
 --- !u!114 &1899557216
 MonoBehaviour:
   m_ObjectHideFlags: 0
