@@ -1,10 +1,17 @@
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SpriteAnimation : MonoBehaviour
 {
+    [SerializeField]
+    private bool autoPlay = true;
+    [SerializeField]
+    private bool loop;
+    private bool play;
+
     [SerializeField]
     private float fps = 60.0f;
 
@@ -25,12 +32,13 @@ public class SpriteAnimation : MonoBehaviour
     void Start()
     {
         LoadSpritesFromFolder(folderPath);
+        play = autoPlay;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (spritesLoaded)
+        if (spritesLoaded && play)
         {
             timer += Time.deltaTime;
 
@@ -44,12 +52,35 @@ public class SpriteAnimation : MonoBehaviour
                     imageUI.sprite = spriteList[spriteIndex];
                     spriteIndex++;
                 }
-                else
+                else if (loop) 
                 {
                     spriteIndex = 0;
                 }
+                else
+                {
+                    play = false;
+                }
             }
         }
+    }
+
+    public void playAnimation()
+    {
+        spriteIndex = 0;
+        play = true;
+    }
+
+    // loop will begin next time Update() is called
+    public void beginLoopingAnimation()
+    {
+        loop = true;
+        play = true;
+    }
+
+    // loop will continue until it reaches its final frame
+    public void endLoopingAnimation()
+    {
+        loop = false;
     }
 
     void LoadSpritesFromFolder(string path)
