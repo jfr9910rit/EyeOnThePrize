@@ -16,7 +16,7 @@ public class ResetToRest : MonoBehaviour
         Input.GetButtonDown("con1") || Input.GetButtonDown("con2") || Input.GetButtonDown("con3") || Input.GetButtonDown("con4") ||
         Input.GetButtonDown("leftarrow") || Input.GetButtonDown("uparrow") || Input.GetButtonDown("rightarrow") || Input.GetButtonDown("downarrow"))
         {
-            if(GameManager.Instance.difficultyLevel == 3)
+            if(GameManager.Instance.difficultyLevel == 2)
             {
                 GameManager.Instance.playerCount = 0;
                 GameManager.Instance.difficultyLevel = 0;

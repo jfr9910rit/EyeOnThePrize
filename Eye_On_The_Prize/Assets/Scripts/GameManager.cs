@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Reflection;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class GameManager : MonoBehaviour
     public int[,] playerPoints; //fix this
     public int difficultyLevel = 0;
     public string activeModifier = "None";
+    public Image glowRing;
 
     void Awake()
     {
@@ -31,6 +34,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -50,13 +55,14 @@ public class GameManager : MonoBehaviour
             {
                 gameTimer = 0;
                 isTimerRunning = false;
-                //canTakeInput = false;  // Stop user input
-                //CheckSequence();  // Immediately check sequence
                 SceneManager.LoadScene("EndScene");
             }
+
             TimerText.text = Mathf.RoundToInt(gameTimer).ToString();
+            UpdateTimerColor(); // <-- add this line
         }
     }
+
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -73,7 +79,9 @@ public class GameManager : MonoBehaviour
         playerSequences[3] = GameObject.Find("Sequence_L1_3P_P1");
         playerSequences[4] = GameObject.Find("Sequence_L1_3P_P2");
         playerSequences[5] = GameObject.Find("Sequence_L1_3P_P3");
-        
+        GameObject imageObject = GameObject.Find("glowring");
+        glowRing = imageObject.GetComponent<Image>();
+        glowRing.color = Color.green;
         UpdateActiveSequences();
     }
 
@@ -139,4 +147,25 @@ public class GameManager : MonoBehaviour
             if (playerSequences[5] != null) playerSequences[5].SetActive(true);
         }
     }
+
+    private void UpdateTimerColor()
+    {
+        float t = 1f - (gameTimer / (25f - ((float)difficultyLevel * 5f))); // normalize from 0 (start) to 1 (end)
+
+        if (t < 1f / 3f) // Green to Yellow
+        {
+            float lerpT = t * 3f;
+            glowRing.color = Color.Lerp(Color.green, Color.yellow, lerpT);
+        }
+        else if (t < 2f / 3f) // Yellow to Red
+        {
+            float lerpT = (t - 1f / 3f) * 3f;
+            glowRing.color = Color.Lerp(Color.yellow, Color.red, lerpT);
+        }
+        else // Hold Red
+        {
+            glowRing.color = Color.red;
+        }
+    }
+
 }

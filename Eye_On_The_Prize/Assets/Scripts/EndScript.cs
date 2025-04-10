@@ -28,12 +28,12 @@ public class EndScript : MonoBehaviour
 
 
         //}
-        if (GameManager.Instance.difficultyLevel == 3)
+        if (GameManager.Instance.difficultyLevel == 2)
         {
             EndBanner.text = "Game Over \nPress any button to Restart";
         }
         else {
-            EndBanner.text = "Round " + (GameManager.Instance.difficultyLevel + 1) + "Over";
+            EndBanner.text = "Round " + (GameManager.Instance.difficultyLevel + 1) + " Over";
         }
         for(int i = 0; i < GameManager.Instance.playerCount; i++)
         {

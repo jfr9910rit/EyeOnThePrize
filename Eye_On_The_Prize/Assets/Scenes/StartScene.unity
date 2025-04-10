@@ -1568,7 +1568,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1899557214
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1585,8 +1585,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -287.35083, y: 195.57224}
-  m_SizeDelta: {x: 385.7456, y: 200.0822}
+  m_AnchoredPosition: {x: -650.87665, y: -200.28494}
+  m_SizeDelta: {x: 403.4989, y: 528.1001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1899557215
 MonoBehaviour:
@@ -1600,9 +1600,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5b18a0a22ea67428e62e0b069cbe45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fps: 60
+  autoPlay: 1
+  loop: 1
+  fps: 30
   imageUI: {fileID: 1899557216}
-  folderPath: green_effect
+  defaultAnimationFolderPath: SPRITES_FOLDER
 --- !u!114 &1899557216
 MonoBehaviour:
   m_ObjectHideFlags: 0

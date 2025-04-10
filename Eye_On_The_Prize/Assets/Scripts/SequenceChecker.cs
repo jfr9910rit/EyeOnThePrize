@@ -294,7 +294,7 @@ public class SequenceChecker : MonoBehaviour
 
     void HideOriginalSequence(int playerInt)
     {
-        Debug.Log("Hiding Original Sequence!");
+        //Debug.Log("Hiding Original Sequence!");
         for (int s = 0; s < sequenceManager.shapeCount; s++)
         {
             sequenceManager.OriginalSequences[playerInt, s].SetActive(false);
@@ -323,7 +323,7 @@ public class SequenceChecker : MonoBehaviour
 
         if (isCorrect)
         {
-            Debug.Log("Correct Sequence!");
+            //Debug.Log("Correct Sequence!");
             Result.text = "Correct!";
             userPoints[playerInt, 1] += (1000 + (GameManager.Instance.difficultyLevel * 500)); // Base points for correctness
 
@@ -351,13 +351,13 @@ public class SequenceChecker : MonoBehaviour
                     Destroy(sequenceManager.OriginalSequences[playerInt, i]);
                 }
             }
-            Debug.Log(userPoints[playerInt, 1]);
+            //Debug.Log(userPoints[playerInt, 1]);
 
         }
         else
         {
             Result.text = "Incorrect!";
-            Debug.Log("Incorrect Sequence. Try Again!");
+            //Debug.Log("Incorrect Sequence. Try Again!");
 
             playerTries[playerInt, 1]++;
             userIndex[playerInt, 1] = 0;
@@ -368,68 +368,6 @@ public class SequenceChecker : MonoBehaviour
                 GameManager.Instance.PlayerFinished(playerInt, userPoints[playerInt, 1]);
             }
             StartCoroutine(ShowFeedbackSequence(playerInt));
-
-
-            //    for (int i = 0; i < sequenceManager.shapeCount; i++)
-            //    {
-            //        if (userSequences[playerInt, i] != null)
-            //        {
-            //            string userShapeName = userSequences[playerInt, i].name.Replace("(Clone)", "").Trim();
-            //            string correctShapeName = sequenceManager.OriginalSequences[playerInt, i].name.Replace("(Clone)", "").Trim();
-
-            //            Destroy(userSequences[playerInt, i]);
-
-            //            isCorrect = userShapeName == correctShapeName;
-
-            //            GameObject prefabToUse;
-
-            //            if (isCorrect)
-            //            {
-            //                prefabToUse = sequenceManager.shapes.FirstOrDefault(s => s.name == correctShapeName);
-            //            }
-            //            else
-            //            {
-            //                int wrongIndex = -1;
-            //                for (int s = 0; s < sequenceManager.shapes.Length; s++)
-            //                {
-            //                    if (sequenceManager.shapes[s].name == userShapeName)
-            //                    {
-            //                        wrongIndex = s;
-            //                        break;
-            //                    }
-            //                }
-            //                prefabToUse = wrongIndex >= 0 ? sequenceManager.shapesWithX[wrongIndex] : null;
-            //            }
-
-            //            if (prefabToUse != null)
-            //            {
-            //                Vector3 spawnPos = new Vector3(shapeX[playerInt, 1] + (i * (300 - GameManager.Instance.difficultyLevel * 50)), 0, -5);
-            //                GameObject feedbackShape = Instantiate(prefabToUse, spawnPos, Quaternion.identity);
-
-            //                // Parent to the proper sequence UI section
-            //                if (GameManager.Instance.playerCount == 1)
-            //                    feedbackShape.transform.SetParent(sequenceManager.seqs[0], false);
-            //                else if (GameManager.Instance.playerCount == 2)
-            //                    feedbackShape.transform.SetParent(sequenceManager.seqs[playerInt + 1], false);
-            //                else if (GameManager.Instance.playerCount == 3)
-            //                    feedbackShape.transform.SetParent(sequenceManager.seqs[playerInt + 3], false);
-
-            //                feedbackObjects[i] = feedbackShape;
-            //            }
-            //        }
-            //    }
-
-            //    // Wait, shake, and wipe
-            //    StartCoroutine(ShakeAndWipeSequence(feedbackObjects));
-
-            //    canTakeInput2[playerInt] = true;
-            //    hasCheckedSequence[playerInt] = false;
-
-
-            //}
-
-            //PlayerPrefs.SetInt($"Player{playerInt}Score", userPoints[playerInt, 1]);
-            //PlayerPrefs.Save();
 
 
         }
@@ -469,7 +407,7 @@ public class SequenceChecker : MonoBehaviour
                 if (isCorrectShape)
                 {
                     // If the shape is correct, instantiate the original shape
-                    Debug.Log($"Correct shape for index {i}: {originalShapeName}");
+                    //Debug.Log($"Correct shape for index {i}: {originalShapeName}");
                     feedbackShape = Instantiate(sequenceManager.OriginalSequences[playerInt, i], originalPos, Quaternion.identity);
                     feedbackShape.SetActive(true);
                 }
@@ -482,12 +420,12 @@ public class SequenceChecker : MonoBehaviour
 
                     if (xVersion != null)
                     {
-                        Debug.Log($"Incorrect shape for index {i}, replacing with X version of: {baseName}");
+                        //Debug.Log($"Incorrect shape for index {i}, replacing with X version of: {baseName}");
                         feedbackShape = Instantiate(xVersion, originalPos, Quaternion.identity);
                     }
                     else
                     {
-                        Debug.LogWarning($"No X version found for shape {baseName}, using original");
+                        //Debug.LogWarning($"No X version found for shape {baseName}, using original");
                         feedbackShape = sequenceManager.OriginalSequences[playerInt, i]; // Fallback to the original shape
                     }
                 }
@@ -531,7 +469,7 @@ public class SequenceChecker : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError($"Failed to instantiate feedback shape at index {i}");
+                    //Debug.LogError($"Failed to instantiate feedback shape at index {i}");
                 }
             }
 
