@@ -425,14 +425,14 @@ public class SequenceChecker : MonoBehaviour
             //    canTakeInput2[playerInt] = true;
             //    hasCheckedSequence[playerInt] = false;
 
-            
-        //}
 
-        //PlayerPrefs.SetInt($"Player{playerInt}Score", userPoints[playerInt, 1]);
-        //PlayerPrefs.Save();
+            //}
+
+            //PlayerPrefs.SetInt($"Player{playerInt}Score", userPoints[playerInt, 1]);
+            //PlayerPrefs.Save();
 
 
-    }
+        }
 
 
         IEnumerator ShowFeedbackSequence(int playerInt)
@@ -492,10 +492,41 @@ public class SequenceChecker : MonoBehaviour
                     }
                 }
 
+                int seqNum = 0;
                 // Set the parent and store the shape
                 if (feedbackShape != null)
                 {
-                    feedbackShape.transform.SetParent(sequenceManager.seqs[playerInt], true);
+                    if(GameManager.Instance.playerCount == 1)
+                    {
+                        seqNum = 0;
+                    }
+                    else if(GameManager.Instance.playerCount == 2)
+                    {
+                        if(playerInt == 0)
+                        {
+                            seqNum = 1;
+                        }
+                        else if(playerInt == 1)
+                        {
+                            seqNum = 2;
+                        }
+                    }
+                    else if(GameManager.Instance.playerCount == 3)
+                    {
+                        if (playerInt == 0)
+                        {
+                            seqNum = 3;
+                        }
+                        else if (playerInt == 1)
+                        {
+                            seqNum = 4;
+                        }
+                        else if(playerInt == 2)
+                        {
+                            seqNum = 5;
+                        }
+                    }
+                    feedbackShape.transform.SetParent(sequenceManager.seqs[seqNum], true);
                     userSequences[playerInt, i] = feedbackShape; // Store feedback shape in the sequence
                 }
                 else
@@ -551,4 +582,3 @@ public class SequenceChecker : MonoBehaviour
 
     }
 }
-
