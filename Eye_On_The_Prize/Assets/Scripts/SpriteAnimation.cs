@@ -96,7 +96,7 @@ public class SpriteAnimation : MonoBehaviour
         loop = false;
     }
 
-    void LoadSpritesFromFolder(string path)
+    public void LoadSpritesFromFolder(string path)
     {
         spritesLoaded = false;
         defaultAnimationFolderPath = path;

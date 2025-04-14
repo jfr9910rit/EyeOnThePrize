@@ -2,6 +2,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Collections;
 
 
 public class StartManager : MonoBehaviour
@@ -17,11 +20,17 @@ public class StartManager : MonoBehaviour
     public Image p1Ready;
     public Image p2Ready;
     public Image p3Ready;
+    public Image eppee;
+    public Image teebee;
+    public Image heartly;
     private float startTime;
     public TextMeshProUGUI pressHold;
     public Image progBar;
     private float percentage = 0;
     private float decriment = .01f;
+    private SpriteAnimation ep;
+    private SpriteAnimation tb;
+    private SpriteAnimation hl;
 
     void Start()
     {
@@ -29,6 +38,13 @@ public class StartManager : MonoBehaviour
         p2glow.enabled = false;
         p3glow.enabled = false;
         p3glow.enabled = false;
+    }
+
+    void Awake()
+    {
+        ep = eppee.GetComponent<SpriteAnimation>();
+        tb = teebee.GetComponent<SpriteAnimation>();
+        hl = heartly.GetComponent<SpriteAnimation>();
     }
 
     // Update is called once per frame
@@ -44,6 +60,10 @@ public class StartManager : MonoBehaviour
                 p1Ready.enabled = false;
                 GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
                 playerCount += 1;
+                ep.LoadSpritesFromFolder("eppee_spawn");
+                ep.playAnimation();
+                ep.LoadSpritesFromFolder("eppee_resting");
+                ep.playAnimation();
             }
             if (playerCount < 2 && Input.GetKeyDown(KeyCode.Alpha7))//make all buttons
             {
@@ -52,6 +72,8 @@ public class StartManager : MonoBehaviour
                 p2Ready.enabled = false;
                 GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
                 playerCount += 1;
+                tb.LoadSpritesFromFolder("teebee_spawn");
+                tb.playAnimation();
 
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))//make all buttons
@@ -61,7 +83,8 @@ public class StartManager : MonoBehaviour
                 p3Ready.enabled = false;
                 GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
                 playerCount += 1;
-
+                hl.LoadSpritesFromFolder("heartly_spawn");
+                hl.playAnimation();
             }
         }
 
@@ -77,26 +100,31 @@ public class StartManager : MonoBehaviour
             }
 
 
-            if (percentage > 1)
-            {
-                // SceneManager.SetActiveScene(SceneManager.GetSceneByName("Julian_Testing"));
-                SceneManager.LoadSceneAsync("Julian_Testing");
-            }
-            else if (Input.GetKey(KeyCode.Alpha1))//change key
-            {
-                percentage = Time.time - startTime;
-                progBar.fillAmount = percentage;
+            //if (percentage > 1)
+            //{
+            //    // SceneManager.SetActiveScene(SceneManager.GetSceneByName("Julian_Testing"));
+            //    SceneManager.LoadSceneAsync("Julian_Testing");
+            //}
+            //else if (Input.GetKey(KeyCode.Alpha1))//change key
+            //{
+            //    percentage = Time.time - startTime;
+            //    progBar.fillAmount = percentage;
 
-            } else if (percentage > 0)
-            {
-                percentage -= decriment;
-                progBar.fillAmount = percentage;
+            //} else if (percentage > 0)
+            //{
+            //    percentage -= decriment;
+            //    progBar.fillAmount = percentage;
 
-            }
+            //}
 
 
         }
 
 
+    }
+
+    IEnumerator spawnAndIdle()
+    {
+        //going to make spawn and transition in idle here to make it so it can wait for first to finish easier
     }
 }
