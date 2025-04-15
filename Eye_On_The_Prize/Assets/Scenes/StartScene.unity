@@ -562,6 +562,10 @@ MonoBehaviour:
   teebee: {fileID: 710413987}
   heartly: {fileID: 1739660804}
   pressHold: {fileID: 1972718959}
+  playerRoles:
+  - 
+  - 
+  - 
 --- !u!1 &472036549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,7 +1244,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -655.8, y: -332}
+  m_AnchoredPosition: {x: -655.8, y: -207.84}
   m_SizeDelta: {x: 320.7487, y: 132.8683}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1153379918
@@ -1315,7 +1319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 41.00244, y: -369.16}
+  m_AnchoredPosition: {x: 41.002014, y: -243.60999}
   m_SizeDelta: {x: 320.7487, y: 132.8683}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1411631227
@@ -1816,7 +1820,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 660.00244, y: -329.16}
+  m_AnchoredPosition: {x: 660, y: -200.28}
   m_SizeDelta: {x: 320.7487, y: 132.8683}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1810358643

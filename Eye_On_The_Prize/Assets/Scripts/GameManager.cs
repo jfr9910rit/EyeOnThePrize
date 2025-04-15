@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public int playerCount = 0;
-    public GameObject[] playerSequences = new GameObject[6];
-    public string[] roles = new string[3];
+    public GameObject[] playerSequences = new GameObject[10];
+    public string[] pRoles = new string[3];
     public TextMeshProUGUI TimerText;
     public float gameTimer = 25f;
     public float hideTime = 10f;
@@ -75,12 +75,16 @@ public class GameManager : MonoBehaviour
     {
         TimerText = GameObject.Find("Timer")?.GetComponent<TextMeshProUGUI>();
 
-        playerSequences[0] = GameObject.Find("Sequence_L1_1P");
-        playerSequences[1] = GameObject.Find("Sequence_L1_2P_P1");
-        playerSequences[2] = GameObject.Find("Sequence_L1_2P_P2");
-        playerSequences[3] = GameObject.Find("Sequence_L1_3P_P1");
-        playerSequences[4] = GameObject.Find("Sequence_L1_3P_P2");
-        playerSequences[5] = GameObject.Find("Sequence_L1_3P_P3");
+        playerSequences[0] = GameObject.Find("Sequence_1P_EP");
+        playerSequences[1] = GameObject.Find("Sequence_1P_TB");
+        playerSequences[2] = GameObject.Find("Sequence_1P_HL");
+        playerSequences[3] = GameObject.Find("Sequence_2P_P1_EP");
+        playerSequences[4] = GameObject.Find("Sequence_2P_P1_TB");
+        playerSequences[5] = GameObject.Find("Sequence_2P_P2_TB");
+        playerSequences[6] = GameObject.Find("Sequence_2P_P3_HL");
+        playerSequences[7] = GameObject.Find("Sequence_3P_P1");
+        playerSequences[8] = GameObject.Find("Sequence_3P_P2");
+        playerSequences[9] = GameObject.Find("Sequence_3P_P3");
         GameObject imageObject = GameObject.Find("glowring");
         glowRing = imageObject.GetComponent<Image>();
         glowRing.color = Color.green;
@@ -96,9 +100,13 @@ public class GameManager : MonoBehaviour
         UpdateActiveSequences();
     }
 
-    public void SetRoles(string[] roles)
+    public void SetRoles(string roles)
     {
-        
+        if(roles == eppee && playerCount == 1)
+        {
+            pRoles[0] = roles;
+        }
+        else if(roles == eppee && playerCount == 1)
     }
 
     public void StartGameTimer(int time)
@@ -140,11 +148,19 @@ public class GameManager : MonoBehaviour
 
         if (playerCount == 1)
         {
-            if ()
+            if (pRoles == "eppee")
+            {
+                if (playerSequences[0] != null) playerSequences[0].SetActive(true);
+            }
+            else if(pRoles == "teebee")
             {
 
             }
-            if (playerSequences[0] != null) playerSequences[0].SetActive(true);
+            else if(pRoles == "heartly")
+            {
+
+            }
+            
         }
         else if (playerCount == 2)
         {

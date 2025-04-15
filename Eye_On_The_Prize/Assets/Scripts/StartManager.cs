@@ -91,16 +91,15 @@ public class StartManager : MonoBehaviour
 
     private void AssignPlayer(string role, int roleIndex)
     {
-        
-
-        GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
         playerRoles[playerCount] = role;
         playerIndices[roleIndex] = playerCount;
         playerCount++;
-        for(int i = 0; i < playerRoles.Length; i++)
-        {
-            Debug.Log(playerRoles[i]);
-        }
+        GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount);
+        GameManager.Instance.SetRoles(role);
+        //for(int i = 0; i < playerRoles.Length; i++)
+        //{
+        //    Debug.Log(playerRoles[i]);
+        //}
     }
 
     private IEnumerator PlaySequentialAnimations(Image char1, SpriteAnimation anim, string firstFolder, string secondFolder, int x, int y)
