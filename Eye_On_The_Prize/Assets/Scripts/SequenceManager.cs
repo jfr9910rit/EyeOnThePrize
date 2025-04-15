@@ -5,21 +5,15 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 
-
-
 //go nuclear, make into instantiate
 public class SequenceManager : MonoBehaviour
 {
-    
     public GameObject[,] OriginalSequences;
-
-    //public GameObject[] shape1, shape2, shape3, shape4, shape5;
-
-    private float[] probabilities;
-    private int lastSelected = -1;
     public GameObject[] shapes;
     public GameObject[] shapesWithX; // Same order as shapes[]
 
+    private float[] probabilities;
+    private int lastSelected = -1;
     private float timer = 0f;
     private float delayTime = 0.5f;
     private int index = 0;
@@ -38,78 +32,57 @@ public class SequenceManager : MonoBehaviour
         probabilities = new float[] { 25f, 25f, 25f, 25f };
         shapeCount = 5 + diffLevel;
         shapeGap = 300 - (diffLevel * 50);
-        OriginalSequences = new GameObject[playerCnt,shapeCount];
+        OriginalSequences = new GameObject[playerCnt, shapeCount];
         activationStarted = true;
         ActivateNextShape();
     }
 
     void Awake()
     {
-        //trying to fix occasional bug where it fails to reset each round
         GameManager.Instance.playersFinished = 0;
     }
 
     void Update()
     {
-
         if (!activationStarted || index >= shapeCount)
         {
             activationStarted = false;
         }
 
-        // Timer-based delay
         timer += Time.deltaTime;
-        
 
-        if (timer >= delayTime && activationStarted == true) //experiment with order/speed
+        if (timer >= delayTime && activationStarted == true)
         {
             timer = 0f;
             ActivateNextShape();
         }
-
-
     }
 
-    //actually creates the sequence
     void ActivateNextShape()
     {
         if (index >= shapeCount) return;
-        if (playerCnt == 1)
-        { 
-           int randomIndex = GetWeightedRandomIndex(shapes.Length);
-           OriginalSequences[0,index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
-           OriginalSequences[0,index].transform.SetParent(seqs[0], false);
-           shapeX += shapeGap;
-           UpdateProbabilities(randomIndex, shapes.Length);
-        }
-        else if(playerCnt == 2)
+
+        for (int i = 0; i < playerCnt; i++)
         {
+            int seqIndex = (playerCnt == 1) ? 0 : (playerCnt == 2) ? i + 1 : i + 3;
             int randomIndex = GetWeightedRandomIndex(shapes.Length);
-            OriginalSequences[0,index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
-            OriginalSequences[0,index].transform.SetParent(seqs[1], false);
-            randomIndex = GetWeightedRandomIndex(shapes.Length);
-            OriginalSequences[1, index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
-            OriginalSequences[1, index].transform.SetParent(seqs[2], false);
-            shapeX += shapeGap;
-            UpdateProbabilities(randomIndex, shapes.Length);
-        }
-        else if(playerCnt == 3)
-        {
-            int randomIndex = GetWeightedRandomIndex(shapes.Length);
-            OriginalSequences[0, index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
-            OriginalSequences[0, index].transform.SetParent(seqs[3], false);
-            randomIndex = GetWeightedRandomIndex(shapes.Length);
-            OriginalSequences[1, index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
-            OriginalSequences[1, index].transform.SetParent(seqs[4], false);
-            randomIndex = GetWeightedRandomIndex(shapes.Length);
-            OriginalSequences[2, index] = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
-            OriginalSequences[2, index].transform.SetParent(seqs[5], false);
-            shapeX += shapeGap;
+
+            GameObject shape = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
+            shape.transform.SetParent(seqs[seqIndex], false);
+            AnimateShape(shape);
+            OriginalSequences[i, index] = shape;
+
             UpdateProbabilities(randomIndex, shapes.Length);
         }
 
+        shapeX += shapeGap;
         index++;
-        
+    }
+
+    void AnimateShape(GameObject shape)
+    {
+        shape.transform.localScale = Vector3.zero;
+        shape.AddComponent<ShapeAnimator>();
     }
 
     int GetWeightedRandomIndex(int shapeCount)
@@ -130,12 +103,12 @@ public class SequenceManager : MonoBehaviour
             }
         }
 
-        return 0; // Failsafe
+        return 0;
     }
 
     void UpdateProbabilities(int selected, int shapeCount)
     {
-        if (lastSelected == selected) // If the same shape is selected again
+        if (lastSelected == selected)
         {
             probabilities[selected] /= 2f;
         }
@@ -143,22 +116,17 @@ public class SequenceManager : MonoBehaviour
         {
             if (lastSelected != -1)
             {
-                probabilities[lastSelected] = 12.5f; // Restore the previous selection to half of its original 25%
+                probabilities[lastSelected] = 12.5f;
             }
 
-            probabilities[selected] /= 2f; // Halve the new selection
+            probabilities[selected] /= 2f;
         }
 
-        // Recalculate the remaining probability pool
         float remaining = 100f - probabilities[selected] - (lastSelected != -1 ? probabilities[lastSelected] : 0);
-        int countOther = shapeCount - (lastSelected == -1 ? 1 : 2); // Remaining non-selected options
+        int countOther = shapeCount - (lastSelected == -1 ? 1 : 2);
 
-        if (countOther <= 0)
-        {
-            countOther = 1;  // Prevent division by zero
-        }
+        if (countOther <= 0) countOther = 1;
 
-        // Only loop within bounds of probabilities
         for (int i = 0; i < Mathf.Min(shapeCount, probabilities.Length); i++)
         {
             if (i != selected && i != lastSelected)
@@ -167,7 +135,29 @@ public class SequenceManager : MonoBehaviour
             }
         }
 
-        lastSelected = selected; // Store last choice
+        lastSelected = selected;
     }
+}
 
+public class ShapeAnimator : MonoBehaviour
+{
+    private float scaleSpeed = 30f;
+    private float rotationSpeed = 1080f;
+    private bool finishedScaling = false;
+
+    void Update()
+    {
+        if (!finishedScaling)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one, Time.deltaTime * scaleSpeed);
+            transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+
+            if (Vector3.Distance(transform.localScale, Vector3.one) < 0.01f)
+            {
+                transform.localScale = Vector3.one;
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                finishedScaling = true;
+            }
+        }
+    }
 }

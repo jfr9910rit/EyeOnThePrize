@@ -2,18 +2,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Collections;
-
 
 public class StartManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public int playerCount = 0;
-    //public TextMeshProUGUI p1JoinDialogue;
-    //public TextMeshProUGUI p2JoinDialogue;
-    //public TextMeshProUGUI p3JoinDialogue;
     public Image p1glow;
     public Image p2glow;
     public Image p3glow;
@@ -23,20 +16,22 @@ public class StartManager : MonoBehaviour
     public Image eppee;
     public Image teebee;
     public Image heartly;
-    private float startTime;
     public TextMeshProUGUI pressHold;
-    public Image progBar;
-    private float percentage = 0;
-    private float decriment = .01f;
+
+    private float startTime;
     private SpriteAnimation ep;
     private SpriteAnimation tb;
     private SpriteAnimation hl;
+    private bool[] joined;
+
+    // Public array to store joined player roles in order
+    public string[] playerRoles = new string[3];
+    private int[] playerIndices = new int[3]; // Maps roles to player slot (0-2)
 
     void Start()
     {
         p1glow.enabled = false;
         p2glow.enabled = false;
-        p3glow.enabled = false;
         p3glow.enabled = false;
     }
 
@@ -45,86 +40,89 @@ public class StartManager : MonoBehaviour
         ep = eppee.GetComponent<SpriteAnimation>();
         tb = teebee.GetComponent<SpriteAnimation>();
         hl = heartly.GetComponent<SpriteAnimation>();
+        joined = new bool[3];
+        for (int i = 0; i < playerIndices.Length; i++)
+        {
+            playerIndices[i] = -1;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //change logic so it can be 2 players with slots 2 and 3 being full being p1 and p2 and single player being any poistion
-        if(playerCount < 3)
+        if (playerCount < 3)
         {
-            if (playerCount < 1 && Input.GetKeyDown(KeyCode.Alpha2))//make all buttons
+            if (Input.GetKeyDown(KeyCode.Alpha2) && !joined[0])
             {
-                //p1JoinDialogue.text = "Player 1 Ready";
-                p1glow.enabled = true;
+                joined[0] = true;
+                AssignPlayer("eppee", 0);
                 p1Ready.enabled = false;
-                GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
-                playerCount += 1;
-                ep.LoadSpritesFromFolder("eppee_spawn");
-                ep.playAnimation();
-                ep.LoadSpritesFromFolder("eppee_resting");
-                ep.playAnimation();
+                StartCoroutine(PlaySequentialAnimations(eppee, ep, "eppee_spawn", "eppee_resting", -650, -200));
             }
-            if (playerCount < 2 && Input.GetKeyDown(KeyCode.Alpha7))//make all buttons
+            else if (Input.GetKeyDown(KeyCode.Alpha7) && !joined[1])
             {
-                //p2JoinDialogue.text = "Player 2 Ready";
-                p2glow.enabled = true;
+                joined[1] = true;
+                AssignPlayer("teebee", 1);
                 p2Ready.enabled = false;
-                GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
-                playerCount += 1;
-                tb.LoadSpritesFromFolder("teebee_spawn");
-                tb.playAnimation();
-
+                StartCoroutine(PlaySequentialAnimations(teebee, tb, "teebee_spawn", "teebee_resting", 22, -243));
             }
-            if (Input.GetKeyDown(KeyCode.LeftArrow))//make all buttons
+            else if (Input.GetKeyDown(KeyCode.LeftArrow) && !joined[2])
             {
-                //p3JoinDialogue.text = "Player 3 Ready";
-                p3glow.enabled = true;
+                joined[2] = true;
+                AssignPlayer("heartly", 2);
                 p3Ready.enabled = false;
-                GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
-                playerCount += 1;
-                hl.LoadSpritesFromFolder("heartly_spawn");
-                hl.playAnimation();
+                StartCoroutine(PlaySequentialAnimations(heartly, hl, "heartly_spawn", "heartly_resting", 660, -200));
             }
         }
 
-        //add timer
-        if(GameManager.Instance.playerCount > 0)
+        if (GameManager.Instance.playerCount > 0)
         {
             pressHold.text = "Player 1 hold 'Circle' to start " + GameManager.Instance.playerCount.ToString() + " Player game";
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 SceneManager.LoadSceneAsync("Julian_Testing");
-
             }
-
-
-            //if (percentage > 1)
-            //{
-            //    // SceneManager.SetActiveScene(SceneManager.GetSceneByName("Julian_Testing"));
-            //    SceneManager.LoadSceneAsync("Julian_Testing");
-            //}
-            //else if (Input.GetKey(KeyCode.Alpha1))//change key
-            //{
-            //    percentage = Time.time - startTime;
-            //    progBar.fillAmount = percentage;
-
-            //} else if (percentage > 0)
-            //{
-            //    percentage -= decriment;
-            //    progBar.fillAmount = percentage;
-
-            //}
-
-
         }
-
-
     }
 
-    IEnumerator spawnAndIdle()
+    private void AssignPlayer(string role, int roleIndex)
     {
-        //going to make spawn and transition in idle here to make it so it can wait for first to finish easier
+        switch (playerCount)
+        {
+            case 0:
+                p1glow.enabled = true;
+                break;
+            case 1:
+                p2glow.enabled = true;
+                break;
+            case 2:
+                p3glow.enabled = true;
+                break;
+        }
+
+        GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
+        playerRoles[playerCount] = role;
+        playerIndices[roleIndex] = playerCount;
+        playerCount++;
+    }
+
+    private IEnumerator PlaySequentialAnimations(Image char1, SpriteAnimation anim, string firstFolder, string secondFolder, int x, int y)
+    {
+        anim.LoadSpritesFromFolder(firstFolder);
+        char1.rectTransform.sizeDelta = new Vector2(403, 528);
+        char1.rectTransform.anchoredPosition = new Vector2(x, y);
+        anim.loop = false;
+        anim.playAnimation();
+
+        while (anim.IsPlaying)
+        {
+            yield return null;
+        }
+
+        anim.LoadSpritesFromFolder(secondFolder);
+        anim.loop = true;
+        char1.rectTransform.sizeDelta = new Vector2(403, 360);
+        char1.rectTransform.anchoredPosition = new Vector2(x, y - 70);
+        anim.playAnimation();
     }
 }

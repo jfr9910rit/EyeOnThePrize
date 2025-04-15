@@ -9,7 +9,7 @@ public class SpriteAnimation : MonoBehaviour
     [SerializeField]
     private bool autoPlay = true;
     [SerializeField]
-    private bool loop;
+    public bool loop;
     private bool play;
 
     [SerializeField]
@@ -28,6 +28,9 @@ public class SpriteAnimation : MonoBehaviour
     private int spriteIndex = 0;
 
     private float timer = 0f;
+
+    // Public property to expose play state
+    public bool IsPlaying => play;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -54,7 +57,7 @@ public class SpriteAnimation : MonoBehaviour
                     imageUI.sprite = spriteList[spriteIndex];
                     spriteIndex++;
                 }
-                else if (loop) 
+                else if (loop)
                 {
                     spriteIndex = 0;
                 }
@@ -78,6 +81,7 @@ public class SpriteAnimation : MonoBehaviour
         spriteIndex = 0;
         play = true;
     }
+
     public void beginLoopingAnimation(string animation_folder = "")
     {
         if (animation_folder != "")

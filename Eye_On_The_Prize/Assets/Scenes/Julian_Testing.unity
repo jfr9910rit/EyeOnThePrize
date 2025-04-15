@@ -173,7 +173,7 @@ MonoBehaviour:
   loop: 1
   fps: 30
   imageUI: {fileID: 45533711}
-  defaultAnimationFolderPath: SPRITES_FOLDER
+  defaultAnimationFolderPath: yellow_effect
 --- !u!114 &45533711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2821,7 +2821,7 @@ MonoBehaviour:
   loop: 1
   fps: 30
   imageUI: {fileID: 1796539446}
-  defaultAnimationFolderPath: SPRITES_FOLDER
+  defaultAnimationFolderPath: yellow_effect
 --- !u!114 &1796539446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2914,7 +2914,7 @@ MonoBehaviour:
   loop: 1
   fps: 30
   imageUI: {fileID: 1826985599}
-  defaultAnimationFolderPath: SPRITES_FOLDER
+  defaultAnimationFolderPath: green_effect
 --- !u!114 &1826985599
 MonoBehaviour:
   m_ObjectHideFlags: 0
