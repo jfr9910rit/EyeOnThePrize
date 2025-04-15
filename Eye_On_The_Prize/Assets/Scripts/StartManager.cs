@@ -30,13 +30,14 @@ public class StartManager : MonoBehaviour
 
     void Start()
     {
-        p1glow.enabled = false;
-        p2glow.enabled = false;
-        p3glow.enabled = false;
+        
     }
 
     void Awake()
     {
+        p1glow.enabled = false;
+        p2glow.enabled = false;
+        p3glow.enabled = false;
         ep = eppee.GetComponent<SpriteAnimation>();
         tb = teebee.GetComponent<SpriteAnimation>();
         hl = heartly.GetComponent<SpriteAnimation>();
@@ -56,6 +57,7 @@ public class StartManager : MonoBehaviour
                 joined[0] = true;
                 AssignPlayer("eppee", 0);
                 p1Ready.enabled = false;
+                p1glow.enabled = true;
                 StartCoroutine(PlaySequentialAnimations(eppee, ep, "eppee_spawn", "eppee_resting", -650, -200));
             }
             else if (Input.GetKeyDown(KeyCode.Alpha7) && !joined[1])
@@ -63,6 +65,7 @@ public class StartManager : MonoBehaviour
                 joined[1] = true;
                 AssignPlayer("teebee", 1);
                 p2Ready.enabled = false;
+                p2glow.enabled = true;
                 StartCoroutine(PlaySequentialAnimations(teebee, tb, "teebee_spawn", "teebee_resting", 22, -243));
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow) && !joined[2])
@@ -70,6 +73,7 @@ public class StartManager : MonoBehaviour
                 joined[2] = true;
                 AssignPlayer("heartly", 2);
                 p3Ready.enabled = false;
+                p3glow.enabled = true;
                 StartCoroutine(PlaySequentialAnimations(heartly, hl, "heartly_spawn", "heartly_resting", 660, -200));
             }
         }
@@ -87,23 +91,16 @@ public class StartManager : MonoBehaviour
 
     private void AssignPlayer(string role, int roleIndex)
     {
-        switch (playerCount)
-        {
-            case 0:
-                p1glow.enabled = true;
-                break;
-            case 1:
-                p2glow.enabled = true;
-                break;
-            case 2:
-                p3glow.enabled = true;
-                break;
-        }
+        
 
         GameManager.Instance.SetPlayerCount(GameManager.Instance.playerCount + 1);
         playerRoles[playerCount] = role;
         playerIndices[roleIndex] = playerCount;
         playerCount++;
+        for(int i = 0; i < playerRoles.Length; i++)
+        {
+            Debug.Log(playerRoles[i]);
+        }
     }
 
     private IEnumerator PlaySequentialAnimations(Image char1, SpriteAnimation anim, string firstFolder, string secondFolder, int x, int y)

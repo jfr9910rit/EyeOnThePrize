@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     public int playerCount = 0;
     public GameObject[] playerSequences = new GameObject[6];
+    public string[] roles = new string[3];
     public TextMeshProUGUI TimerText;
     public float gameTimer = 25f;
     public float hideTime = 10f;
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour
     void AssignSceneVariables()
     {
         TimerText = GameObject.Find("Timer")?.GetComponent<TextMeshProUGUI>();
+
         playerSequences[0] = GameObject.Find("Sequence_L1_1P");
         playerSequences[1] = GameObject.Find("Sequence_L1_2P_P1");
         playerSequences[2] = GameObject.Find("Sequence_L1_2P_P2");
@@ -92,6 +94,11 @@ public class GameManager : MonoBehaviour
         //playersFinished = 0; // Reset player finish count
         difficultyLevel = 0;
         UpdateActiveSequences();
+    }
+
+    public void SetRoles(string[] roles)
+    {
+        
     }
 
     public void StartGameTimer(int time)
@@ -133,6 +140,10 @@ public class GameManager : MonoBehaviour
 
         if (playerCount == 1)
         {
+            if ()
+            {
+
+            }
             if (playerSequences[0] != null) playerSequences[0].SetActive(true);
         }
         else if (playerCount == 2)

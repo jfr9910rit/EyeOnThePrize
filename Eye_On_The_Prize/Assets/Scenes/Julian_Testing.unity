@@ -345,7 +345,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bb2a402437abd93468a1171eea8e1a33, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 939c2d250ad9a184599a316a1f04d8ed, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -851,7 +851,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 0837f2a3aba13c542b7952241dff7762, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1314,6 +1314,7 @@ GameObject:
   - component: {fileID: 787268695}
   - component: {fileID: 787268697}
   - component: {fileID: 787268696}
+  - component: {fileID: 787268698}
   m_Layer: 0
   m_Name: heartly
   m_TagString: Untagged
@@ -1378,6 +1379,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787268694}
   m_CullTransparentMesh: 1
+--- !u!114 &787268698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787268694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5b18a0a22ea67428e62e0b069cbe45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoPlay: 1
+  loop: 1
+  fps: 30
+  imageUI: {fileID: 787268696}
+  defaultAnimationFolderPath: heartly_resting
 --- !u!1 &790340536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,6 +1407,7 @@ GameObject:
   - component: {fileID: 790340537}
   - component: {fileID: 790340539}
   - component: {fileID: 790340538}
+  - component: {fileID: 790340540}
   m_Layer: 0
   m_Name: eppi
   m_TagString: Untagged
@@ -1413,7 +1432,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -775, y: 0}
-  m_SizeDelta: {x: 175, y: 175}
+  m_SizeDelta: {x: 250, y: 175}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &790340538
 MonoBehaviour:
@@ -1453,6 +1472,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790340536}
   m_CullTransparentMesh: 1
+--- !u!114 &790340540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790340536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5b18a0a22ea67428e62e0b069cbe45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoPlay: 1
+  loop: 1
+  fps: 30
+  imageUI: {fileID: 790340538}
+  defaultAnimationFolderPath: eppee_resting
 --- !u!1 &905056261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1603,7 +1639,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 438019ca0ef044d4fabea3ce657e45ac, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1854,6 +1890,7 @@ GameObject:
   - component: {fileID: 1194789983}
   - component: {fileID: 1194789985}
   - component: {fileID: 1194789984}
+  - component: {fileID: 1194789986}
   m_Layer: 0
   m_Name: tb
   m_TagString: Untagged
@@ -1878,7 +1915,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -775, y: 0}
-  m_SizeDelta: {x: 175, y: 175}
+  m_SizeDelta: {x: 225, y: 175}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1194789984
 MonoBehaviour:
@@ -1918,6 +1955,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194789982}
   m_CullTransparentMesh: 1
+--- !u!114 &1194789986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194789982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5b18a0a22ea67428e62e0b069cbe45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoPlay: 1
+  loop: 1
+  fps: 30
+  imageUI: {fileID: 1194789984}
+  defaultAnimationFolderPath: teebee_resting
 --- !u!1 &1200836883
 GameObject:
   m_ObjectHideFlags: 0
