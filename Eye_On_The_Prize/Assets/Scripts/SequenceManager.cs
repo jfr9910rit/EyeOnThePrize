@@ -5,12 +5,11 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 
-//go nuclear, make into instantiate
 public class SequenceManager : MonoBehaviour
 {
     public GameObject[,] OriginalSequences;
     public GameObject[] shapes;
-    public GameObject[] shapesWithX; // Same order as shapes[]
+    public GameObject[] shapesWithX;
 
     private float[] probabilities;
     private int lastSelected = -1;
@@ -51,7 +50,7 @@ public class SequenceManager : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (timer >= delayTime && activationStarted == true)
+        if (timer >= delayTime && activationStarted)
         {
             timer = 0f;
             ActivateNextShape();
@@ -64,7 +63,7 @@ public class SequenceManager : MonoBehaviour
 
         for (int i = 0; i < playerCnt; i++)
         {
-            int seqIndex = (playerCnt == 1) ? 0 : (playerCnt == 2) ? i + 1 : i + 3;
+            int seqIndex = GetSequenceIndex(i);
             int randomIndex = GetWeightedRandomIndex(shapes.Length);
 
             GameObject shape = Instantiate(shapes[randomIndex], new Vector3(shapeX, 0, -5), Quaternion.identity);
@@ -77,6 +76,36 @@ public class SequenceManager : MonoBehaviour
 
         shapeX += shapeGap;
         index++;
+    }
+
+    int GetSequenceIndex(int playerSlot)
+    {
+        if (playerCnt == 1)
+        {
+            string role = GameManager.Instance.pRoles[playerSlot];
+            if (role == "eppee") return 0;
+            if (role == "teebee") return 1;
+            if (role == "heartly") return 2;
+        }
+        else if (playerCnt == 2)
+        {
+            string role = GameManager.Instance.pRoles[playerSlot];
+            if (playerSlot == 0)
+            {
+                if (role == "eppee") return 3;
+                if (role == "teebee") return 4;
+            }
+            else if (playerSlot == 1)
+            {
+                if (role == "teebee") return 5;
+                if (role == "heartly") return 6;
+            }
+        }
+        else if (playerCnt == 3)
+        {
+            return 7 + playerSlot;
+        }
+        return 0; // fallback
     }
 
     void AnimateShape(GameObject shape)

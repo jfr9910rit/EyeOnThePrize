@@ -2,12 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using System.Reflection;
-
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager Instance;
 
     public int playerCount = 0;
@@ -18,14 +15,13 @@ public class GameManager : MonoBehaviour
     public float hideTime = 10f;
     public bool isTimerRunning = false;
     public int playersFinished = 0;
-    public int[,] playerPoints; //fix this
+    public int[,] playerPoints;
     public int difficultyLevel = 0;
     public string activeModifier = "None";
     public Image glowRing;
 
     void Awake()
     {
-        Debug.Log(playerCount);
         if (Instance == null)
         {
             Instance = this;
@@ -35,18 +31,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-         //initialize players
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isTimerRunning && SceneManager.GetActiveScene().name == "Julian_Testing")
@@ -60,15 +51,13 @@ public class GameManager : MonoBehaviour
             }
 
             TimerText.text = Mathf.RoundToInt(gameTimer).ToString();
-            UpdateTimerColor(); // <-- add this line
+            UpdateTimerColor();
         }
     }
-
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         AssignSceneVariables();
-        
     }
 
     void AssignSceneVariables()
@@ -81,118 +70,98 @@ public class GameManager : MonoBehaviour
         playerSequences[3] = GameObject.Find("Sequence_2P_P1_EP");
         playerSequences[4] = GameObject.Find("Sequence_2P_P1_TB");
         playerSequences[5] = GameObject.Find("Sequence_2P_P2_TB");
-        playerSequences[6] = GameObject.Find("Sequence_2P_P3_HL");
+        playerSequences[6] = GameObject.Find("Sequence_2P_P2_HL");
         playerSequences[7] = GameObject.Find("Sequence_3P_P1");
         playerSequences[8] = GameObject.Find("Sequence_3P_P2");
         playerSequences[9] = GameObject.Find("Sequence_3P_P3");
+
         GameObject imageObject = GameObject.Find("glowring");
-        glowRing = imageObject.GetComponent<Image>();
-        glowRing.color = Color.green;
+        glowRing = imageObject?.GetComponent<Image>();
+        if (glowRing != null) glowRing.color = Color.green;
+
         UpdateActiveSequences();
     }
 
-    public void SetPlayerCount(int count)
+    public void SetPlayerCount(int count, string[] roles)
     {
         playerCount = count;
         playerPoints = new int[playerCount, 2];
-        //playersFinished = 0; // Reset player finish count
         difficultyLevel = 0;
-        UpdateActiveSequences();
-    }
 
-    public void SetRoles(string roles)
-    {
-        if(roles == eppee && playerCount == 1)
+        for (int i = 0; i < roles.Length; i++)
         {
-            pRoles[0] = roles;
+            pRoles[i] = roles[i];
+            Debug.Log("Assigned pRole[" + i + "] = " + pRoles[i]);
         }
-        else if(roles == eppee && playerCount == 1)
+
+        UpdateActiveSequences();
     }
 
     public void StartGameTimer(int time)
     {
         gameTimer = time;
         isTimerRunning = true;
-        //SequenceStarted = true;
     }
 
     public void PlayerFinished(int playerIndex, int score)
     {
-        if (playerIndex >= 0 && playerIndex < playerPoints.Length)
+        if (playerIndex >= 0 && playerIndex < playerPoints.GetLength(0))
         {
-            playerPoints[playerIndex,1] += score;
-            Debug.Log("test1");
+            playerPoints[playerIndex, 1] += score;
         }
+
         playersFinished++;
         if (playersFinished >= playerCount)
         {
             isTimerRunning = false;
-            Debug.Log(playerPoints[playerIndex, 1]);
-            
-            SceneManager.LoadScene("EndScene"); // change to end scene here
-            
-            //add other difficulty stuff here
+            SceneManager.LoadScene("EndScene");
         }
     }
 
-
     private void UpdateActiveSequences()
     {
-        for (int i = 0; i < playerSequences.Length; i++)
+        foreach (var seq in playerSequences)
         {
-            if (playerSequences[i] != null)
-            {
-                playerSequences[i].SetActive(false);
-            }
+            if (seq != null) seq.SetActive(false);
         }
 
         if (playerCount == 1)
         {
-            if (pRoles == "eppee")
-            {
-                if (playerSequences[0] != null) playerSequences[0].SetActive(true);
-            }
-            else if(pRoles == "teebee")
-            {
-
-            }
-            else if(pRoles == "heartly")
-            {
-
-            }
-            
+            if (pRoles[0] == "eppee" && playerSequences[0] != null) playerSequences[0].SetActive(true);
+            else if (pRoles[0] == "teebee" && playerSequences[1] != null) playerSequences[1].SetActive(true);
+            else if (pRoles[0] == "heartly" && playerSequences[2] != null) playerSequences[2].SetActive(true);
         }
         else if (playerCount == 2)
         {
-            if (playerSequences[1] != null) playerSequences[1].SetActive(true);
-            if (playerSequences[2] != null) playerSequences[2].SetActive(true);
+            if (pRoles[0] == "eppee" && playerSequences[3] != null) playerSequences[3].SetActive(true);
+            else if (pRoles[0] == "teebee" && playerSequences[4] != null) playerSequences[4].SetActive(true);
+
+            if (pRoles[1] == "teebee" && playerSequences[5] != null) playerSequences[5].SetActive(true);
+            else if (pRoles[1] == "heartly" && playerSequences[6] != null) playerSequences[6].SetActive(true);
         }
         else if (playerCount == 3)
         {
-            if (playerSequences[3] != null) playerSequences[3].SetActive(true);
-            if (playerSequences[4] != null) playerSequences[4].SetActive(true);
-            if (playerSequences[5] != null) playerSequences[5].SetActive(true);
+            if (playerSequences[7] != null) playerSequences[7].SetActive(true);
+            if (playerSequences[8] != null) playerSequences[8].SetActive(true);
+            if (playerSequences[9] != null) playerSequences[9].SetActive(true);
         }
     }
 
     private void UpdateTimerColor()
     {
-        float t = 1f - (gameTimer / (25f - ((float)difficultyLevel * 5f))); // normalize from 0 (start) to 1 (end)
+        float t = 1f - (gameTimer / (25f - (float)difficultyLevel * 5f));
 
-        if (t < 1f / 3f) // Green to Yellow
+        if (t < 1f / 3f)
         {
-            float lerpT = t * 3f;
-            glowRing.color = Color.Lerp(Color.green, Color.yellow, lerpT);
+            glowRing.color = Color.Lerp(Color.green, Color.yellow, t * 3f);
         }
-        else if (t < 2f / 3f) // Yellow to Red
+        else if (t < 2f / 3f)
         {
-            float lerpT = (t - 1f / 3f) * 3f;
-            glowRing.color = Color.Lerp(Color.yellow, Color.red, lerpT);
+            glowRing.color = Color.Lerp(Color.yellow, Color.red, (t - 1f / 3f) * 3f);
         }
-        else // Hold Red
+        else
         {
             glowRing.color = Color.red;
         }
     }
-
 }
