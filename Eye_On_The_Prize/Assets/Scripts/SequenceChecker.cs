@@ -35,7 +35,7 @@ public class SequenceChecker : MonoBehaviour
     bool[] hasCheckedSequence;
     private int[,] shapeX;
     private int[,] playerTries;
-    private bool flashing;
+    private bool[] flashing;
     //make references and add in tries
     void Start()
     {
@@ -59,7 +59,7 @@ public class SequenceChecker : MonoBehaviour
         hasCheckedSequence = new bool[GameManager.Instance.playerCount];
         roundTime = 25f - ((float)GameManager.Instance.difficultyLevel * 5f);
         hasHiddenOriginalSequence = new bool[GameManager.Instance.playerCount];
-        flashing = false;
+        flashing = new bool[GameManager.Instance.playerCount];
 
     }
 
@@ -123,7 +123,7 @@ public class SequenceChecker : MonoBehaviour
             //Debug.Log("hidden orig sequence");
             for (int i = 0; i < GameManager.Instance.playerCount; i++)
             {
-                if (!flashing)
+                if (!flashing[i])
                 {
                     //FlashOriginalSequence(i);
                     FlashOriginalSequence(i);
@@ -261,32 +261,58 @@ public class SequenceChecker : MonoBehaviour
 
         if (GameManager.Instance.playerCount == 1)
         {
-            selectedShape.transform.SetParent(sequenceManager.seqs[0], false);
+            if (GameManager.Instance.pRoles[0] == "eppee")
+            {
+                selectedShape.transform.SetParent(sequenceManager.seqs[0], false);
+            }
+            else if(GameManager.Instance.pRoles[0] == "teebee")
+            {
+                selectedShape.transform.SetParent(sequenceManager.seqs[1], false);
+            }
+            else if (GameManager.Instance.pRoles[0] == "heartly")
+            {
+                selectedShape.transform.SetParent(sequenceManager.seqs[2], false);
+            }
+            
         }
         else if (GameManager.Instance.playerCount == 2)
         {
             if (playerInt == 0)
             {
-                selectedShape.transform.SetParent(sequenceManager.seqs[1], false);
+                if (GameManager.Instance.pRoles[0] == "eppee")
+                {
+                    selectedShape.transform.SetParent(sequenceManager.seqs[3], false);
+                }
+                else if (GameManager.Instance.pRoles[0] == "teebee")
+                {
+                    selectedShape.transform.SetParent(sequenceManager.seqs[4], false);
+                }
             }
             else if (playerInt == 1)
             {
-                selectedShape.transform.SetParent(sequenceManager.seqs[2], false);
+                if (GameManager.Instance.pRoles[1] == "eppee")
+                {
+                    selectedShape.transform.SetParent(sequenceManager.seqs[5], false);
+                }
+                else if (GameManager.Instance.pRoles[1] == "teebee")
+                {
+                    selectedShape.transform.SetParent(sequenceManager.seqs[6], false);
+                }
             }
         }
         else if (GameManager.Instance.playerCount == 3)
         {
             if (playerInt == 0)
             {
-                selectedShape.transform.SetParent(sequenceManager.seqs[3], false);
+                selectedShape.transform.SetParent(sequenceManager.seqs[7], false);
             }
             else if (playerInt == 1)
             {
-                selectedShape.transform.SetParent(sequenceManager.seqs[4], false);
+                selectedShape.transform.SetParent(sequenceManager.seqs[8], false);
             }
             else if (playerInt == 2)
             {
-                selectedShape.transform.SetParent(sequenceManager.seqs[5], false);
+                selectedShape.transform.SetParent(sequenceManager.seqs[9], false);
             }
         }
 
@@ -315,13 +341,13 @@ public class SequenceChecker : MonoBehaviour
 
     void FlashOriginalSequence(int playerInt)
     {
-        //Debug.Log("Hiding Original Sequence!");
+        Debug.Log("Flashing Original Sequence!");
         for (int s = 0; s < sequenceManager.shapeCount; s++)
         {
-            sequenceManager.OriginalSequences[playerInt, s].GetComponent<SpriteAnimation>().beginLoopingAnimation();
+            sequenceManager.OriginalSequences[playerInt, s].GetComponent<SpriteAnimation>().playAnimation();
 
         }
-        flashing = true;
+        flashing[playerInt] = true;
     }
 
     void HideOriginalSequence(int playerInt)
@@ -332,7 +358,7 @@ public class SequenceChecker : MonoBehaviour
             sequenceManager.OriginalSequences[playerInt, s].SetActive(false);
         }
         hasHiddenOriginalSequence[playerInt] = true;
-        flashing = false;
+        flashing[playerInt] = false;
 
     }
 
@@ -424,7 +450,7 @@ public class SequenceChecker : MonoBehaviour
                     : "null";
                 string originalShapeName = sequenceManager.OriginalSequences[playerInt, i].name.Split('(')[0].Trim();
 
-                Debug.Log($"Index {i}: Player Shape: {playerShapeName}, Original Shape: {originalShapeName}");
+                //Debug.Log($"Index {i}: Player Shape: {playerShapeName}, Original Shape: {originalShapeName}");
 
                 // Determine which shape to show
                 GameObject feedbackShape = null;
@@ -468,32 +494,57 @@ public class SequenceChecker : MonoBehaviour
                 {
                     if(GameManager.Instance.playerCount == 1)
                     {
-                        seqNum = 0;
+                        if (GameManager.Instance.pRoles[0] == "eppee")
+                        {
+                            seqNum = 0;
+                        }
+                        else if (GameManager.Instance.pRoles[0] == "teebee")
+                        {
+                            seqNum = 1;
+                        }
+                        else if (GameManager.Instance.pRoles[0] == "heartly")
+                        {
+                            seqNum = 2;
+                        }
                     }
                     else if(GameManager.Instance.playerCount == 2)
                     {
                         if(playerInt == 0)
                         {
-                            seqNum = 1;
+                            if (GameManager.Instance.pRoles[0] == "eppee")
+                            {
+                                seqNum = 3;
+                            }
+                            else if (GameManager.Instance.pRoles[0] == "teebee")
+                            {
+                                seqNum = 4;
+                            }
                         }
                         else if(playerInt == 1)
                         {
-                            seqNum = 2;
+                            if (GameManager.Instance.pRoles[1] == "teebee")
+                            {
+                                seqNum = 5;
+                            }
+                            else if (GameManager.Instance.pRoles[1] == "heartly")
+                            {
+                                seqNum = 6;
+                            }
                         }
                     }
                     else if(GameManager.Instance.playerCount == 3)
                     {
                         if (playerInt == 0)
                         {
-                            seqNum = 3;
+                            seqNum = 7;
                         }
                         else if (playerInt == 1)
                         {
-                            seqNum = 4;
+                            seqNum = 8;
                         }
                         else if(playerInt == 2)
                         {
-                            seqNum = 5;
+                            seqNum = 9;
                         }
                     }
                     feedbackShape.transform.SetParent(sequenceManager.seqs[seqNum], true);

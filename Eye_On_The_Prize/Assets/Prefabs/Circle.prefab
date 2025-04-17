@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 0
-  loop: 1
+  loop: 0
   fps: 30
-  imageUI: {fileID: 0}
+  imageUI: {fileID: 3034564958627386515}
   defaultAnimationFolderPath: circle
