@@ -290,11 +290,11 @@ public class SequenceChecker : MonoBehaviour
             }
             else if (playerInt == 1)
             {
-                if (GameManager.Instance.pRoles[1] == "eppee")
+                if (GameManager.Instance.pRoles[1] == "teebee")
                 {
                     selectedShape.transform.SetParent(sequenceManager.seqs[5], false);
                 }
-                else if (GameManager.Instance.pRoles[1] == "teebee")
+                else if (GameManager.Instance.pRoles[1] == "heartly")
                 {
                     selectedShape.transform.SetParent(sequenceManager.seqs[6], false);
                 }
