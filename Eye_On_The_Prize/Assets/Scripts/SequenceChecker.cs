@@ -35,6 +35,7 @@ public class SequenceChecker : MonoBehaviour
     bool[] hasCheckedSequence;
     private int[,] shapeX;
     private int[,] playerTries;
+    private bool flashing;
     //make references and add in tries
     void Start()
     {
@@ -58,6 +59,7 @@ public class SequenceChecker : MonoBehaviour
         hasCheckedSequence = new bool[GameManager.Instance.playerCount];
         roundTime = 25f - ((float)GameManager.Instance.difficultyLevel * 5f);
         hasHiddenOriginalSequence = new bool[GameManager.Instance.playerCount];
+        flashing = false;
 
     }
 
@@ -97,8 +99,8 @@ public class SequenceChecker : MonoBehaviour
             }
         }
 
-        // Hide the original sequence after 10 seconds
-        if (/*isSequenceReady && !hasHiddenOriginalSequence &&*/ GameManager.Instance.gameTimer <= (roundTime - GameManager.Instance.hideTime))
+
+        if (GameManager.Instance.gameTimer <= (roundTime - GameManager.Instance.hideTime))
         {
             //Debug.Log("hidden orig sequence");
             for (int i = 0; i < GameManager.Instance.playerCount; i++)
@@ -106,6 +108,25 @@ public class SequenceChecker : MonoBehaviour
                 if (!hasHiddenOriginalSequence[i])
                 {
                     HideOriginalSequence(i);
+                }
+
+                //Debug.Log("hidden orig sequence");
+            }
+
+
+        }
+
+
+        // Hide the original sequence after 10 seconds
+        if (/*isSequenceReady && !hasHiddenOriginalSequence &&*/ GameManager.Instance.gameTimer <= (roundTime - GameManager.Instance.hideTime + 2.5f))
+        {
+            //Debug.Log("hidden orig sequence");
+            for (int i = 0; i < GameManager.Instance.playerCount; i++)
+            {
+                if (!flashing)
+                {
+                    //FlashOriginalSequence(i);
+                    FlashOriginalSequence(i);
                 }
 
                 //Debug.Log("hidden orig sequence");
@@ -292,6 +313,17 @@ public class SequenceChecker : MonoBehaviour
     }
 
 
+    void FlashOriginalSequence(int playerInt)
+    {
+        //Debug.Log("Hiding Original Sequence!");
+        for (int s = 0; s < sequenceManager.shapeCount; s++)
+        {
+            sequenceManager.OriginalSequences[playerInt, s].GetComponent<SpriteAnimation>().beginLoopingAnimation();
+
+        }
+        flashing = true;
+    }
+
     void HideOriginalSequence(int playerInt)
     {
         //Debug.Log("Hiding Original Sequence!");
@@ -300,9 +332,9 @@ public class SequenceChecker : MonoBehaviour
             sequenceManager.OriginalSequences[playerInt, s].SetActive(false);
         }
         hasHiddenOriginalSequence[playerInt] = true;
+        flashing = false;
+
     }
-
-
 
 
     //make per player and also assign points to player

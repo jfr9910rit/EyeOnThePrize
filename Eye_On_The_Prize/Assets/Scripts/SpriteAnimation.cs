@@ -35,6 +35,9 @@ public class SpriteAnimation : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        imageUI = GetComponent<Image>();
+
+
         LoadSpritesFromFolder(defaultAnimationFolderPath);
         play = autoPlay;
     }
