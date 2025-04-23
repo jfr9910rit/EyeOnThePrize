@@ -4,9 +4,9 @@ using System.Threading;
 
 public class SerialComManager : MonoBehaviour
 {
-    [SerializeField] private string COM_A;
-    [SerializeField] private string COM_B;
-    [SerializeField] private string COM_C;
+    //[SerializeField] private string COM_A;
+    //[SerializeField] private string COM_B;
+    //[SerializeField] private string COM_C;
 
     Thread IOThread = new Thread(DataThread);
     private static SerialPort sp1;
@@ -17,6 +17,7 @@ public class SerialComManager : MonoBehaviour
 
     private static void DataThread()
     {
+        // these will likely change depending on the computer being used
         sp1 = new SerialPort("COM4", 9600);
         sp1.Open();
         sp2 = new SerialPort("COM9", 9600);
@@ -53,12 +54,13 @@ public class SerialComManager : MonoBehaviour
     {
         sp1.Close();
         sp2.Close();
-        sp3.Close();
+        //sp3.Close();
     }
 
     /*
      * apparently the unity editor wont let functions attached to buttons have more than one parameter so this is how we're doing it.
-     * formatted like this: "COM[port#]_[msg]"
+     * parameter is formatted like this: "COM[port#]_[msg]"
+     * for ex: COM4_0
      */
     public void SendSerialMessage(string port_msg) 
     {
