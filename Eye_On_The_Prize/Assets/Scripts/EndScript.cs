@@ -1,109 +1,112 @@
-using System.Diagnostics;
-using System.Reflection;
-using System.Threading;
+using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Video;
 using UnityEngine.UI;
+using UnityEngine.Video;
+
 
 public class EndScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public TextMeshProUGUI EndBanner;
-    
-
     public TextMeshProUGUI[] pScores;
     public Image[] podiums;
     public Image[] glows;
     public Image[] chars;
+    public GameObject[] playerPlaces;
     public VideoPlayer outro;
-    private float outroTime;
+
+    private float outroTime = 10f;
 
     void Awake()
     {
-        outroTime = 10f;
-        for(int i = 0; i < GameManager.Instance.playerCount; i++)
+        // Hide all podiums initially
+        foreach (GameObject place in playerPlaces)
         {
-            //podiums[i].setActive(false);
-            //glows[i].setActive(false);
-            //chars[i].setActive(false);
-            //pScores[i].setActive(false);
+            place.SetActive(false);
         }
 
+        int playerCount = GameManager.Instance.playerCount;
+        string[] roles = new string[playerCount];
+        int[] scores = new int[playerCount];
 
-        //GameManager.Instance.isTimerRunning = false;
-
-        //if (GameManager.Instance.playerCount == 1)
-        //{
-        //    if (GameManager.Instance.pRoles[0] == "eppee")
-        //    {
-                
-        //    }
-        //    else if (GameManager.Instance.pRoles[0] == "teebee")
-        //    {
-                
-        //    }
-        //    else if (GameManager.Instance.pRoles[0] == "heartly")
-        //    {
-                
-        //    }
-
-        //}
-        //else if (GameManager.Instance.playerCount == 2)
-        //{
-        //    if (playerInt == 0)
-        //    {
-        //        if (GameManager.Instance.pRoles[0] == "eppee")
-        //        {
-                    
-        //        }
-        //        else if (GameManager.Instance.pRoles[0] == "teebee")
-        //        {
-                    
-        //        }
-        //    }
-        //    else if (playerInt == 1)
-        //    {
-        //        if (GameManager.Instance.pRoles[1] == "teebee")
-        //        {
-                    
-        //        }
-        //        else if (GameManager.Instance.pRoles[1] == "heartly")
-        //        {
-                    
-        //        }
-        //    }
-        //}
-        //else if (GameManager.Instance.playerCount == 3)
-        //{
-
-        //}
-
-
-
-
-        if (GameManager.Instance.difficultyLevel == 2)
+        for (int i = 0; i < playerCount; i++)
         {
-            EndBanner.text = "Game Over";
+            roles[i] = GameManager.Instance.pRoles[i];
+            scores[i] = GameManager.Instance.playerPoints[i, 1];
+        }
 
-        }
-        else {
-            EndBanner.text = "Round " + (GameManager.Instance.difficultyLevel + 1) + " Over";
-        }
-        for(int i = 0; i < GameManager.Instance.playerCount; i++)
+        // Pair roles and scores for sorting
+        var playerData = roles.Select((role, index) => new { Role = role, Score = scores[index], Index = index }).ToList();
+        var sorted = playerData.OrderByDescending(p => p.Score).ToList();
+
+        for (int i = 0; i < sorted.Count; i++)
         {
-            pScores[i].text = /*"Player " + (i +1) +  */"Score: " + GameManager.Instance.playerPoints[i, 1];
+            string role = sorted[i].Role;
+            int score = sorted[i].Score;
+            int podiumIndex = GetPodiumIndex(playerCount, i, role);
+            if (podiumIndex >= 0 && podiumIndex < playerPlaces.Length)
+            {
+                GameObject podium = playerPlaces[podiumIndex];
+                podium.SetActive(true);
+
+                Transform scoreObj = podium.transform.Find("score");
+                if (scoreObj != null && scoreObj.TryGetComponent(out TextMeshProUGUI scoreText))
+                {
+                    scoreText.text = "Score: " + score;
+                }
+            }
         }
-        
+
+        // Banner display
+        EndBanner.text = GameManager.Instance.difficultyLevel == 2
+            ? "Game Over"
+            : "Round " + (GameManager.Instance.difficultyLevel + 1) + " Over";
+
+        // Score list update (optional legacy UI)
+        for (int i = 0; i < playerCount; i++)
+        {
+            pScores[i].text = "Score: " + scores[i];
+        }
     }
 
-    // Update is called once per frame
+    private int GetPodiumIndex(int playerCount, int placement, string role)
+    {
+        int offset = 0;
+        int roleIndex = RoleToIndex(role); // 0=eppee, 1=teebee, 2=heartly
+
+        if (playerCount == 1)
+        {
+            return roleIndex; // indexes 0–2
+        }
+        else if (playerCount == 2)
+        {
+            offset = (placement == 0) ? 9 : 12;
+        }
+        else if (playerCount == 3)
+        {
+            offset = placement * 3;
+        }
+
+        return offset + roleIndex;
+    }
+
+    private int RoleToIndex(string role)
+    {
+        return role switch
+        {
+            "eppee" => 0,
+            "teebee" => 1,
+            "heartly" => 2,
+            _ => -1
+        };
+    }
+
     void Update()
     {
         outroTime -= Time.deltaTime;
-        if(outroTime == 0)
+        if (outroTime <= 0f)
         {
-            //Debug.Log("Done!");
+            // Do something when outro is done
         }
     }
 }
