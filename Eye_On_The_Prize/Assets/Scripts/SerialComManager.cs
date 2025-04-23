@@ -4,21 +4,46 @@ using System.Threading;
 
 public class SerialComManager : MonoBehaviour
 {
+    //[SerializeField] private string COM_A;
+    //[SerializeField] private string COM_B;
+    //[SerializeField] private string COM_C;
+
     Thread IOThread = new Thread(DataThread);
-    private static SerialPort sp;
+    private static SerialPort sp1;
+    private static SerialPort sp2;
+    private static SerialPort sp3;
+    private static string targetCom = "";
     private static string outgoingMsg = "";
 
     private static void DataThread()
     {
-        sp = new SerialPort("COM4", 9600);
-        sp.Open();
+        // these will likely change depending on the computer being used
+        sp1 = new SerialPort("COM4", 9600);
+        sp1.Open();
+        sp2 = new SerialPort("COM9", 9600);
+        sp2.Open();
+        //sp3 = new SerialPort("COM_", 9600);
+        //sp3.Open();
 
         while (true)
         {
-            if (outgoingMsg != "")
+            // if msg exists
+            if (outgoingMsg != "" && targetCom != "")
             {
-                sp.Write(outgoingMsg);
+                // send msg to correct port
+                switch (targetCom)
+                {
+                    case "COM4":
+                        sp1.Write(outgoingMsg);
+                        break;
+                    case "COM9":
+                        sp2.Write(outgoingMsg);
+                        break;
+                }
+
+                // clear msg fields
                 outgoingMsg = "";
+                targetCom = "";
             }
 
             Thread.Sleep(200);
@@ -27,11 +52,27 @@ public class SerialComManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        sp.Close();
+        sp1.Close();
+        sp2.Close();
+        //sp3.Close();
     }
 
-    public void SendSerialMessage(string msg)
+    /*
+     * apparently the unity editor wont let functions attached to buttons have more than one parameter so this is how we're doing it.
+     * parameter is formatted like this: "COM[port#]_[msg]"
+     * for ex: COM4_0
+     */
+    public void TestSerialMessage(string port_msg) 
     {
+        string com = port_msg.Substring(0, 4);
+        string msg = port_msg.Substring(4);
+        targetCom = com;
+        outgoingMsg = msg;
+    }
+
+    public void SendSerialMessage(string com, string msg)
+    {
+        targetCom = com;
         outgoingMsg = msg;
     }
 

@@ -70,9 +70,9 @@ void loop() {
     }
 
     // say what you got:
-    Serial.print("I received: ");
-    Serial.println(incomingByte, DEC);
-    Serial.println(state);
+    //Serial.print("I received: ");
+    //Serial.println(incomingByte, DEC);
+    //Serial.println(state);
   }
 
   delay(1);
