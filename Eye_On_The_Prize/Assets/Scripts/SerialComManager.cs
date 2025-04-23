@@ -62,10 +62,16 @@ public class SerialComManager : MonoBehaviour
      * parameter is formatted like this: "COM[port#]_[msg]"
      * for ex: COM4_0
      */
-    public void SendSerialMessage(string port_msg) 
+    public void TestSerialMessage(string port_msg) 
     {
         string com = port_msg.Substring(0, 4);
         string msg = port_msg.Substring(4);
+        targetCom = com;
+        outgoingMsg = msg;
+    }
+
+    public void SendSerialMessage(string com, string msg)
+    {
         targetCom = com;
         outgoingMsg = msg;
     }

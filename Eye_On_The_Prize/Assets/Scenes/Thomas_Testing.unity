@@ -569,7 +569,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 895314524}
         m_TargetAssemblyTypeName: SerialComManager, Assembly-CSharp
-        m_MethodName: SendSerialMessage
+        m_MethodName: TestSerialMessage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1066,7 +1066,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 895314524}
         m_TargetAssemblyTypeName: SerialComManager, Assembly-CSharp
-        m_MethodName: SendSerialMessage
+        m_MethodName: TestSerialMessage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1721,7 +1721,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 895314524}
         m_TargetAssemblyTypeName: SerialComManager, Assembly-CSharp
-        m_MethodName: SendSerialMessage
+        m_MethodName: TestSerialMessage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1854,7 +1854,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 895314524}
         m_TargetAssemblyTypeName: SerialComManager, Assembly-CSharp
-        m_MethodName: SendSerialMessage
+        m_MethodName: TestSerialMessage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2216,7 +2216,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 895314524}
         m_TargetAssemblyTypeName: SerialComManager, Assembly-CSharp
-        m_MethodName: SendSerialMessage
+        m_MethodName: TestSerialMessage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2349,7 +2349,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 895314524}
         m_TargetAssemblyTypeName: SerialComManager, Assembly-CSharp
-        m_MethodName: SendSerialMessage
+        m_MethodName: TestSerialMessage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2482,7 +2482,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 895314524}
         m_TargetAssemblyTypeName: SerialComManager, Assembly-CSharp
-        m_MethodName: SendSerialMessage
+        m_MethodName: TestSerialMessage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2559,9 +2559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308b7c49e1d22824a89826c4d984e8be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  COM_A: 
-  COM_B: 
-  COM_C: 
 --- !u!4 &895314525
 Transform:
   m_ObjectHideFlags: 0
@@ -2662,7 +2659,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 895314524}
         m_TargetAssemblyTypeName: SerialComManager, Assembly-CSharp
-        m_MethodName: SendSerialMessage
+        m_MethodName: TestSerialMessage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2931,7 +2928,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 895314524}
         m_TargetAssemblyTypeName: SerialComManager, Assembly-CSharp
-        m_MethodName: SendSerialMessage
+        m_MethodName: TestSerialMessage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3292,7 +3289,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 895314524}
         m_TargetAssemblyTypeName: SerialComManager, Assembly-CSharp
-        m_MethodName: SendSerialMessage
+        m_MethodName: TestSerialMessage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
