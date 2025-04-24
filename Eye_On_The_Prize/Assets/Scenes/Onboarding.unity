@@ -599,7 +599,7 @@ MonoBehaviour:
   animation: {fileID: 1021014713}
   fadeOutFolder: fade_out
   videoPlayer: {fileID: 2124679229}
-  nextSceneName: Julian_Testing
+  nextSceneName: Countdown
 --- !u!1 &2124679227
 GameObject:
   m_ObjectHideFlags: 0

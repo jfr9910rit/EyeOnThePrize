@@ -75,7 +75,7 @@ public class StartManager : MonoBehaviour
         {
             if(startTime < 0)
             {
-                SceneManager.LoadSceneAsync("Julian_Testing");
+                SceneManager.LoadSceneAsync("Onboarding");
             }
 
             timerTextObject.SetActive(true);
@@ -90,7 +90,7 @@ public class StartManager : MonoBehaviour
             Color color = timerText.color;
             color.a = alpha;
             timerText.color = color;
-            pressHold.text = "Player 1 hold 'Circle' to start " + GameManager.Instance.playerCount.ToString() + " Player game";
+            pressHold.text = "Player 1 press 'Circle' to start a " + GameManager.Instance.playerCount.ToString() + " Player game";
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {

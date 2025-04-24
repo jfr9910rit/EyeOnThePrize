@@ -31,7 +31,7 @@ public class ResetToRest : MonoBehaviour
                 GameManager.Instance.difficultyLevel++;
                 GameManager.Instance.gameTimer = 25f - ((float)GameManager.Instance.difficultyLevel * 5f);
                 GameManager.Instance.hideTime = 10f - ((float)GameManager.Instance.difficultyLevel * 2.5f);
-                SceneManager.LoadSceneAsync("Julian_Testing");
+                SceneManager.LoadSceneAsync("Countdown");
             }
             
         }

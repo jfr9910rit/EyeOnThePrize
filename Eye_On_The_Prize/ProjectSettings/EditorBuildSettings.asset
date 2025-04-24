@@ -23,6 +23,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndTransition.unity
     guid: 7c2d006f72b89644eb9248c4d0f165a2
+  - enabled: 1
+    path: Assets/Scenes/Onboarding.unity
+    guid: 012c9db12ecc255488b51548f2fde103
+  - enabled: 1
+    path: Assets/Scenes/Countdown.unity
+    guid: 9aca2c5dbad90714882e751539a4a373
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
