@@ -12,8 +12,10 @@ public class StartManager : MonoBehaviour
     public Image p1Ready, p2Ready, p3Ready;
     public Image eppee, teebee, heartly;
     public TextMeshProUGUI pressHold;
+    public GameObject timerTextObject;
 
-    private float startTime;
+    private TextMeshProUGUI timerText;
+    private float startTime = 20;
     private SpriteAnimation ep, tb, hl;
     private bool[] joined;
     public string[] playerRoles = new string[3];
@@ -21,6 +23,9 @@ public class StartManager : MonoBehaviour
 
     void Awake()
     {
+        timerText = timerTextObject.GetComponent<TextMeshProUGUI>();
+
+
         p1glow.enabled = false;
         p2glow.enabled = false;
         p3glow.enabled = false;
@@ -68,6 +73,23 @@ public class StartManager : MonoBehaviour
 
         if (GameManager.Instance.playerCount > 0)
         {
+            if(startTime < 0)
+            {
+                SceneManager.LoadSceneAsync("Julian_Testing");
+            }
+
+            timerTextObject.SetActive(true);
+            startTime -= Time.deltaTime;
+            timerText.text = ":" + Mathf.Round(startTime).ToString();
+
+            // Calculate opacity
+            float t = 1 - (startTime / 20);
+            float alpha = 0.01f + Mathf.Clamp01(t * t);
+
+            // Set the color with new alpha
+            Color color = timerText.color;
+            color.a = alpha;
+            timerText.color = color;
             pressHold.text = "Player 1 hold 'Circle' to start " + GameManager.Instance.playerCount.ToString() + " Player game";
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
