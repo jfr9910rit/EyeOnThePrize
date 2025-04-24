@@ -19,7 +19,7 @@ public class SpriteAnimation : MonoBehaviour
     private Image imageUI;
 
     [SerializeField]
-    private string defaultAnimationFolderPath = "SPRITES_FOLDER"; // Relative to the Resources folder
+    public string defaultAnimationFolderPath = "SPRITES_FOLDER"; // Relative to the Resources folder
 
     private List<Sprite> spriteList = new List<Sprite>();
     private bool spritesLoaded = false;
