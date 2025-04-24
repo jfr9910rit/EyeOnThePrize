@@ -203,8 +203,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -306,10 +306,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 27730452}
-  defaultAnimationFolderPath: heartly_resting
+  defaultAnimationFolderPath: heartly_happy
 --- !u!114 &27730452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 204151687}
   defaultAnimationFolderPath: teebee_resting
@@ -955,8 +955,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1605,8 +1605,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1722,8 +1722,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1844,10 +1844,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 525977242}
-  defaultAnimationFolderPath: eppee_resting
+  defaultAnimationFolderPath: eppee_happy
 --- !u!114 &525977242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2047,10 +2047,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 591111491}
-  defaultAnimationFolderPath: teebee_resting
+  defaultAnimationFolderPath: teebee_mad
 --- !u!114 &591111491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2293,10 +2293,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 714064559}
-  defaultAnimationFolderPath: teebee_resting
+  defaultAnimationFolderPath: teebee_happy
 --- !u!114 &714064559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2679,8 +2679,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2857,10 +2857,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 825936183}
-  defaultAnimationFolderPath: eppee_resting
+  defaultAnimationFolderPath: eppee_mad
 --- !u!114 &825936183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3133,8 +3133,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3386,7 +3386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 1037489045}
   defaultAnimationFolderPath: heartly_resting
@@ -3479,10 +3479,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 1047015480}
-  defaultAnimationFolderPath: heartly_resting
+  defaultAnimationFolderPath: heartly_mad
 --- !u!114 &1047015480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3605,8 +3605,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3851,8 +3851,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4064,10 +4064,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 1237654807}
-  defaultAnimationFolderPath: heartly_resting
+  defaultAnimationFolderPath: heartly_happy
 --- !u!114 &1237654807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4157,10 +4157,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 1246342651}
-  defaultAnimationFolderPath: teebee_resting
+  defaultAnimationFolderPath: teebee_happy
 --- !u!114 &1246342651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4289,10 +4289,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 1339523710}
-  defaultAnimationFolderPath: eppee_resting
+  defaultAnimationFolderPath: eppee_mad
 --- !u!114 &1339523710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4702,8 +4702,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4805,7 +4805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 1443876887}
   defaultAnimationFolderPath: eppee_resting
@@ -5116,8 +5116,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5271,8 +5271,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5557,8 +5557,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5693,8 +5693,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5904,8 +5904,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6007,10 +6007,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 1740127982}
-  defaultAnimationFolderPath: teebee_resting
+  defaultAnimationFolderPath: teebee_mad
 --- !u!114 &1740127982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6394,10 +6394,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 1896978419}
-  defaultAnimationFolderPath: heartly_resting
+  defaultAnimationFolderPath: heartly_mad
 --- !u!114 &1896978419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6562,10 +6562,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 0
+  loop: 1
   fps: 30
   imageUI: {fileID: 1911779765}
-  defaultAnimationFolderPath: eppee_resting
+  defaultAnimationFolderPath: eppee_happy
 --- !u!114 &1911779765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6934,8 +6934,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
