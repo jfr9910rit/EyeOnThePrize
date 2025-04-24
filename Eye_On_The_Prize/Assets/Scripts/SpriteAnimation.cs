@@ -122,4 +122,10 @@ public class SpriteAnimation : MonoBehaviour
             Debug.LogWarning($"No sprites found at path: {path}");
         }
     }
+
+    public bool HasFinished()
+    {
+        return spriteIndex >= spriteList.Count - 1 && !loop;
+    }
+
 }

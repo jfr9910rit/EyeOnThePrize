@@ -72,7 +72,7 @@ public class StartManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                SceneManager.LoadSceneAsync("Julian_Testing");
+                SceneManager.LoadSceneAsync("Onboarding");
             }
         }
     }
