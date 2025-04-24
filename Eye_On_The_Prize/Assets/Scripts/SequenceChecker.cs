@@ -15,7 +15,7 @@ public class SequenceChecker : MonoBehaviour
 {
     public static SequenceChecker Instance;
 
-    public TextMeshProUGUI Result;
+    //public TextMeshProUGUI Result;
     //public TextMeshProUGUI Timer;
     //private float mainTimer = 25f;
     //private float hideTime = 10f;
@@ -382,7 +382,7 @@ public class SequenceChecker : MonoBehaviour
         if (isCorrect)
         {
             //Debug.Log("Correct Sequence!");
-            Result.text = "Correct!";
+            //Result.text = "Correct!";
             userPoints[playerInt, 1] += (1000 + (GameManager.Instance.difficultyLevel * 500)); // Base points for correctness
 
             // Calculate bonus points based on remaining time
@@ -414,7 +414,7 @@ public class SequenceChecker : MonoBehaviour
         }
         else
         {
-            Result.text = "Incorrect!";
+            //Result.text = "Incorrect!";
             //Debug.Log("Incorrect Sequence. Try Again!");
 
             playerTries[playerInt, 1]++;
