@@ -563,6 +563,7 @@ MonoBehaviour:
   teebee: {fileID: 710413987}
   heartly: {fileID: 1739660804}
   timerTextObject: {fileID: 939910801}
+  wellWellWell: {fileID: 577154568}
   playerRoles:
   - 
   - 
@@ -661,7 +662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &577154569
 RectTransform:
   m_ObjectHideFlags: 0
@@ -678,8 +679,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 304}
-  m_SizeDelta: {x: 658.21, y: 441.1799}
+  m_AnchoredPosition: {x: -856.09503, y: 470.35202}
+  m_SizeDelta: {x: 207.8199, y: 139.2959}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &577154570
 MonoBehaviour:
@@ -828,7 +829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5b18a0a22ea67428e62e0b069cbe45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoPlay: 1
+  autoPlay: 0
   loop: 0
   fps: 25
   imageUI: {fileID: 577154570}

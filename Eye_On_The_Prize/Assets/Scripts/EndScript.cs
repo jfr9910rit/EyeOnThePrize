@@ -14,6 +14,10 @@ public class EndScript : MonoBehaviour
     public Image[] chars;
     public GameObject[] playerPlaces;
     public VideoPlayer outro;
+    public AudioSource fail;
+    public GameObject simonFail;
+    private int scoreTotal;
+
 
     private float outroTime = 10f;
 
@@ -24,7 +28,7 @@ public class EndScript : MonoBehaviour
         {
             place.SetActive(false);
         }
-
+        simonFail.SetActive(false);
         int playerCount = GameManager.Instance.playerCount;
         string[] roles = new string[playerCount];
         int[] scores = new int[playerCount];
@@ -66,6 +70,14 @@ public class EndScript : MonoBehaviour
         for (int i = 0; i < playerCount; i++)
         {
             pScores[i].text = scores[i] + " PTS";
+            scoreTotal += scores[i];
+        }
+
+        if(scoreTotal <= 1500)
+        {
+            fail.Play();
+            simonFail.SetActive(true);
+            simonFail.GetComponent<SpriteAnimation>().playAnimation();
         }
     }
 

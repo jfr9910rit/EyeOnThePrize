@@ -13,7 +13,7 @@ public class StartManager : MonoBehaviour
     public Image eppee, teebee, heartly;
     //public TextMeshProUGUI pressHold;
     public GameObject timerTextObject;
-
+    public GameObject wellWellWell;
     private TextMeshProUGUI timerText;
     private float startTime = 20;
     private SpriteAnimation ep, tb, hl;
@@ -29,7 +29,7 @@ public class StartManager : MonoBehaviour
         p1glow.enabled = false;
         p2glow.enabled = false;
         p3glow.enabled = false;
-
+        wellWellWell.SetActive(false);
         ep = eppee.GetComponent<SpriteAnimation>();
         tb = teebee.GetComponent<SpriteAnimation>();
         hl = heartly.GetComponent<SpriteAnimation>();
@@ -38,6 +38,13 @@ public class StartManager : MonoBehaviour
         for (int i = 0; i < playerIndices.Length; i++)
         {
             playerIndices[i] = -1;
+        }
+
+        if(UnityEngine.Random.Range(0,1001) == 666)
+        {
+            wellWellWell.SetActive(true);
+            wellWellWell.GetComponent<SpriteAnimation>().playAnimation();
+            wellWellWell.GetComponent<AudioSource>().Play();
         }
     }
 
