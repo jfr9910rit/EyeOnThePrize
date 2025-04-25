@@ -9,11 +9,11 @@ public class TranstionTimer2 : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        if (GameManager.Instance.difficultyLevel == 2)
+        if (GameManager.Instance.difficultyLevel == 1)
         {
             nextScene = "Round2";
         }
-        else if (GameManager.Instance.difficultyLevel == 3)
+        else if (GameManager.Instance.difficultyLevel == 2)
         {
             nextScene = "Round3";
         }

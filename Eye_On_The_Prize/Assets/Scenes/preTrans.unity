@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameTimer: 2.16
-  nextScene: End Scene
+  nextScene: EndScene
 --- !u!114 &1850503425
 MonoBehaviour:
   m_ObjectHideFlags: 0
