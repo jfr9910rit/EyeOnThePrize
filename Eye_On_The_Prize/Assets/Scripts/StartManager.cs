@@ -11,7 +11,7 @@ public class StartManager : MonoBehaviour
     public Image p1glow, p2glow, p3glow;
     public Image p1Ready, p2Ready, p3Ready;
     public Image eppee, teebee, heartly;
-    public TextMeshProUGUI pressHold;
+    //public TextMeshProUGUI pressHold;
     public GameObject timerTextObject;
 
     private TextMeshProUGUI timerText;
@@ -51,7 +51,7 @@ public class StartManager : MonoBehaviour
                 AddRole("eppee", 0);
                 p1Ready.enabled = false;
                 p1glow.enabled = true;
-                StartCoroutine(PlaySequentialAnimations(eppee, ep, "eppee_spawn", "eppee_resting", -650, -200));
+                StartCoroutine(PlaySequentialAnimations(eppee, ep, "eppee_spawn", "eppee_resting", -650, -220));
             }
             else if (Input.GetKeyDown(KeyCode.Alpha7) && !joined[1])
             {
@@ -59,7 +59,7 @@ public class StartManager : MonoBehaviour
                 AddRole("teebee", 1);
                 p2Ready.enabled = false;
                 p2glow.enabled = true;
-                StartCoroutine(PlaySequentialAnimations(teebee, tb, "teebee_spawn", "teebee_resting", 22, -243));
+                StartCoroutine(PlaySequentialAnimations(teebee, tb, "teebee_spawn", "teebee_resting", 22, -265));
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow) && !joined[2])
             {
@@ -67,13 +67,17 @@ public class StartManager : MonoBehaviour
                 AddRole("heartly", 2);
                 p3Ready.enabled = false;
                 p3glow.enabled = true;
-                StartCoroutine(PlaySequentialAnimations(heartly, hl, "heartly_spawn", "heartly_resting", 660, -200));
+                StartCoroutine(PlaySequentialAnimations(heartly, hl, "heartly_spawn", "heartly_resting", 660, -220));
             }
         }
 
         if (GameManager.Instance.playerCount > 0)
         {
             if(startTime < 0)
+            {
+                SceneManager.LoadSceneAsync("Onboarding");
+            }
+            else if(GameManager.Instance.playerCount == 3)
             {
                 SceneManager.LoadSceneAsync("Onboarding");
             }
@@ -90,12 +94,12 @@ public class StartManager : MonoBehaviour
             Color color = timerText.color;
             color.a = alpha;
             timerText.color = color;
-            pressHold.text = "Player 1 press 'Circle' to start a " + GameManager.Instance.playerCount.ToString() + " Player game";
+            //pressHold.text = "Player 1 press 'Circle' to start a " + GameManager.Instance.playerCount.ToString() + " Player game";
 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                SceneManager.LoadSceneAsync("Onboarding");
-            }
+            //if (Input.GetKeyDown(KeyCode.Alpha1))
+            //{
+            //    SceneManager.LoadSceneAsync("Onboarding");
+            //}
         }
     }
 
@@ -138,8 +142,16 @@ public class StartManager : MonoBehaviour
 
         anim.LoadSpritesFromFolder(secondFolder);
         anim.loop = true;
-        char1.rectTransform.sizeDelta = new Vector2(403, 360);
-        char1.rectTransform.anchoredPosition = new Vector2(x, y - 70);
+        if(char1 == eppee)
+        {
+            char1.rectTransform.sizeDelta = new Vector2(450, 300);
+        }
+        else
+        {
+            char1.rectTransform.sizeDelta = new Vector2(403, 360);
+        }
+
+            char1.rectTransform.anchoredPosition = new Vector2(x, y - 70);
         anim.playAnimation();
     }
 }

@@ -36,8 +36,12 @@ public class SequenceChecker : MonoBehaviour
     private int[,] shapeX;
     private int[,] playerTries;
     private bool[] flashing;
+    public AudioSource audioPlayer;
+    public GameObject simon;
+    public AudioClip[] quips = new AudioClip[5];
+    private SpriteAnimation anim;
     //make references and add in tries
-    void Start()
+    void Awake()
     {
         sequenceManager = FindObjectOfType<SequenceManager>();
 
@@ -60,7 +64,8 @@ public class SequenceChecker : MonoBehaviour
         roundTime = 25f - ((float)GameManager.Instance.difficultyLevel * 5f);
         hasHiddenOriginalSequence = new bool[GameManager.Instance.playerCount];
         flashing = new bool[GameManager.Instance.playerCount];
-
+        simon.SetActive(false);
+        anim = simon.GetComponent<SpriteAnimation>();
     }
 
     void Update()
@@ -172,6 +177,8 @@ public class SequenceChecker : MonoBehaviour
 
         //prob can turn into a function later
         // Listen for input
+
+        //need to properly map for diff roles 
         if (Input.GetButtonDown("2") && canTakeInput2[0] && playerTries[0, 1] < 3)
         {
             if (userIndex[0, 1] == 0) HideOriginalSequence(0);
@@ -410,7 +417,7 @@ public class SequenceChecker : MonoBehaviour
                 }
             }
             //Debug.Log(userPoints[playerInt, 1]);
-
+            StartCoroutine(SimonQuipping(true));
         }
         else
         {
@@ -426,7 +433,7 @@ public class SequenceChecker : MonoBehaviour
                 GameManager.Instance.PlayerFinished(playerInt, userPoints[playerInt, 1]);
             }
             StartCoroutine(ShowFeedbackSequence(playerInt));
-
+            StartCoroutine(SimonQuipping(false));
 
         }
 
@@ -565,6 +572,7 @@ public class SequenceChecker : MonoBehaviour
                 if (userSequences[playerInt, i] != null)
                 {
                     StartCoroutine(ShakeAndDestroy(userSequences[playerInt, i]));
+                    
                 }
             }
 
@@ -575,7 +583,37 @@ public class SequenceChecker : MonoBehaviour
             canTakeInput2[playerInt] = true;
         }
 
-
+        IEnumerator SimonQuipping(bool good)
+        {
+            if (good)
+            {
+                simon.SetActive(true);
+                int j = UnityEngine.Random.Range(2, 4);
+                audioPlayer.clip = quips[j];
+                audioPlayer.Play();
+                anim.LoadSpritesFromFolder(quips[j].name);
+                anim.playAnimation();
+                while (anim.IsPlaying)
+                {
+                    yield return null;
+                }
+                simon.SetActive(false);
+            }
+            else
+            {
+                simon.SetActive(true);
+                int j = UnityEngine.Random.Range(0, 1);
+                audioPlayer.clip = quips[j];
+                audioPlayer.Play();
+                anim.LoadSpritesFromFolder(quips[j].name);
+                anim.playAnimation();
+                while (anim.IsPlaying)
+                {
+                    yield return null;
+                }
+                simon.SetActive(false);
+            }
+        }
 
 
 
@@ -596,6 +634,10 @@ public class SequenceChecker : MonoBehaviour
                 elapsed += Time.deltaTime;
                 yield return null;
             }
+
+            
+            
+            
 
             Destroy(obj);
         }

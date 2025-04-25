@@ -1312,6 +1312,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae1170d75ff9ce489f0fa4ca655d1e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioPlayer: {fileID: 1645861086}
+  simon: {fileID: 1645861081}
+  quips:
+  - {fileID: 8300000, guid: ce7f7546721c1734ea9a6474ed2c5410, type: 3}
+  - {fileID: 8300000, guid: ae78c8583c5a6a2499f16bdd8efbd6ff, type: 3}
+  - {fileID: 8300000, guid: 2ca2c2d028b887e49a1dab975a57a8f3, type: 3}
+  - {fileID: 8300000, guid: 2f42472c110e6fe4a8025c1ac32c3e68, type: 3}
+  - {fileID: 8300000, guid: f3f2ffeef2915d94088b072fcfab72d5, type: 3}
 --- !u!1 &555483841
 GameObject:
   m_ObjectHideFlags: 0
@@ -3445,7 +3453,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1645861082
 RectTransform:
   m_ObjectHideFlags: 0
