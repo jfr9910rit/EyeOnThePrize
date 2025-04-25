@@ -7,7 +7,7 @@ public class TranstionTimer : MonoBehaviour
     public float gameTimer = 25f;
     public string nextScene = "";
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         
     }

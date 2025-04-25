@@ -35,7 +35,7 @@ public class StartManager : MonoBehaviour
         p3 = p3glow.GetComponent<SpriteAnimation>();
         p1.LoadSpritesFromFolder("podiumOff");
         p1.playAnimation();
-        p2.LoadSpritesFromFolder("podiumOff");
+        p2.LoadSpritesFromFolder("podiumOff2");
         p2.playAnimation();
         p3.LoadSpritesFromFolder("podiumOff");
         p3.playAnimation();

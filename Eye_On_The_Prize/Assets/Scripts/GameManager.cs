@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
             {
                 gameTimer = 0;
                 isTimerRunning = false;
-                SceneManager.LoadScene("EndScene");
+                SceneManager.LoadScene("PreTrans");
             }
 
             TimerText.text = Mathf.RoundToInt(gameTimer).ToString();
@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
         if (playersFinished >= playerCount)
         {
             isTimerRunning = false;
-            SceneManager.LoadScene("EndScene");
+            SceneManager.LoadScene("preTrans");
         }
     }
 
