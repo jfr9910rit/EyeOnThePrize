@@ -443,7 +443,7 @@ public class SequenceChecker : MonoBehaviour
             return;
         }
 
-        if (userIndex[playerInt, 1] == 0) shapeX[playerInt, 1] = -600;
+        if (userIndex[playerInt, 1] == 0) shapeX[playerInt, 1] = -525;
         GameObject selectedShape = Instantiate(sequenceManager.shapes[shapeInt], new Vector3(shapeX[playerInt, 1], 0, -5), Quaternion.identity);
 
         if (GameManager.Instance.playerCount == 1)
@@ -512,7 +512,7 @@ public class SequenceChecker : MonoBehaviour
             userIndex[playerInt, 1]++;
             //Debug.Log(userIndex[playerInt, 1]);
 
-            shapeX[playerInt, 1] += (300 - GameManager.Instance.difficultyLevel * 50); //turn 300 to variable
+            shapeX[playerInt, 1] += (275 - GameManager.Instance.difficultyLevel * 30); //turn 300 to variable
 
             if (userIndex[playerInt, 1] >= sequenceManager.shapeCount)
             {
@@ -765,34 +765,38 @@ public class SequenceChecker : MonoBehaviour
 
         IEnumerator SimonQuipping(bool good)
         {
-            if (good == true)
+            if(UnityEngine.Random.Range(0,5) == 4)
             {
-                simon.SetActive(true);
-                int j = UnityEngine.Random.Range(2, 5);
-                audioPlayer.clip = quips[j];
-                audioPlayer.Play();
-                anim.LoadSpritesFromFolder(quips[j].name);
-                anim.playAnimation();
-                while (audioPlayer.isPlaying)
+                if (good == true)
                 {
-                    yield return null;
+                    simon.SetActive(true);
+                    int j = UnityEngine.Random.Range(2, 5);
+                    audioPlayer.clip = quips[j];
+                    audioPlayer.Play();
+                    anim.LoadSpritesFromFolder(quips[j].name);
+                    anim.playAnimation();
+                    while (audioPlayer.isPlaying)
+                    {
+                        yield return null;
+                    }
+                    simon.SetActive(false);
                 }
-                simon.SetActive(false);
-            }
-            else
-            {
-                simon.SetActive(true);
-                int j = UnityEngine.Random.Range(0, 2);
-                audioPlayer.clip = quips[j];
-                audioPlayer.Play();
-                anim.LoadSpritesFromFolder(quips[j].name);
-                anim.playAnimation();
-                while (audioPlayer.isPlaying)
+                else
                 {
-                    yield return null;
+                    simon.SetActive(true);
+                    int j = UnityEngine.Random.Range(0, 2);
+                    audioPlayer.clip = quips[j];
+                    audioPlayer.Play();
+                    anim.LoadSpritesFromFolder(quips[j].name);
+                    anim.playAnimation();
+                    while (audioPlayer.isPlaying)
+                    {
+                        yield return null;
+                    }
+                    simon.SetActive(false);
                 }
-                simon.SetActive(false);
             }
+            
         }
 
 

@@ -86,6 +86,7 @@ public class StartManager : MonoBehaviour
             }
             else if(GameManager.Instance.playerCount == 3)
             {
+                //take out later
                 SceneManager.LoadSceneAsync("Onboarding");
             }
 

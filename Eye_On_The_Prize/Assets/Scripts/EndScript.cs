@@ -56,7 +56,7 @@ public class EndScript : MonoBehaviour
                 Transform scoreObj = podium.transform.Find("score");
                 if (scoreObj != null && scoreObj.TryGetComponent(out TextMeshProUGUI scoreText))
                 {
-                    scoreText.text = "Score: " + score;
+                    scoreText.text = score + " PTS";
                 }
             }
         }

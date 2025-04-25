@@ -23,6 +23,7 @@ public class SequenceManager : MonoBehaviour
     private int shapeX = -500;
     private int shapeGap = 250;
     public Transform[] seqs;
+    public AudioSource shapeSounds;
 
     void Start()
     {
@@ -30,7 +31,7 @@ public class SequenceManager : MonoBehaviour
         diffLevel = GameManager.Instance.difficultyLevel;
         probabilities = new float[] { 25f, 25f, 25f, 25f };
         shapeCount = 5 + diffLevel;
-        shapeGap = 250 - (diffLevel * 50);
+        shapeGap = 250 - (diffLevel * 30);
         OriginalSequences = new GameObject[playerCnt, shapeCount];
         activationStarted = true;
         ActivateNextShape();
@@ -76,6 +77,7 @@ public class SequenceManager : MonoBehaviour
 
         shapeX += shapeGap;
         index++;
+        shapeSounds.Play();
     }
 
     int GetSequenceIndex(int playerSlot)

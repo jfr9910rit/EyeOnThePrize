@@ -163,7 +163,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320808821}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 2b2b55d4d1d19aa4d811f76781f63761, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: d8e333581d457bb4a8ff90e2aa8aa3f1, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 460665242}
@@ -309,6 +309,12 @@ MonoBehaviour:
   fadeOutFolder: fade_out
   videoPlayer: {fileID: 320808823}
   nextSceneName: Julian_Testing
+  playerSkips:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  skipped: {fileID: 0}
+  unskipped: {fileID: 0}
 --- !u!1 &460665240
 GameObject:
   m_ObjectHideFlags: 0
