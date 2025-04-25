@@ -70,20 +70,81 @@ public class Onboarding : MonoBehaviour
         }
 
         //ROLES
-        if (Input.GetButtonDown("4") && p1Skip == false)
+        if(GameManager.Instance.playerCount == 1)
         {
-            playerSkips[0].GetComponent<Image>().sprite = skipped;
-            p1Skip = true;
+            if (GameManager.Instance.pRoles[0] == "eppee")
+            {
+                if (Input.GetButtonDown("4") && p1Skip == false)
+                {
+                    playerSkips[0].GetComponent<Image>().sprite = skipped;
+                    p1Skip = true;
+                }
+            }
+            else if (GameManager.Instance.pRoles[0] == "teebee")
+            {
+                if (Input.GetButtonDown("con4") && p1Skip == false)
+                {
+                    playerSkips[0].GetComponent<Image>().sprite = skipped;
+                    p1Skip = true;
+                }
+            }
+            else if (GameManager.Instance.pRoles[0] == "heartly")
+            {
+                if (Input.GetButtonDown("downArrow") && p1Skip == false)
+                {
+                    playerSkips[0].GetComponent<Image>().sprite = skipped;
+                    p1Skip = true;
+                }
+            }
         }
-        else if (Input.GetButtonDown("con4") && p2Skip == false)
+        else if(GameManager.Instance.playerCount == 2)
         {
-            playerSkips[1].GetComponent<Image>().sprite = skipped;
-            p2Skip = true;
+            if (GameManager.Instance.pRoles[0] == "eppee")
+            {
+                if (Input.GetButtonDown("4") && p1Skip == false)
+                {
+                    playerSkips[0].GetComponent<Image>().sprite = skipped;
+                    p1Skip = true;
+                }
+            }
+            else if (GameManager.Instance.pRoles[0] == "teebee")
+            {
+                if (Input.GetButtonDown("con4") && p1Skip == false)
+                {
+                    playerSkips[0].GetComponent<Image>().sprite = skipped;
+                    p1Skip = true;
+                }
+            }
+
+            if (Input.GetButtonDown("con4") && p2Skip == false)
+            {
+                playerSkips[1].GetComponent<Image>().sprite = skipped;
+                p2Skip = true;
+            }
+            else if (Input.GetButtonDown("downarrow") && p2Skip == false)
+            {
+                playerSkips[1].GetComponent<Image>().sprite = skipped;
+                p2Skip = true;
+            }
         }
-        else if (Input.GetButtonDown("downarrow") && p3Skip == false)
+        else if(GameManager.Instance.playerCount == 3)
         {
-            playerSkips[2].GetComponent<Image>().sprite = skipped;
-            p3Skip = true;
+            if (Input.GetButtonDown("4") && p1Skip == false)
+            {
+                playerSkips[0].GetComponent<Image>().sprite = skipped;
+                p1Skip = true;
+            }
+            else if (Input.GetButtonDown("con4") && p2Skip == false)
+            {
+                playerSkips[1].GetComponent<Image>().sprite = skipped;
+                p2Skip = true;
+            }
+            else if (Input.GetButtonDown("downarrow") && p3Skip == false)
+            {
+                playerSkips[2].GetComponent<Image>().sprite = skipped;
+                p3Skip = true;
+            }
         }
+        
     }
 }
