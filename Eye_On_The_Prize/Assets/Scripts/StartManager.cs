@@ -8,7 +8,7 @@ using System.Linq;
 public class StartManager : MonoBehaviour
 {
     public int playerCount = 0;
-    public Image p1glow, p2glow, p3glow;
+    public GameObject p1glow, p2glow, p3glow;
     public Image p1Ready, p2Ready, p3Ready;
     public Image eppee, teebee, heartly;
     //public TextMeshProUGUI pressHold;
@@ -17,6 +17,7 @@ public class StartManager : MonoBehaviour
     private TextMeshProUGUI timerText;
     private float startTime = 20;
     private SpriteAnimation ep, tb, hl;
+    private SpriteAnimation p1, p2, p3;
     private bool[] joined;
     public string[] playerRoles = new string[3];
     private int[] playerIndices = new int[3];
@@ -24,15 +25,20 @@ public class StartManager : MonoBehaviour
     void Awake()
     {
         timerText = timerTextObject.GetComponent<TextMeshProUGUI>();
-
-
-        p1glow.enabled = false;
-        p2glow.enabled = false;
-        p3glow.enabled = false;
+        
         wellWellWell.SetActive(false);
         ep = eppee.GetComponent<SpriteAnimation>();
         tb = teebee.GetComponent<SpriteAnimation>();
         hl = heartly.GetComponent<SpriteAnimation>();
+        p1 = p1glow.GetComponent<SpriteAnimation>();
+        p2 = p2glow.GetComponent<SpriteAnimation>();
+        p3 = p3glow.GetComponent<SpriteAnimation>();
+        p1.LoadSpritesFromFolder("podiumOff");
+        p1.playAnimation();
+        p2.LoadSpritesFromFolder("podiumOff");
+        p2.playAnimation();
+        p3.LoadSpritesFromFolder("podiumOff");
+        p3.playAnimation();
 
         joined = new bool[3];
         for (int i = 0; i < playerIndices.Length; i++)
@@ -57,24 +63,27 @@ public class StartManager : MonoBehaviour
                 joined[0] = true;
                 AddRole("eppee", 0);
                 p1Ready.enabled = false;
-                p1glow.enabled = true;
-                StartCoroutine(PlaySequentialAnimations(eppee, ep, "eppee_spawn", "eppee_resting", -650, -220));
+                p1.LoadSpritesFromFolder("podiumOn");
+                p1.playAnimation();
+                StartCoroutine(PlaySequentialAnimations(eppee, ep, "eppi_on state", "eppi_off", -650, -220));
             }
             else if (Input.GetKeyDown(KeyCode.Alpha7) && !joined[1])
             {
                 joined[1] = true;
                 AddRole("teebee", 1);
                 p2Ready.enabled = false;
-                p2glow.enabled = true;
-                StartCoroutine(PlaySequentialAnimations(teebee, tb, "teebee_spawn", "teebee_resting", 22, -265));
+                p2.LoadSpritesFromFolder("podiumOn");
+                p2.playAnimation();
+                StartCoroutine(PlaySequentialAnimations(teebee, tb, "tb_on state", "tb_idle", 22, -265));
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow) && !joined[2])
             {
                 joined[2] = true;
                 AddRole("heartly", 2);
                 p3Ready.enabled = false;
-                p3glow.enabled = true;
-                StartCoroutine(PlaySequentialAnimations(heartly, hl, "heartly_spawn", "heartly_resting", 660, -220));
+                p3.LoadSpritesFromFolder("podiumOn");
+                p3.playAnimation();
+                StartCoroutine(PlaySequentialAnimations(heartly, hl, "heartly_on state", "heartly_idle", 660, -220));
             }
         }
 
@@ -138,8 +147,8 @@ public class StartManager : MonoBehaviour
     private IEnumerator PlaySequentialAnimations(Image char1, SpriteAnimation anim, string firstFolder, string secondFolder, int x, int y)
     {
         anim.LoadSpritesFromFolder(firstFolder);
-        char1.rectTransform.sizeDelta = new Vector2(403, 528);
-        char1.rectTransform.anchoredPosition = new Vector2(x, y);
+        //char1.rectTransform.sizeDelta = new Vector2(403, 528);
+        //char1.rectTransform.anchoredPosition = new Vector2(x, y);
         anim.loop = false;
         anim.playAnimation();
 
@@ -150,16 +159,16 @@ public class StartManager : MonoBehaviour
 
         anim.LoadSpritesFromFolder(secondFolder);
         anim.loop = true;
-        if(char1 == eppee)
-        {
-            char1.rectTransform.sizeDelta = new Vector2(450, 300);
-        }
-        else
-        {
-            char1.rectTransform.sizeDelta = new Vector2(403, 360);
-        }
+        //if(char1 == eppee)
+        //{
+        //    char1.rectTransform.sizeDelta = new Vector2(450, 300);
+        //}
+        //else
+        //{
+        //    char1.rectTransform.sizeDelta = new Vector2(403, 360);
+        //}
 
-            char1.rectTransform.anchoredPosition = new Vector2(x, y - 70);
+            //char1.rectTransform.anchoredPosition = new Vector2(x, y - 70);
         anim.playAnimation();
     }
 }

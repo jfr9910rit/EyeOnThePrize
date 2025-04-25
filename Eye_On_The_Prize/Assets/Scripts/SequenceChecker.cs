@@ -512,7 +512,7 @@ public class SequenceChecker : MonoBehaviour
             userIndex[playerInt, 1]++;
             //Debug.Log(userIndex[playerInt, 1]);
 
-            shapeX[playerInt, 1] += (275 - GameManager.Instance.difficultyLevel * 30); //turn 300 to variable
+            shapeX[playerInt, 1] += (250 - GameManager.Instance.difficultyLevel * 30); //turn 300 to variable
 
             if (userIndex[playerInt, 1] >= sequenceManager.shapeCount)
             {
