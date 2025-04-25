@@ -183,67 +183,242 @@ public class SequenceChecker : MonoBehaviour
         //prob can turn into a function later
         // Listen for input
 
-        //need to properly map for diff roles 
-        if (Input.GetButtonDown("2") && canTakeInput2[0] && playerTries[0, 1] < 3)
+        //need to properly map for diff roles
+        if(GameManager.Instance.playerCount == 1)
         {
-            if (userIndex[0, 1] == 0) HideOriginalSequence(0);
-            AddTouserSequences(0, 0);
+            if (GameManager.Instance.pRoles[0] == "eppee")
+            {
+                if (Input.GetButtonDown("2") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 0);
+                }
+                else if (Input.GetButtonDown("1") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 1);
+                }
+                else if (Input.GetButtonDown("3") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 2);
+                }
+                else if (Input.GetButtonDown("4") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 3);
+                }
+            }
+            else if(GameManager.Instance.pRoles[0] == "teebee")
+            {
+                if (Input.GetButtonDown("con2") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 0);
+                }
+                else if (Input.GetButtonDown("con1") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 1);
+                }
+                else if (Input.GetButtonDown("con3") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 2);
+                }
+                else if (Input.GetButtonDown("con4") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 3);
+                }
+
+            }
+            else if (GameManager.Instance.pRoles[0] == "heartly")
+            {
+                if (Input.GetButtonDown("uparrow") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 0);
+                }
+                else if (Input.GetButtonDown("leftarrow") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 1);
+                }
+                else if (Input.GetButtonDown("rightarrow") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 2);
+                }
+                else if (Input.GetButtonDown("downarrow") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 3);
+                }
+            }
         }
-        else if (Input.GetButtonDown("1") && canTakeInput2[0] && playerTries[0, 1] < 3)
+        else if(GameManager.Instance.playerCount == 2)
         {
-            if (userIndex[0, 1] == 0) HideOriginalSequence(0);
-            AddTouserSequences(0, 1);
+            if (GameManager.Instance.pRoles[0] == "eppee")
+            {
+                if (Input.GetButtonDown("2") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 0);
+                }
+                else if (Input.GetButtonDown("1") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 1);
+                }
+                else if (Input.GetButtonDown("3") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 2);
+                }
+                else if (Input.GetButtonDown("4") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 3);
+                }
+            }
+            else if (GameManager.Instance.pRoles[0] == "teebee")
+            {
+                if (Input.GetButtonDown("con2") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 0);
+                }
+                else if (Input.GetButtonDown("con1") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 1);
+                }
+                else if (Input.GetButtonDown("con3") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 2);
+                }
+                else if (Input.GetButtonDown("con4") && canTakeInput2[0] && playerTries[0, 1] < 3)
+                {
+                    if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                    AddTouserSequences(0, 3);
+                }
+
+            }
+
+            if(GameManager.Instance.pRoles[1] == "teebee")
+            {
+                if (Input.GetButtonDown("con2") && canTakeInput2[1] && playerTries[1, 1] < 3)
+                {
+                    if (userIndex[1, 1] == 0) HideOriginalSequence(1);
+                    AddTouserSequences(1, 0);
+                }
+                else if (Input.GetButtonDown("con1") && canTakeInput2[1] && playerTries[1, 1] < 3)
+                {
+                    if (userIndex[1, 1] == 0) HideOriginalSequence(1);
+                    AddTouserSequences(1, 1);
+                }
+                else if (Input.GetButtonDown("con3") && canTakeInput2[1] && playerTries[1, 1] < 3)
+                {
+                    if (userIndex[1, 1] == 0) HideOriginalSequence(1);
+                    AddTouserSequences(1, 2);
+                }
+                else if (Input.GetButtonDown("con4") && canTakeInput2[1] && playerTries[1, 1] < 3)
+                {
+                    if (userIndex[1, 1] == 0) HideOriginalSequence(1);
+                    AddTouserSequences(1, 3);
+                }
+            }
+            else if (GameManager.Instance.pRoles[1] == "heartly")
+            {
+                if (Input.GetButtonDown("uparrow") && canTakeInput2[1] && playerTries[1, 1] < 3)
+                {
+                    if (userIndex[1, 1] == 0) HideOriginalSequence(1);
+                    AddTouserSequences(1, 0);
+                }
+                else if (Input.GetButtonDown("leftarrow") && canTakeInput2[1] && playerTries[1, 1] < 3)
+                {
+                    if (userIndex[1, 1] == 0) HideOriginalSequence(1);
+                    AddTouserSequences(1, 1);
+                }
+                else if (Input.GetButtonDown("rightarrow") && canTakeInput2[1] && playerTries[1, 1] < 3)
+                {
+                    if (userIndex[1, 1] == 0) HideOriginalSequence(1);
+                    AddTouserSequences(1, 2);
+                }
+                else if (Input.GetButtonDown("downarrow") && canTakeInput2[1] && playerTries[1, 1] < 3)
+                {
+                    if (userIndex[1, 1] == 0) HideOriginalSequence(1);
+                    AddTouserSequences(1, 3);
+                }
+            }
         }
-        else if (Input.GetButtonDown("3") && canTakeInput2[0] && playerTries[0, 1] < 3)
+        else if(GameManager.Instance.playerCount == 3)
         {
-            if (userIndex[0, 1] == 0) HideOriginalSequence(0);
-            AddTouserSequences(0, 2);
+            if (Input.GetButtonDown("2") && canTakeInput2[0] && playerTries[0, 1] < 3)
+            {
+                if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                AddTouserSequences(0, 0);
+            }
+            else if (Input.GetButtonDown("1") && canTakeInput2[0] && playerTries[0, 1] < 3)
+            {
+                if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                AddTouserSequences(0, 1);
+            }
+            else if (Input.GetButtonDown("3") && canTakeInput2[0] && playerTries[0, 1] < 3)
+            {
+                if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                AddTouserSequences(0, 2);
+            }
+            else if (Input.GetButtonDown("4") && canTakeInput2[0] && playerTries[0, 1] < 3)
+            {
+                if (userIndex[0, 1] == 0) HideOriginalSequence(0);
+                AddTouserSequences(0, 3);
+            }
+            else if (Input.GetButtonDown("con2") && canTakeInput2[1] && playerTries[1, 1] < 3)
+            {
+                if (userIndex[1, 1] == 0) HideOriginalSequence(1);
+                AddTouserSequences(1, 0);
+            }
+            else if (Input.GetButtonDown("con1") && canTakeInput2[1] && playerTries[1, 1] < 3)
+            {
+                if (userIndex[1, 1] == 0) HideOriginalSequence(1);
+                AddTouserSequences(1, 1);
+            }
+            else if (Input.GetButtonDown("con3") && canTakeInput2[1] && playerTries[1, 1] < 3)
+            {
+                if (userIndex[1, 1] == 0) HideOriginalSequence(1);
+                AddTouserSequences(1, 2);
+            }
+            else if (Input.GetButtonDown("con4") && canTakeInput2[1] && playerTries[1, 1] < 3)
+            {
+                if (userIndex[1, 1] == 0) HideOriginalSequence(1);
+                AddTouserSequences(1, 3);
+            }
+            else if (Input.GetButtonDown("uparrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
+            {
+                if (userIndex[2, 1] == 0) HideOriginalSequence(2);
+                AddTouserSequences(2, 0);
+            }
+            else if (Input.GetButtonDown("leftarrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
+            {
+                if (userIndex[2, 1] == 0) HideOriginalSequence(2);
+                AddTouserSequences(2, 1);
+            }
+            else if (Input.GetButtonDown("rightarrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
+            {
+                if (userIndex[2, 1] == 0) HideOriginalSequence(2);
+                AddTouserSequences(2, 2);
+            }
+            else if (Input.GetButtonDown("downarrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
+            {
+                if (userIndex[2, 1] == 0) HideOriginalSequence(2);
+                AddTouserSequences(2, 3);
+            }
         }
-        else if (Input.GetButtonDown("4") && canTakeInput2[0] && playerTries[0, 1] < 3)
-        {
-            if (userIndex[0, 1] == 0) HideOriginalSequence(0);
-            AddTouserSequences(0, 3);
-        }
-        else if (Input.GetButtonDown("con1") && canTakeInput2[1] && playerTries[1, 1] < 3)
-        {
-            if (userIndex[1, 1] == 0) HideOriginalSequence(1);
-            AddTouserSequences(1, 0);
-        }
-        else if (Input.GetButtonDown("con2") && canTakeInput2[1] && playerTries[1, 1] < 3)
-        {
-            if (userIndex[1, 1] == 0) HideOriginalSequence(1);
-            AddTouserSequences(1, 1);
-        }
-        else if (Input.GetButtonDown("con3") && canTakeInput2[1] && playerTries[1, 1] < 3)
-        {
-            if (userIndex[1, 1] == 0) HideOriginalSequence(1);
-            AddTouserSequences(1, 2);
-        }
-        else if (Input.GetButtonDown("con4") && canTakeInput2[1] && playerTries[1, 1] < 3)
-        {
-            if (userIndex[1, 1] == 0) HideOriginalSequence(1);
-            AddTouserSequences(1, 3);
-        }
-        else if (Input.GetButtonDown("leftarrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
-        {
-            if (userIndex[2, 1] == 0) HideOriginalSequence(2);
-            AddTouserSequences(2, 0);
-        }
-        else if (Input.GetButtonDown("uparrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
-        {
-            if (userIndex[2, 1] == 0) HideOriginalSequence(2);
-            AddTouserSequences(2, 1);
-        }
-        else if (Input.GetButtonDown("rightarrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
-        {
-            if (userIndex[2, 1] == 0) HideOriginalSequence(2);
-            AddTouserSequences(2, 2);
-        }
-        else if (Input.GetButtonDown("downarrow") && canTakeInput2[2] && playerTries[2, 1] < 3)
-        {
-            if (userIndex[2, 1] == 0) HideOriginalSequence(2);
-            AddTouserSequences(2, 3);
-        }
+
+        
 
         for (int i = 0; i >= GameManager.Instance.playerCount; i++)
         {

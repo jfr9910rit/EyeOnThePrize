@@ -20,8 +20,8 @@ public class SequenceManager : MonoBehaviour
     private int playerCnt;
     private int diffLevel;
     public int shapeCount = 5;
-    private int shapeX = -550;
-    private int shapeGap = 275;
+    private int shapeX = -500;
+    private int shapeGap = 250;
     public Transform[] seqs;
 
     void Start()
@@ -30,7 +30,7 @@ public class SequenceManager : MonoBehaviour
         diffLevel = GameManager.Instance.difficultyLevel;
         probabilities = new float[] { 25f, 25f, 25f, 25f };
         shapeCount = 5 + diffLevel;
-        shapeGap = 275 - (diffLevel * 50);
+        shapeGap = 250 - (diffLevel * 50);
         OriginalSequences = new GameObject[playerCnt, shapeCount];
         activationStarted = true;
         ActivateNextShape();
