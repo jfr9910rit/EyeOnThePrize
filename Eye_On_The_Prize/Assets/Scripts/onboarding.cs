@@ -11,11 +11,28 @@ public class Onboarding : MonoBehaviour
     public VideoPlayer videoPlayer; // Assign the VideoPlayer
     public string nextSceneName = "MainScene"; // Name of the next scene
     private SpriteAnimation anim;
+    private bool p1Skip, p2Skip, p3Skip;
+    public GameObject[] playerSkips = new GameObject[3];
+    public Sprite skipped, unskipped;
 
     void Awake()
     {
         anim = animation.GetComponent<SpriteAnimation>();
         StartCoroutine(RunSequence());
+        p1Skip = false;
+        p2Skip = false;
+        p3Skip = false;
+        playerSkips[0].SetActive(false);
+        playerSkips[1].SetActive(false);
+        playerSkips[2].SetActive(false);
+        playerSkips[0].GetComponent<Image>().sprite = unskipped;
+        playerSkips[1].GetComponent<Image>().sprite = unskipped;
+        playerSkips[2].GetComponent<Image>().sprite = unskipped;
+
+        for (int i = 0; i < GameManager.Instance.playerCount; i++)
+        {
+            playerSkips[i].SetActive(true);
+        }
     }
 
     IEnumerator RunSequence()
@@ -35,5 +52,99 @@ public class Onboarding : MonoBehaviour
 
         // Load the next scene
         SceneManager.LoadScene(nextSceneName);
+    }
+
+    void Update()
+    {
+        if (GameManager.Instance.playerCount == 1 && p1Skip == true)
+        {
+            SceneManager.LoadScene(nextSceneName);
+        }
+        else if (GameManager.Instance.playerCount == 2 && p1Skip == true && p2Skip == true)
+        {
+            SceneManager.LoadScene(nextSceneName);
+        }
+        else if (GameManager.Instance.playerCount == 3 && p1Skip == true && p2Skip == true && p3Skip == true)
+        {
+            SceneManager.LoadScene(nextSceneName);
+        }
+
+        //ROLES
+        if(GameManager.Instance.playerCount == 1)
+        {
+            if (GameManager.Instance.pRoles[0] == "eppee")
+            {
+                if (Input.GetButtonDown("4") && p1Skip == false)
+                {
+                    playerSkips[0].GetComponent<Image>().sprite = skipped;
+                    p1Skip = true;
+                }
+            }
+            else if (GameManager.Instance.pRoles[0] == "teebee")
+            {
+                if (Input.GetButtonDown("con4") && p1Skip == false)
+                {
+                    playerSkips[0].GetComponent<Image>().sprite = skipped;
+                    p1Skip = true;
+                }
+            }
+            else if (GameManager.Instance.pRoles[0] == "heartly")
+            {
+                if (Input.GetButtonDown("downArrow") && p1Skip == false)
+                {
+                    playerSkips[0].GetComponent<Image>().sprite = skipped;
+                    p1Skip = true;
+                }
+            }
+        }
+        else if(GameManager.Instance.playerCount == 2)
+        {
+            if (GameManager.Instance.pRoles[0] == "eppee")
+            {
+                if (Input.GetButtonDown("4") && p1Skip == false)
+                {
+                    playerSkips[0].GetComponent<Image>().sprite = skipped;
+                    p1Skip = true;
+                }
+            }
+            else if (GameManager.Instance.pRoles[0] == "teebee")
+            {
+                if (Input.GetButtonDown("con4") && p1Skip == false)
+                {
+                    playerSkips[0].GetComponent<Image>().sprite = skipped;
+                    p1Skip = true;
+                }
+            }
+
+            if (Input.GetButtonDown("con4") && p2Skip == false)
+            {
+                playerSkips[1].GetComponent<Image>().sprite = skipped;
+                p2Skip = true;
+            }
+            else if (Input.GetButtonDown("downarrow") && p2Skip == false)
+            {
+                playerSkips[1].GetComponent<Image>().sprite = skipped;
+                p2Skip = true;
+            }
+        }
+        else if(GameManager.Instance.playerCount == 3)
+        {
+            if (Input.GetButtonDown("4") && p1Skip == false)
+            {
+                playerSkips[0].GetComponent<Image>().sprite = skipped;
+                p1Skip = true;
+            }
+            else if (Input.GetButtonDown("con4") && p2Skip == false)
+            {
+                playerSkips[1].GetComponent<Image>().sprite = skipped;
+                p2Skip = true;
+            }
+            else if (Input.GetButtonDown("downarrow") && p3Skip == false)
+            {
+                playerSkips[2].GetComponent<Image>().sprite = skipped;
+                p3Skip = true;
+            }
+        }
+        
     }
 }

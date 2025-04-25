@@ -112,7 +112,7 @@ public class SpriteAnimation : MonoBehaviour
         if (sprites.Length > 0)
         {
             spriteList.AddRange(sprites);
-            Debug.Log($"Loaded {sprites.Length} sprites from {path}");
+            //Debug.Log($"Loaded {sprites.Length} sprites from {path}");
 
             spriteCount = sprites.Length;
             spritesLoaded = true;

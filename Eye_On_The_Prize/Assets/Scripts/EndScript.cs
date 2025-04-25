@@ -65,7 +65,7 @@ public class EndScript : MonoBehaviour
         // Score list update (optional legacy UI)
         for (int i = 0; i < playerCount; i++)
         {
-            pScores[i].text = "Score: " + scores[i];
+            pScores[i].text = scores[i] + " PTS";
         }
     }
 

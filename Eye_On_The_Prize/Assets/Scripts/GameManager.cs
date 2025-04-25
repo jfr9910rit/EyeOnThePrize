@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < roles.Length; i++)
         {
             pRoles[i] = roles[i];
-            Debug.Log("Assigned pRole[" + i + "] = " + pRoles[i]);
+            //Debug.Log("Assigned pRole[" + i + "] = " + pRoles[i]);
         }
 
         UpdateActiveSequences();

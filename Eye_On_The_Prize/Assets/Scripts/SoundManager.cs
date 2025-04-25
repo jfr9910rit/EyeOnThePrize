@@ -5,7 +5,8 @@ public class SoundManager : MonoBehaviour
 {
     public AudioSource audioSource;           
     public AudioClip originalClip;            
-    public AudioClip testingSceneClip;        
+    public AudioClip testingSceneClip;   
+    public AudioClip gong;
 
     private static SoundManager instance;
 
@@ -31,6 +32,7 @@ public class SoundManager : MonoBehaviour
         if (audioSource.clip == null && originalClip != null)
         {
             audioSource.clip = originalClip;
+            audioSource.loop = true;
             audioSource.Play();
         }
 
@@ -52,6 +54,7 @@ public class SoundManager : MonoBehaviour
             if (audioSource.clip != testingSceneClip)
             {
                 audioSource.clip = testingSceneClip;
+                audioSource.loop = true;
                 audioSource.Play();
             }
         }
@@ -61,6 +64,20 @@ public class SoundManager : MonoBehaviour
             if (audioSource.clip != originalClip)
             {
                 audioSource.clip = originalClip;
+                audioSource.loop = true;
+                audioSource.Play();
+            }
+        }
+        else if (scene.name == "Onboarding")
+        {
+            audioSource.Stop();
+        }
+        else if(scene.name == "EndScene")
+        {
+            if (audioSource.clip != gong)
+            {
+                audioSource.clip = gong;
+                audioSource.loop = false;
                 audioSource.Play();
             }
         }
