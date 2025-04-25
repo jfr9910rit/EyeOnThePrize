@@ -41,7 +41,7 @@ public class SequenceChecker : MonoBehaviour
     public AudioClip[] quips = new AudioClip[5];
     private SpriteAnimation anim;
     //make references and add in tries
-    void Awake()
+    void Start()
     {
         sequenceManager = FindObjectOfType<SequenceManager>();
 
@@ -64,8 +64,13 @@ public class SequenceChecker : MonoBehaviour
         roundTime = 25f - ((float)GameManager.Instance.difficultyLevel * 5f);
         hasHiddenOriginalSequence = new bool[GameManager.Instance.playerCount];
         flashing = new bool[GameManager.Instance.playerCount];
-        simon.SetActive(false);
+        
         anim = simon.GetComponent<SpriteAnimation>();
+    }
+
+    void Awake()
+    {
+        simon.SetActive(false);
     }
 
     void Update()
@@ -585,15 +590,15 @@ public class SequenceChecker : MonoBehaviour
 
         IEnumerator SimonQuipping(bool good)
         {
-            if (good)
+            if (good == true)
             {
                 simon.SetActive(true);
-                int j = UnityEngine.Random.Range(2, 4);
+                int j = UnityEngine.Random.Range(2, 5);
                 audioPlayer.clip = quips[j];
                 audioPlayer.Play();
                 anim.LoadSpritesFromFolder(quips[j].name);
                 anim.playAnimation();
-                while (anim.IsPlaying)
+                while (audioPlayer.isPlaying)
                 {
                     yield return null;
                 }
@@ -602,12 +607,12 @@ public class SequenceChecker : MonoBehaviour
             else
             {
                 simon.SetActive(true);
-                int j = UnityEngine.Random.Range(0, 1);
+                int j = UnityEngine.Random.Range(0, 2);
                 audioPlayer.clip = quips[j];
                 audioPlayer.Play();
                 anim.LoadSpritesFromFolder(quips[j].name);
                 anim.playAnimation();
-                while (anim.IsPlaying)
+                while (audioPlayer.isPlaying)
                 {
                     yield return null;
                 }
