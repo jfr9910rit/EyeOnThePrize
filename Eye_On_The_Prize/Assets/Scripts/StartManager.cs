@@ -58,7 +58,7 @@ public class StartManager : MonoBehaviour
     {
         if (playerCount < 3)
         {
-            if (Input.GetButtonDown("2") && !joined[0])
+            if (Input.GetButtonDown("2") && !joined[0] || Input.GetButtonDown("1") && !joined[0] || Input.GetButtonDown("3") && !joined[0] || Input.GetButtonDown("4") && !joined[0])
             {
                 joined[0] = true;
                 AddRole("eppee", 0);
@@ -67,7 +67,7 @@ public class StartManager : MonoBehaviour
                 p1.playAnimation();
                 StartCoroutine(PlaySequentialAnimations(eppee, ep, "eppi_on state", "eppi_off", -650, -220));
             }
-            else if (Input.GetButtonDown("con2") && !joined[1])
+            else if (Input.GetButtonDown("con2") && !joined[1] || Input.GetButtonDown("con1") && !joined[1] || Input.GetButtonDown("con3") && !joined[1] || Input.GetButtonDown("con4") && !joined[1])
             {
                 joined[1] = true;
                 AddRole("teebee", 1);
@@ -76,7 +76,7 @@ public class StartManager : MonoBehaviour
                 p2.playAnimation();
                 StartCoroutine(PlaySequentialAnimations(teebee, tb, "tb_on state", "tb_idle", 22, -265));
             }
-            else if (Input.GetButtonDown("uparrow") && !joined[2])
+            else if (Input.GetButtonDown("uparrow") && !joined[2] || Input.GetButtonDown("leftarrow") && !joined[2] || Input.GetButtonDown("rightarrow") && !joined[2] || Input.GetButtonDown("downarrow") && !joined[2])
             {
                 joined[2] = true;
                 AddRole("heartly", 2);
@@ -93,11 +93,11 @@ public class StartManager : MonoBehaviour
             {
                 SceneManager.LoadSceneAsync("Onboarding");
             }
-            else if(GameManager.Instance.playerCount == 3)
-            {
-                //take out later
-                SceneManager.LoadSceneAsync("Onboarding");
-            }
+            //else if(GameManager.Instance.playerCount == 3)
+            //{
+            //    //take out later
+            //    SceneManager.LoadSceneAsync("Onboarding");
+            //}
 
             timerTextObject.SetActive(true);
             startTime -= Time.deltaTime;

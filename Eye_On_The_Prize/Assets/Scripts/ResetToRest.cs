@@ -29,7 +29,7 @@ public class ResetToRest : MonoBehaviour
                 GameManager.Instance.gameTimer = 25f;
                 GameManager.Instance.playersFinished = 0;
                 GameManager.Instance.hideTime = 10f;
-                SceneManager.LoadSceneAsync("EndTransition");
+                SceneManager.LoadSceneAsync("Outro");
                 
             }
             else
