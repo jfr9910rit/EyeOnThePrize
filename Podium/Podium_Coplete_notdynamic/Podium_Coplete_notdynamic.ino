@@ -19,12 +19,9 @@ bool greenDown = false;
 
 // LEDS
 // how many LEDs in your strip?
-#define NUM_LEDS 80
+#define NUM_LEDS 86
 #define DATA_PIN 6
 CRGB leds[NUM_LEDS];
-
-int incomingByte = 0;
-int state = 0; // 0 = idle, 1 = ep, 2 = tb, 3 = hrtly
 
 int fadeClock = 0;
 
@@ -72,22 +69,22 @@ void loop() {
   greenButtonState = digitalRead(greenButtonPin);
 
   if (redButtonState == HIGH && redDown == false) {
-    Keyboard.write('1');
+    Keyboard.write('v');
     redDown = true;
     Serial.println("RED");
   }
   if (yellowButtonState == HIGH  && yellowDown == false) {
-    Keyboard.write('2');
+    Keyboard.write('b');
     yellowDown = true;
     Serial.println("YEL");
   }
   if (blueButtonState == HIGH && blueDown == false) {
-    Keyboard.write('3');
+    Keyboard.write('n');
     blueDown = true;
     Serial.println("BLU");
   }
   if (greenButtonState == HIGH && greenDown == false) {
-    Keyboard.write('4');
+    Keyboard.write('m');
     greenDown = true;
     Serial.println("GRE");
   }
@@ -111,52 +108,7 @@ void loop() {
     fadeClock = 0;
   }
 
-  switch(state) {
-    case 0: // IDLE || RGB fade while waiting for player
-      solidColor( CHSV( fadeClock, 100, 100) );
-      break;
-    // when player active, pulsing solid color corresponding to their character
-    case 1: // EP
-      characterColorPulse(42);
-      //solidColor( CHSV( 85, 255, fadeClock) );
-      break;
-    case 2: // TB
-      characterColorPulse(85);
-      //solidColor( CHSV( 85, 255, fadeClock) );
-      break;
-    case 3: // HRTLY
-      characterColorPulse(230);
-      //solidColor( CHSV( 230, 255, fadeClock) );
-      break;
-    default:
-      break;
-  }
-
-  // check for serial port inputs from unity
-  if (Serial.available() > 0) {
-    // read the incoming byte:
-    incomingByte = Serial.read();
-
-    switch(incomingByte) {
-      case 48: // 0 - set to idle
-        state = 0;
-        break;
-      case 49: // 1 - set to ep
-        state = 1;
-        break;
-      case 50: // 2 - set to tb
-        state = 2;
-        break;
-      case 51: // 3 - set to hrtly
-        state = 3;
-        break;
-      case 52: // 4 - incorrect answer
-        flashWrong();
-        break;
-      default:
-        break;
-    }
-  }
+  characterColorPulse(230);
   
   delay(50);
 }
