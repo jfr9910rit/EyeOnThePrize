@@ -1154,7 +1154,7 @@ MonoBehaviour:
   scale: 1
   upDownFloat: 0
   frequency: 2
-  scaleAmplitude: 0.1
+  scaleAmplitude: 0.05
   yAmplitude: 20
   baseScale: 1
   scaleSinOffset: 0

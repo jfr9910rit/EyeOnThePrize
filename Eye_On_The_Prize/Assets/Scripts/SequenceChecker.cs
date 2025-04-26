@@ -598,6 +598,7 @@ public class SequenceChecker : MonoBehaviour
             }
             //Debug.Log(userPoints[playerInt, 1]);
             StartCoroutine(SimonQuipping(true));
+            //Thomas here if right
         }
         else
         {
@@ -614,6 +615,7 @@ public class SequenceChecker : MonoBehaviour
             }
             StartCoroutine(ShowFeedbackSequence(playerInt));
             StartCoroutine(SimonQuipping(false));
+            //Thomas here 
 
         }
 

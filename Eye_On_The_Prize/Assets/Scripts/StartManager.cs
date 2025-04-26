@@ -61,6 +61,7 @@ public class StartManager : MonoBehaviour
             if (Input.GetButtonDown("2") && !joined[0] || Input.GetButtonDown("1") && !joined[0] || Input.GetButtonDown("3") && !joined[0] || Input.GetButtonDown("4") && !joined[0])
             {
                 joined[0] = true;
+                //Thomas here 
                 AddRole("eppee", 0);
                 p1Ready.enabled = false;
                 p1.LoadSpritesFromFolder("podiumOn");
@@ -70,6 +71,7 @@ public class StartManager : MonoBehaviour
             else if (Input.GetButtonDown("con2") && !joined[1] || Input.GetButtonDown("con1") && !joined[1] || Input.GetButtonDown("con3") && !joined[1] || Input.GetButtonDown("con4") && !joined[1])
             {
                 joined[1] = true;
+                //Thomas here 
                 AddRole("teebee", 1);
                 p2Ready.enabled = false;
                 p2.LoadSpritesFromFolder("podiumOn");
@@ -79,6 +81,7 @@ public class StartManager : MonoBehaviour
             else if (Input.GetButtonDown("uparrow") && !joined[2] || Input.GetButtonDown("leftarrow") && !joined[2] || Input.GetButtonDown("rightarrow") && !joined[2] || Input.GetButtonDown("downarrow") && !joined[2])
             {
                 joined[2] = true;
+                //Thomas here 
                 AddRole("heartly", 2);
                 p3Ready.enabled = false;
                 p3.LoadSpritesFromFolder("podiumOn");

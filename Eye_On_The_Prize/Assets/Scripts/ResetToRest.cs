@@ -24,6 +24,7 @@ public class ResetToRest : MonoBehaviour
             if(GameManager.Instance.difficultyLevel == 2)
             {
                 done = true;
+                //Thomas Here
                 GameManager.Instance.playerCount = 0;
                 GameManager.Instance.difficultyLevel = 0;
                 GameManager.Instance.gameTimer = 25f;
