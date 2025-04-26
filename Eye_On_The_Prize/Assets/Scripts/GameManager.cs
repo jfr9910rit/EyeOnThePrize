@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] playerSequences = new GameObject[10];
     public string[] pRoles = new string[3];
     public TextMeshProUGUI TimerText;
-    public float gameTimer = 3f;
+    public float gameTimer = 20f;
     public float hideTime = 10f;
     public bool isTimerRunning = false;
     public int playersFinished = 0;
