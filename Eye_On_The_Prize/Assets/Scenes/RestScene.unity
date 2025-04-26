@@ -481,6 +481,7 @@ MonoBehaviour:
   originalClip: {fileID: 8300000, guid: 82db5fac737bfa04d8b7558d29466e52, type: 3}
   testingSceneClip: {fileID: 8300000, guid: 8eabdf5525592434fb8349e5d4c92c5e, type: 3}
   gong: {fileID: 8300000, guid: 17371fa546287e443b6db9b7a3bf5291, type: 3}
+  applause: {fileID: 8300000, guid: 1b61f4dce59066642bf2e9467936f039, type: 3}
 --- !u!1 &616275520
 GameObject:
   m_ObjectHideFlags: 0

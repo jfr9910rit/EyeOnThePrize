@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Reflection;
 
 
+
 public class EndScript : MonoBehaviour
 {
     public TextMeshProUGUI EndBanner;
@@ -21,6 +22,8 @@ public class EndScript : MonoBehaviour
     public float moveSpeed = 600f; // units per second
     public float scoreSpeed = 500f; // points per second
     public Image round;
+    public AudioClip diss;
+    public AudioClip college;
 
     private class MovingPlayer
     {
@@ -103,13 +106,23 @@ public class EndScript : MonoBehaviour
             pScores[i].text = scores[i] + " PTS";
             scoreTotal += scores[i];
         }
-
-        if (scoreTotal <= 1500)
+        int rand = UnityEngine.Random.Range(0, 2);
+        if(UnityEngine.Random.Range(0, 2) == 1)
         {
-            fail.Play();
-            simonFail.SetActive(true);
-            simonFail.GetComponent<SpriteAnimation>().playAnimation();
+            if (rand == 0)
+            {
+                fail.clip = diss;
+                fail.Play();
+                //simonFail.SetActive(true);
+                //simonFail.GetComponent<SpriteAnimation>().playAnimation();
+            }
+            else if (rand == 1)
+            {
+                fail.clip = college;
+                fail.Play();
+            }
         }
+        
     }
 
     void Update()
