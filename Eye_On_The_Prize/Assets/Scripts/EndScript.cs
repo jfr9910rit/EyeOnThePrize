@@ -20,7 +20,7 @@ public class EndScript : MonoBehaviour
     public AudioSource fail;
     public GameObject simonFail;
     public float moveSpeed = 600f; // units per second
-    public float scoreSpeed = 500f; // points per second
+    public float scoreSpeed = 1500f; // points per second
     public Image round;
     public AudioClip diss;
     public AudioClip college;

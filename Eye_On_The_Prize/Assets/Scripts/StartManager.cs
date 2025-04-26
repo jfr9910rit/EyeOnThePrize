@@ -10,13 +10,13 @@ public class StartManager : MonoBehaviour
     public int playerCount = 0;
     public GameObject p1glow, p2glow, p3glow;
     public Image p1Ready, p2Ready, p3Ready;
-    public Image eppee, teebee, heartly;
+    public Image eppee, teebee, heartly, simon;
     //public TextMeshProUGUI pressHold;
     public GameObject timerTextObject;
     public GameObject wellWellWell;
     private TextMeshProUGUI timerText;
     private float startTime = 20;
-    private SpriteAnimation ep, tb, hl;
+    private SpriteAnimation ep, tb, hl, sim;
     private SpriteAnimation p1, p2, p3;
     private bool[] joined;
     public string[] playerRoles = new string[3];
@@ -33,13 +33,14 @@ public class StartManager : MonoBehaviour
         p1 = p1glow.GetComponent<SpriteAnimation>();
         p2 = p2glow.GetComponent<SpriteAnimation>();
         p3 = p3glow.GetComponent<SpriteAnimation>();
+        sim = simon.GetComponent<SpriteAnimation>();
         p1.LoadSpritesFromFolder("podiumOff");
         p1.playAnimation();
         p2.LoadSpritesFromFolder("podiumOff2");
         p2.playAnimation();
         p3.LoadSpritesFromFolder("podiumOff");
         p3.playAnimation();
-
+        StartCoroutine(PlaySequentialAnimations(simon, sim, "simonArise", "simon_BEEG", 0, 0));
         joined = new bool[3];
         for (int i = 0; i < playerIndices.Length; i++)
         {
@@ -52,6 +53,7 @@ public class StartManager : MonoBehaviour
             wellWellWell.GetComponent<SpriteAnimation>().playAnimation();
             wellWellWell.GetComponent<AudioSource>().Play();
         }
+        
     }
 
     void Update()
@@ -159,7 +161,7 @@ public class StartManager : MonoBehaviour
         {
             yield return null;
         }
-
+        
         anim.LoadSpritesFromFolder(secondFolder);
         anim.loop = true;
         //if(char1 == eppee)

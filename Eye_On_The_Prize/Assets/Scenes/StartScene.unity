@@ -661,6 +661,7 @@ MonoBehaviour:
   eppee: {fileID: 1899557216}
   teebee: {fileID: 710413987}
   heartly: {fileID: 1739660804}
+  simon: {fileID: 2088063015}
   timerTextObject: {fileID: 939910801}
   wellWellWell: {fileID: 577154568}
   playerRoles:
@@ -2730,7 +2731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoPlay: 1
-  loop: 1
+  loop: 0
   fps: 24
   imageUI: {fileID: 2088063015}
   defaultAnimationFolderPath: simon_BEEG
