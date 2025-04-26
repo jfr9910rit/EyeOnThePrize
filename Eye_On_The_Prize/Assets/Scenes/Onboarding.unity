@@ -927,7 +927,7 @@ MonoBehaviour:
   animation: {fileID: 1021014713}
   fadeOutFolder: fade_out
   videoPlayer: {fileID: 2124679229}
-  nextSceneName: Countdown
+  nextSceneName: Round1
   playerSkips:
   - {fileID: 450625446}
   - {fileID: 907948199}

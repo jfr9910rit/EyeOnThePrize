@@ -3,6 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using System.Collections.Generic;
+using System.Reflection;
+
 
 
 public class EndScript : MonoBehaviour
@@ -16,19 +19,34 @@ public class EndScript : MonoBehaviour
     public VideoPlayer outro;
     public AudioSource fail;
     public GameObject simonFail;
-    private int scoreTotal;
+    public float moveSpeed = 600f; // units per second
+    public float scoreSpeed = 500f; // points per second
+    public Image round;
+    public AudioClip diss;
+    public AudioClip college;
 
+    private class MovingPlayer
+    {
+        public GameObject podium;
+        public Vector3 startPos;
+        public Vector3 targetPos;
+        public TextMeshProUGUI scoreText;
+        public int finalScore;
+        public float displayedScore;
+        public bool reachedTarget;
+    }
 
-    private float outroTime = 10f;
+    private List<MovingPlayer> movingPlayers = new List<MovingPlayer>();
 
     void Awake()
     {
-        // Hide all podiums initially
         foreach (GameObject place in playerPlaces)
         {
             place.SetActive(false);
         }
+
         simonFail.SetActive(false);
+
         int playerCount = GameManager.Instance.playerCount;
         string[] roles = new string[playerCount];
         int[] scores = new int[playerCount];
@@ -39,7 +57,6 @@ public class EndScript : MonoBehaviour
             scores[i] = GameManager.Instance.playerPoints[i, 1];
         }
 
-        // Pair roles and scores for sorting
         var playerData = roles.Select((role, index) => new { Role = role, Score = scores[index], Index = index }).ToList();
         var sorted = playerData.OrderByDescending(p => p.Score).ToList();
 
@@ -48,6 +65,7 @@ public class EndScript : MonoBehaviour
             string role = sorted[i].Role;
             int score = sorted[i].Score;
             int podiumIndex = GetPodiumIndex(playerCount, i, role);
+
             if (podiumIndex >= 0 && podiumIndex < playerPlaces.Length)
             {
                 GameObject podium = playerPlaces[podiumIndex];
@@ -56,39 +74,90 @@ public class EndScript : MonoBehaviour
                 Transform scoreObj = podium.transform.Find("score");
                 if (scoreObj != null && scoreObj.TryGetComponent(out TextMeshProUGUI scoreText))
                 {
-                    scoreText.text = score + " PTS";
+                    Vector3 originalPos = podium.transform.position;
+                    Vector3 belowPos = originalPos - new Vector3(0f, 800f, 0f);
+                    podium.transform.position = belowPos;
+
+                    movingPlayers.Add(new MovingPlayer
+                    {
+                        podium = podium,
+                        startPos = belowPos,
+                        targetPos = originalPos,
+                        scoreText = scoreText,
+                        finalScore = score,
+                        displayedScore = 0f,
+                        reachedTarget = false
+                    });
+
+                    scoreText.text = "0 PTS";
                 }
             }
         }
 
-        // Banner display
-        EndBanner.text = GameManager.Instance.difficultyLevel == 2
-            ? "Game Over"
-            : "Round " + (GameManager.Instance.difficultyLevel + 1) + " Over";
+        string r = (GameManager.Instance.difficultyLevel + 1).ToString();
+        round.GetComponent<SpriteAnimation>().LoadSpritesFromFolder(r);
+        round.GetComponent<SpriteAnimation>().playAnimation();
 
-        // Score list update (optional legacy UI)
+
+
+        int scoreTotal = 0;
         for (int i = 0; i < playerCount; i++)
         {
             pScores[i].text = scores[i] + " PTS";
             scoreTotal += scores[i];
         }
-
-        if(scoreTotal <= 1500)
+        int rand = UnityEngine.Random.Range(0, 2);
+        if(UnityEngine.Random.Range(0, 2) == 1)
         {
-            fail.Play();
-            simonFail.SetActive(true);
-            simonFail.GetComponent<SpriteAnimation>().playAnimation();
+            if (rand == 0)
+            {
+                fail.clip = diss;
+                fail.Play();
+                //simonFail.SetActive(true);
+                //simonFail.GetComponent<SpriteAnimation>().playAnimation();
+            }
+            else if (rand == 1)
+            {
+                fail.clip = college;
+                fail.Play();
+            }
+        }
+        
+    }
+
+    void Update()
+    {
+        foreach (var moving in movingPlayers)
+        {
+            if (!moving.reachedTarget)
+            {
+                moving.podium.transform.position = Vector3.MoveTowards(moving.podium.transform.position, moving.targetPos, moveSpeed * Time.deltaTime);
+                if (Vector3.Distance(moving.podium.transform.position, moving.targetPos) < 0.1f)
+                {
+                    moving.podium.transform.position = moving.targetPos;
+                    moving.reachedTarget = true;
+                }
+            }
+
+            if (moving.displayedScore < moving.finalScore)
+            {
+                moving.displayedScore += scoreSpeed * Time.deltaTime;
+                if (moving.displayedScore > moving.finalScore)
+                    moving.displayedScore = moving.finalScore;
+
+                moving.scoreText.text = Mathf.FloorToInt(moving.displayedScore) + " PTS";
+            }
         }
     }
 
     private int GetPodiumIndex(int playerCount, int placement, string role)
     {
         int offset = 0;
-        int roleIndex = RoleToIndex(role); // 0=eppee, 1=teebee, 2=heartly
+        int roleIndex = RoleToIndex(role);
 
         if (playerCount == 1)
         {
-            return roleIndex; // indexes 0–2
+            return roleIndex;
         }
         else if (playerCount == 2)
         {
@@ -111,14 +180,5 @@ public class EndScript : MonoBehaviour
             "heartly" => 2,
             _ => -1
         };
-    }
-
-    void Update()
-    {
-        outroTime -= Time.deltaTime;
-        if (outroTime <= 0f)
-        {
-            // Do something when outro is done
-        }
     }
 }

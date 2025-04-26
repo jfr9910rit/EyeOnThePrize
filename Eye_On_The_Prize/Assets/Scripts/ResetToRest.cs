@@ -24,12 +24,13 @@ public class ResetToRest : MonoBehaviour
             if(GameManager.Instance.difficultyLevel == 2)
             {
                 done = true;
+                //Thomas Here
                 GameManager.Instance.playerCount = 0;
                 GameManager.Instance.difficultyLevel = 0;
-                GameManager.Instance.gameTimer = 25f;
+                GameManager.Instance.gameTimer = 20f;
                 GameManager.Instance.playersFinished = 0;
                 GameManager.Instance.hideTime = 10f;
-                SceneManager.LoadSceneAsync("EndTransition");
+                SceneManager.LoadSceneAsync("Outro");
                 
             }
             else
@@ -38,9 +39,9 @@ public class ResetToRest : MonoBehaviour
                 done = true;
                 GameManager.Instance.playersFinished = 0;
                 GameManager.Instance.difficultyLevel++;
-                GameManager.Instance.gameTimer = 25f - ((float)GameManager.Instance.difficultyLevel * 5f);
+                GameManager.Instance.gameTimer = 20f;
                 GameManager.Instance.hideTime = 10f - ((float)GameManager.Instance.difficultyLevel * 2.5f);
-                SceneManager.LoadSceneAsync("Countdown");
+                SceneManager.LoadSceneAsync("postTrans");
             }
             
         }

@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip originalClip;            
     public AudioClip testingSceneClip;   
     public AudioClip gong;
+    public AudioClip applause;
 
     private static SoundManager instance;
 
@@ -77,6 +78,15 @@ public class SoundManager : MonoBehaviour
             if (audioSource.clip != gong)
             {
                 audioSource.clip = gong;
+                audioSource.loop = false;
+                audioSource.Play();
+            }
+        }
+        else if(scene.name == "Outro")
+        {
+            if (audioSource.clip != applause)
+            {
+                audioSource.clip = applause;
                 audioSource.loop = false;
                 audioSource.Play();
             }

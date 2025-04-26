@@ -481,6 +481,7 @@ MonoBehaviour:
   originalClip: {fileID: 8300000, guid: 82db5fac737bfa04d8b7558d29466e52, type: 3}
   testingSceneClip: {fileID: 8300000, guid: 8eabdf5525592434fb8349e5d4c92c5e, type: 3}
   gong: {fileID: 8300000, guid: 17371fa546287e443b6db9b7a3bf5291, type: 3}
+  applause: {fileID: 8300000, guid: 1b61f4dce59066642bf2e9467936f039, type: 3}
 --- !u!1 &616275520
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,8 +757,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: PRESS ANY BUTTON TO JOIN
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f07e897ff9fce9a40b292f7f5b9083f6, type: 2}
-  m_sharedMaterial: {fileID: 8262250560645112714, guid: f07e897ff9fce9a40b292f7f5b9083f6, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7d74a242b9dceb747b15f28a71b5c006, type: 2}
+  m_sharedMaterial: {fileID: -1199795632758594078, guid: 7d74a242b9dceb747b15f28a71b5c006, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

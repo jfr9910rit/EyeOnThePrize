@@ -29,6 +29,24 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Countdown.unity
     guid: 9aca2c5dbad90714882e751539a4a373
+  - enabled: 1
+    path: Assets/Scenes/postTrans.unity
+    guid: 35bf9574fa35ef044adaf0e72195d3d5
+  - enabled: 1
+    path: Assets/Scenes/preTrans.unity
+    guid: 78e0a994c6e75f042bb8aad794c22ab6
+  - enabled: 1
+    path: Assets/Scenes/Round1.unity
+    guid: 167eadb4586de924bbb304c4381444c1
+  - enabled: 1
+    path: Assets/Scenes/Round2.unity
+    guid: bb7b3573525ca314b87200906d614f7c
+  - enabled: 1
+    path: Assets/Scenes/Round3.unity
+    guid: 5100b980aacd62342aab5e643007476c
+  - enabled: 1
+    path: Assets/Scenes/Outro.unity
+    guid: 0395df97f006fde4b944c673680d1704
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

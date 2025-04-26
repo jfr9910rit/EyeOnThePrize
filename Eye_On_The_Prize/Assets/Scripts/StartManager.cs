@@ -35,7 +35,7 @@ public class StartManager : MonoBehaviour
         p3 = p3glow.GetComponent<SpriteAnimation>();
         p1.LoadSpritesFromFolder("podiumOff");
         p1.playAnimation();
-        p2.LoadSpritesFromFolder("podiumOff");
+        p2.LoadSpritesFromFolder("podiumOff2");
         p2.playAnimation();
         p3.LoadSpritesFromFolder("podiumOff");
         p3.playAnimation();
@@ -58,27 +58,30 @@ public class StartManager : MonoBehaviour
     {
         if (playerCount < 3)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha2) && !joined[0])
+            if (Input.GetButtonDown("2") && !joined[0] || Input.GetButtonDown("1") && !joined[0] || Input.GetButtonDown("3") && !joined[0] || Input.GetButtonDown("4") && !joined[0])
             {
                 joined[0] = true;
+                //Thomas here 
                 AddRole("eppee", 0);
                 p1Ready.enabled = false;
                 p1.LoadSpritesFromFolder("podiumOn");
                 p1.playAnimation();
                 StartCoroutine(PlaySequentialAnimations(eppee, ep, "eppi_on state", "eppi_off", -650, -220));
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha7) && !joined[1])
+            else if (Input.GetButtonDown("con2") && !joined[1] || Input.GetButtonDown("con1") && !joined[1] || Input.GetButtonDown("con3") && !joined[1] || Input.GetButtonDown("con4") && !joined[1])
             {
                 joined[1] = true;
+                //Thomas here 
                 AddRole("teebee", 1);
                 p2Ready.enabled = false;
                 p2.LoadSpritesFromFolder("podiumOn");
                 p2.playAnimation();
                 StartCoroutine(PlaySequentialAnimations(teebee, tb, "tb_on state", "tb_idle", 22, -265));
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow) && !joined[2])
+            else if (Input.GetButtonDown("uparrow") && !joined[2] || Input.GetButtonDown("leftarrow") && !joined[2] || Input.GetButtonDown("rightarrow") && !joined[2] || Input.GetButtonDown("downarrow") && !joined[2])
             {
                 joined[2] = true;
+                //Thomas here 
                 AddRole("heartly", 2);
                 p3Ready.enabled = false;
                 p3.LoadSpritesFromFolder("podiumOn");
@@ -93,11 +96,11 @@ public class StartManager : MonoBehaviour
             {
                 SceneManager.LoadSceneAsync("Onboarding");
             }
-            else if(GameManager.Instance.playerCount == 3)
-            {
-                //take out later
-                SceneManager.LoadSceneAsync("Onboarding");
-            }
+            //else if(GameManager.Instance.playerCount == 3)
+            //{
+            //    //take out later
+            //    SceneManager.LoadSceneAsync("Onboarding");
+            //}
 
             timerTextObject.SetActive(true);
             startTime -= Time.deltaTime;
