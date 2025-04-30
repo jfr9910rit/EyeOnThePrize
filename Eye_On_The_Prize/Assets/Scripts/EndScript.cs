@@ -107,7 +107,7 @@ public class EndScript : MonoBehaviour
             scoreTotal += scores[i];
         }
         int rand = UnityEngine.Random.Range(0, 2);
-        if(UnityEngine.Random.Range(0, 2) == 1)
+        if(UnityEngine.Random.Range(0, 5) == 1)
         {
             if (rand == 0)
             {
