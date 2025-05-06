@@ -20,6 +20,7 @@ public class TextBlink : MonoBehaviour
 
     private void Update()
     {
+        //on user input go to join scene
         if (Input.GetButtonDown("1") || Input.GetButtonDown("2") || Input.GetButtonDown("3") || Input.GetButtonDown("4") ||
         Input.GetButtonDown("con1") || Input.GetButtonDown("con2") || Input.GetButtonDown("con3") || Input.GetButtonDown("con4") ||
         Input.GetButtonDown("leftarrow") || Input.GetButtonDown("uparrow") || Input.GetButtonDown("rightarrow") || Input.GetButtonDown("downarrow"))
@@ -29,7 +30,7 @@ public class TextBlink : MonoBehaviour
 
     }
 
-
+    //just small script to make alpha value bounce from 0 to full back and forth
 
     private IEnumerator IntroFade(TextMeshProUGUI textToUse)
     {

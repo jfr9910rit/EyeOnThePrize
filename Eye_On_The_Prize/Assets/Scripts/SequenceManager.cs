@@ -36,12 +36,12 @@ public class SequenceManager : MonoBehaviour
         activationStarted = true;
         ActivateNextShape();
     }
-
+    //reset on new round
     void Awake()
     {
         GameManager.Instance.playersFinished = 0;
     }
-
+    //timer that resets for time spacing for each shape
     void Update()
     {
         if (!activationStarted || index >= shapeCount)
@@ -57,7 +57,7 @@ public class SequenceManager : MonoBehaviour
             ActivateNextShape();
         }
     }
-
+    //makes shape from prefab and increases x until full
     void ActivateNextShape()
     {
         if (index >= shapeCount) return;
@@ -79,7 +79,7 @@ public class SequenceManager : MonoBehaviour
         index++;
         shapeSounds.Play();
     }
-
+    //makes sure shapes are being sent to proper sequence in the scene
     int GetSequenceIndex(int playerSlot)
     {
         if (playerCnt == 1)
@@ -109,13 +109,13 @@ public class SequenceManager : MonoBehaviour
         }
         return 0; // fallback
     }
-
+    //small animation to make shape appear
     void AnimateShape(GameObject shape)
     {
         shape.transform.localScale = Vector3.zero;
         shape.AddComponent<ShapeAnimator>();
     }
-
+    //randomize which shape appears
     int GetWeightedRandomIndex(int shapeCount)
     {
         float total = 0;
@@ -136,7 +136,7 @@ public class SequenceManager : MonoBehaviour
 
         return 0;
     }
-
+    //makes the chances weighted so the more a shape appears in a row the less likely it is to appear next
     void UpdateProbabilities(int selected, int shapeCount)
     {
         if (lastSelected == selected)

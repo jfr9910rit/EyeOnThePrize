@@ -25,6 +25,7 @@ public class EndScript : MonoBehaviour
     public AudioClip diss;
     public AudioClip college;
 
+    //Class for moving the podium at the end
     private class MovingPlayer
     {
         public GameObject podium;
@@ -38,8 +39,10 @@ public class EndScript : MonoBehaviour
 
     private List<MovingPlayer> movingPlayers = new List<MovingPlayer>();
 
+    //plays on every time scene is pulled up
     void Awake()
     {
+        //hide all 
         foreach (GameObject place in playerPlaces)
         {
             place.SetActive(false);
@@ -50,7 +53,7 @@ public class EndScript : MonoBehaviour
         int playerCount = GameManager.Instance.playerCount;
         string[] roles = new string[playerCount];
         int[] scores = new int[playerCount];
-
+        // Sorting the players by points and then making it so the correct options are up depedning on role and sorting by points
         for (int i = 0; i < playerCount; i++)
         {
             roles[i] = GameManager.Instance.pRoles[i];
@@ -93,7 +96,7 @@ public class EndScript : MonoBehaviour
                 }
             }
         }
-
+        
         string r = (GameManager.Instance.difficultyLevel + 1).ToString();
         round.GetComponent<SpriteAnimation>().LoadSpritesFromFolder(r);
         round.GetComponent<SpriteAnimation>().playAnimation();
@@ -124,7 +127,7 @@ public class EndScript : MonoBehaviour
         }
         
     }
-
+    // move player and increase points over time
     void Update()
     {
         foreach (var moving in movingPlayers)
@@ -149,7 +152,7 @@ public class EndScript : MonoBehaviour
             }
         }
     }
-
+    // set proper podium index
     private int GetPodiumIndex(int playerCount, int placement, string role)
     {
         int offset = 0;
@@ -170,7 +173,7 @@ public class EndScript : MonoBehaviour
 
         return offset + roleIndex;
     }
-
+    //int for roles
     private int RoleToIndex(string role)
     {
         return role switch

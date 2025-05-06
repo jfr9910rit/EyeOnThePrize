@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
+    //update for timer to run and on complete switches scene
     void Update()
     {
         if (isTimerRunning && SceneManager.GetActiveScene().name == "Julian_Testing")
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     {
         AssignSceneVariables();
     }
-
+    //sets sequences from scene
     void AssignSceneVariables()
     {
         TimerText = GameObject.Find("Timer")?.GetComponent<TextMeshProUGUI>();
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 
         UpdateActiveSequences();
     }
-
+    //sends player count
     public void SetPlayerCount(int count, string[] roles)
     {
         playerCount = count;
@@ -96,13 +96,13 @@ public class GameManager : MonoBehaviour
 
         UpdateActiveSequences();
     }
-
+    //start timer method to call from scene
     public void StartGameTimer(int time)
     {
         gameTimer = time;
         isTimerRunning = true;
     }
-
+    // increase amount finished until all are done then finishes early
     public void PlayerFinished(int playerIndex, int score)
     {
         if (playerIndex >= 0 && playerIndex < playerPoints.GetLength(0))
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("preTrans");
         }
     }
-
+    // properly setting sequences to roles
     private void UpdateActiveSequences()
     {
         foreach (var seq in playerSequences)
@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
             if (playerSequences[9] != null) playerSequences[9].SetActive(true);
         }
     }
-
+    //changes timer color over time
     private void UpdateTimerColor()
     {
         float t = 1f - (gameTimer / (25f - (float)difficultyLevel * 5f));

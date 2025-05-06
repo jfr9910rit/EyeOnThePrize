@@ -21,6 +21,7 @@ public class ResetToRest : MonoBehaviour
         Input.GetButtonDown("con1") || Input.GetButtonDown("con2") || Input.GetButtonDown("con3") || Input.GetButtonDown("con4") ||
         Input.GetButtonDown("leftarrow") || Input.GetButtonDown("uparrow") || Input.GetButtonDown("rightarrow") || Input.GetButtonDown("downarrow") || timer <= 0 && !done)
         {
+            //if the game is over set stuff back to start
             if(GameManager.Instance.difficultyLevel == 2)
             {
                 done = true;
@@ -33,6 +34,7 @@ public class ResetToRest : MonoBehaviour
                 SceneManager.LoadSceneAsync("Outro");
                 
             }
+            // if the game is not dont then go to next round and increase difficulty
             else
             {
                 Debug.Log("increase");

@@ -67,14 +67,15 @@ public class SequenceChecker : MonoBehaviour
         
         anim = simon.GetComponent<SpriteAnimation>();
     }
-
+    //hide simon
     void Awake()
     {
         simon.SetActive(false);
     }
-
+    //listening for stats every frame
     void Update()
     {
+        //dont allow input while making sequence
         if (!isSequenceReady)
         {
             if (sequenceManager != null && sequenceManager.OriginalSequences != null)
@@ -109,7 +110,7 @@ public class SequenceChecker : MonoBehaviour
             }
         }
 
-
+        //hide timer after proper time
         if (GameManager.Instance.gameTimer <= (roundTime - GameManager.Instance.hideTime))
         {
             //Debug.Log("hidden orig sequence");
@@ -182,8 +183,7 @@ public class SequenceChecker : MonoBehaviour
 
         //prob can turn into a function later
         // Listen for input
-
-        //need to properly map for diff roles
+        //could have been much more optimized but it functioned and i was very tired
         if(GameManager.Instance.playerCount == 1)
         {
             if (GameManager.Instance.pRoles[0] == "eppee")
@@ -419,7 +419,7 @@ public class SequenceChecker : MonoBehaviour
         }
 
         
-
+        //if user fills sequence check it
         for (int i = 0; i >= GameManager.Instance.playerCount; i++)
         {
             // Stop taking input immediately once user finishes their sequence
@@ -435,7 +435,7 @@ public class SequenceChecker : MonoBehaviour
 
     }
 
-
+    //method for adding the shapes to user sequence and assigning it to the proper ones so they show correctly
     void AddTouserSequences(int playerInt, int shapeInt)
     {
         if (userIndex[playerInt, 1] >= sequenceManager.shapeCount || !canTakeInput2[playerInt])
@@ -525,7 +525,7 @@ public class SequenceChecker : MonoBehaviour
 
     }
 
-
+    //method
     void FlashOriginalSequence(int playerInt)
     {
         Debug.Log("Flashing Original Sequence!");
@@ -764,7 +764,7 @@ public class SequenceChecker : MonoBehaviour
             userIndex[playerInt, 1] = 0;
             canTakeInput2[playerInt] = true;
         }
-
+        //ranomize what simon says depending on correct or not and random chances
         IEnumerator SimonQuipping(bool good)
         {
             if(UnityEngine.Random.Range(0,5) == 4)
@@ -803,7 +803,7 @@ public class SequenceChecker : MonoBehaviour
 
 
 
-
+        //shakes and destroys the sequences when wrong
         IEnumerator ShakeAndDestroy(GameObject obj)
         {
             Vector3 originalPos = obj.transform.localPosition;

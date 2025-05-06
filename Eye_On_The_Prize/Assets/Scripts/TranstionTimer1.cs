@@ -6,6 +6,7 @@ public class TranstionTimer2 : MonoBehaviour
 
     public float gameTimer = 25f;
     public string nextScene = "";
+    //same as other transition timer but will change where it goes to next to minimize scenes being made
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {

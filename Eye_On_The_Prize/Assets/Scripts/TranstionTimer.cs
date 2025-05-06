@@ -11,7 +11,7 @@ public class TranstionTimer : MonoBehaviour
     {
         
     }
-
+    //timer based scene switch for transitions
     // Update is called once per frame
     void Update()
     {

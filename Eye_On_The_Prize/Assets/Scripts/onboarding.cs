@@ -14,7 +14,7 @@ public class Onboarding : MonoBehaviour
     private bool p1Skip, p2Skip, p3Skip;
     public GameObject[] playerSkips = new GameObject[3];
     public Sprite skipped, unskipped;
-
+    //sets skips to false on start and makes it so there is proper number of skips
     void Awake()
     {
         anim = animation.GetComponent<SpriteAnimation>();

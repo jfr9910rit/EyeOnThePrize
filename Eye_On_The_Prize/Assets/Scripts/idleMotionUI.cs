@@ -28,7 +28,7 @@ public class SineScale : MonoBehaviour
         initialScale = new Vector3(baseScale, baseScale, baseScale);
         initialPosition = new Vector3(rectTransform.position.x, rectTransform.position.y, rectTransform.position.z);
     }
-
+    //makes the text float up and down or scale in and out
     void Update()
     {
         if (scale)

@@ -46,7 +46,7 @@ public class SoundManager : MonoBehaviour
         // Unsubscribe to prevent memory leaks
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-
+    //depedning on what scene is loaded play certain sounds such as bg music and also applause and round end sound
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "Julian_Testing")

@@ -21,7 +21,7 @@ public class StartManager : MonoBehaviour
     private bool[] joined;
     public string[] playerRoles = new string[3];
     private int[] playerIndices = new int[3];
-
+    //get everything in the scene ready and start a few animation early
     void Awake()
     {
         timerText = timerTextObject.GetComponent<TextMeshProUGUI>();
@@ -58,6 +58,7 @@ public class StartManager : MonoBehaviour
 
     void Update()
     {
+        //listen for player input and then join them at the proper spots and play their join anaimtions 
         if (playerCount < 3)
         {
             if (Input.GetButtonDown("2") && !joined[0] || Input.GetButtonDown("1") && !joined[0] || Input.GetButtonDown("3") && !joined[0] || Input.GetButtonDown("4") && !joined[0])
@@ -91,7 +92,7 @@ public class StartManager : MonoBehaviour
                 StartCoroutine(PlaySequentialAnimations(heartly, hl, "heartly_on state", "heartly_idle", 660, -220));
             }
         }
-
+        //start a timer where if player count is full or if it ends it starts game
         if (GameManager.Instance.playerCount > 0)
         {
             if(startTime < 0)
@@ -124,7 +125,7 @@ public class StartManager : MonoBehaviour
             //}
         }
     }
-
+    //add role to newly joined player
     private void AddRole(string role, int index)
     {
         playerRoles[playerCount] = role;
@@ -137,7 +138,7 @@ public class StartManager : MonoBehaviour
 
         GameManager.Instance.SetPlayerCount(playerCount, ordered);
     }
-
+    //set roles in left to right order
     private int GetVisualIndex(string role)
     {
         switch (role)
@@ -148,7 +149,7 @@ public class StartManager : MonoBehaviour
             default: return 99;
         }
     }
-
+    //play join and then play the idle animation, works for other animations as well
     private IEnumerator PlaySequentialAnimations(Image char1, SpriteAnimation anim, string firstFolder, string secondFolder, int x, int y)
     {
         anim.LoadSpritesFromFolder(firstFolder);
